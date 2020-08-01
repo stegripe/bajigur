@@ -3,6 +3,11 @@ const moment = require("moment-timezone");
 
 const start = async (bot) => {
     console.log(moment.tz("Asia/Jakarta").format() + " => Sticker bot has been started up!");
+    // Force-curr session
+    bot.onStateChanged((state) => {
+        console.log("statechanged", state);
+        if (state === "CONFLICT") bot.forceRefocus();
+    });
     // Message handler
     bot.onMessage(async (message) => {
         // Hello world
