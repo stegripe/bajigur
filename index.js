@@ -2,7 +2,7 @@ const wa = require("@open-wa/wa-automate");
 const moment = require("moment-timezone");
 
 const start = async (bot) => {
-    console.log(moment.tz("Asia/Jakarta").format() + " => Sticker bot has been started up!");
+    console.log(`[READY] ${moment.tz("Asia/Jakarta").format()} => The sticker bot has been booted up!`);
     // Force-curr session
     bot.onStateChanged((state) => {
         console.log("[StateChange] StateChanged status:", state);
