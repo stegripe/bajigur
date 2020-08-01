@@ -7,7 +7,7 @@ const start = async (bot) => {
     bot.onMessage(async (message) => {
         // Hello world
         if (message.body === "#hi" || message.body === "#hai" || message.body === "#halo" || message.body === "#hello") {
-            bot.sendText(message.from, "Hi, if you want to make a sticker instantly, please send/quote some image attachments with caption ```#sticker```");
+            bot.sendText(message.from, `Hi *${message.sender.pushname}*, if you want to make a sticker instantly, please send/quote some image attachments with caption \`\`\`#sticker\`\`\``);
         }
         // Attachment using #sticker
         if (message.type === "image" && message.caption === "#sticker") {
