@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/zhycorp/whatsapp-sticker-bot/issues"
   },
-  "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme"
+  "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme",
+  "dependencies": {
+    "@open-wa/wa-automate": "^1.9.105",
+    "moment-timezone": "^0.5.31"
+  }
 }

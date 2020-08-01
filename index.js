@@ -1,13 +1,13 @@
 const wa = require("@open-wa/wa-automate");
 const moment = require("moment-timezone");
 
-const start = async (client) => {
+const start = async (bot) => {
     console.log(moment.tz("Asia/Jakarta").format() + " => Sticker bot has been started up!");
     // Message handler
     bot.onMessage(async (message) => {
         // Hello world
         if (message.body === "#hi" || message.body === "#hai" || message.body === "#halo" || message.body === "#hello") {
-            bot.sendText(message.from, "Hi, if you want to make a sticker instantly, please send/quote some image attachments with caption `#sticker`");
+            bot.sendText(message.from, "Hi, if you want to make a sticker instantly, please send/quote some image attachments with caption ```#sticker```");
         }
     });
 };
