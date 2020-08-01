@@ -9,6 +9,13 @@ const start = async (bot) => {
         if (message.body === "#hi" || message.body === "#hai" || message.body === "#halo" || message.body === "#hello") {
             bot.sendText(message.from, "Hi, if you want to make a sticker instantly, please send/quote some image attachments with caption ```#sticker```");
         }
+        // Attachment using #sticker
+        if (message.type === "image" && message.caption === "#sticker") {
+            console.log(moment.tz("Asia/Jakarta").format() + " => Someone just generated a sticker: " + message.from + " ( " + message.sender.pushname + " | " + message.chat.name + " )");
+            const mediaData = await wa.decryptMedia(message);
+            const imageBase64 = `data:${message.mimetype};base64,${mediaData.toString("base64")}`;
+            bot.sendImageAsSticker(message.from, imageBase64);
+        }
     });
 };
 
