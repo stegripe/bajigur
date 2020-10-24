@@ -15,8 +15,8 @@ Simple WhatsApp bot for creating stickers from images sent or quoted from chat o
 
 ```js
 module.exports = {
-timezone: "Asia/Jakarta", //example <Continet/Timezone>
-prefix: "#" //if could be anything. example: "!", "," and "++"...
+timezone: "Asia/Jakarta", // example <Continet/Timezone>
+prefix: "#" // if could be anything. example: "!", "," and "++"...
 }
 ```
 

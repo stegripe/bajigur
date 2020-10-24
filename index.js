@@ -1,6 +1,6 @@
 const wa = require("@open-wa/wa-automate");
 const moment = require("moment-timezone");
-let { prefix, timezone } = require('./config')
+let { prefix, timezone } = require("./config");
 
 const start = async (bot) => {
     console.log(`[READY] ${moment.tz(timezone).format()} => The sticker bot has been booted up!`);
@@ -11,12 +11,12 @@ const start = async (bot) => {
     });
     // Message handler
     bot.onMessage(async (message) => {
-        if(!prefix) prefix = "#";
-        if(!message.body.startsWith(prefix)) return;
-        
+        if (!prefix) prefix = "#";
+        if (!message.body.startsWith(prefix)) return;
+
         let command = message.body.toLowerCase().split(" ")[0];
         command = command.slice(prefix.length);
-        
+
         // Hello world
         if (command === "hi" || command === "hai" || command === "halo" || command === "hello") {
             console.log(`[DEBUG] [runCmd] ${moment.tz(timezone).format()} => Someone has used 'hi' command: ${message.from} ( ${message.sender.pushname} | ${message.chat.name} )`);
