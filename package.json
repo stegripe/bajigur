@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme",
   "dependencies": {
-    "@open-wa/wa-automate": "^3.0.6",
+    "@open-wa/wa-automate": "^3.0.8",
     "moment-timezone": "^0.5.31"
   }
 }
