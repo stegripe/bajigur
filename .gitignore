@@ -1,8 +1,0 @@
-# Node modules directory
-node_modules
-
-# WhatsApp client
-session.data.json
-
-# Other
-.DS_Store
