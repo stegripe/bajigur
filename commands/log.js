@@ -1,4 +1,4 @@
-exports.run = (message, bot) => {
+exports.run = (bot, message) => {
     bot.sendText(message.from, "Test").then(m => {
         console.log(message);
         bot.deleteMessage(message.from, m);

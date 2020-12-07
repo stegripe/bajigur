@@ -1,6 +1,6 @@
 const { evaluate } = require("mathjs");
 
-exports.run = async (message, bot, args) => {
+exports.run = async (bot, message, args) => {
     const expressions = args.join(" ");
     console.log(expressions);
     const answer = evaluate(expressions);
