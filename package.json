@@ -1,0 +1,19 @@
+{
+  "name": "whatsapp-bot",
+  "version": "2.0.0",
+  "description": "A simple and easy-to-use WhatsApp bot project, written in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhycorp/whatsapp-sticker-bot.git"
+  },
+  "author": "Zhycorp",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/zhycorp/whatsapp-sticker-bot/issues"
+  },
+  "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme"
+}
