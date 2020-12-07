@@ -1,42 +1,40 @@
-﻿# WhatsApp Sticker Bot
+# WhatsApp Bot
 
-Simple WhatsApp bot for creating stickers from images sent or quoted from chat or groups
+> I am not responsible if you get banned because of using this app!
 
-## Required things
+## Available Commands
+| Command | Description | Screenshot |
+|------|-------------| --------------|
+| Ping | PING PONG | ![Ping](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/master/assets/images/ping.png) |
+| Sticker | Stickerify a picture | ![Sticker](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/master/assets/images/sticker.png) |
+| Help | Show the bot's commands list | ![Help](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/master/assets/images/help.png) |
+| Math | Calculate something | ![Math](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/master/assets/images/math.png) |
+| Another new thing soon | | |
 
--   A virtual machine/server with a LTS version of Node.JS
--   WhatsApp account already logged in on your smartphone
+## Features
+| Name | Description |
+| ---- | ----------- |
+| Command handler | This bot uses a command handler which means every command has its own file; Easier to debug |
+| | Another new thing soon |
 
-## Configuration
-
-### How to change the prefix or the timezone?
-
-[Docs for timezone](https://momentjs.com/timezone/docs/#/using-timezones)
-
-```js
-module.exports = {
-timezone: "Asia/Jakarta", // example <Continet/Timezone>
-prefix: "#" // if could be anything. example: "!", "," and "++"...
-}
+## Usage
+1. Open your terminal
+2. Download this repo, or you can just run
+```sh
+$ git clone https://github.com/zhycorp/whatsapp-bot
+$ cd whatsapp-bot
 ```
-
-## Usage guide
-
-1. Clone this repository
-2. Install all required packages by typing
-```bash
-npm install
+3. Open up the `config.js` file, and fill the required variables
+4. Install all the required dependencies by running, and get the bot online
+```sh
+$ npm i
+$ node .
 ```
-then
-```bash
-node .
-```
-3. Scan the QR code that appear on your console with your WhatsApp
-4. The bot should be up and running.
+5. It will gives you a QR code which you can scan using your WhatsApp Web account
+6. Your bot is online and ready to use.
 
-> Add this bot in a group or chat directly to the number and send an image attachments with the caption #sticker then the image will turn into a sticker, you can also quote a picture from someone in the group!
+## Contributing
+Feels like fixing bug, adding new features, and more? Feel free to make a Pull requests.
 
-> If you are using Ubuntu and find some error, try install some depencies below
-```
-$ sudo apt install -y ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils
-```
+## License
+This project is licensed under [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html).
