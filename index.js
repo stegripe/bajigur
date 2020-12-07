@@ -1,4 +1,4 @@
-const prefix = "/";
+const prefix = require("./config.json").prefix;
 const whatsapp = require("@open-wa/wa-automate");
 const fs = require("fs");
 const availableCommands = new Set();
