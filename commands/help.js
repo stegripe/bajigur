@@ -25,7 +25,7 @@ exports.run = (bot, message, args) => {
 
 exports.help = {
     name: "Help",
-    description: "Show this",
+    description: "Show the bot's commands list",
     usage: "help",
-    cooldown: 15,
+    cooldown: 5,
 };

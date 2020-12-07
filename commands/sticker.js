@@ -12,7 +12,7 @@ exports.run = async (bot, message) => {
 
 exports.help = {
     name: "Sticker",
-    description: "Stickerify a picture!",
+    description: "Stickerify a picture",
     usage: "sticker",
     cooldown: 5
 };

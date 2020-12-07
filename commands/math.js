@@ -10,7 +10,7 @@ exports.run = async (bot, message, args) => {
 
 exports.help = {
     name: "Math",
-    description: "Calculate stuffs",
+    description: "Calculate something",
     usage: "math <expression>",
     cooldown: 5,
 };
