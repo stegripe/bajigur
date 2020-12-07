@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/zhycorp/whatsapp-sticker-bot/issues"
   },
-  "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme"
+  "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme",
+  "dependencies": {
+    "@open-wa/wa-automate": "^3.1.5",
+    "@open-wa/wa-decrypt": "^3.0.0"
+  }
 }
