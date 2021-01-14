@@ -11,7 +11,12 @@ fs.readdir("./commands", (e, files) => {
     });
 });
 
-whatsapp.create().then((bot) => start(bot));
+whatsapp.create({
+    puppeteer: {
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    }
+}).then((bot) => start(bot));
 
 function start(bot) {
     bot.onMessage(async (message) => {
