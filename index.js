@@ -12,6 +12,7 @@ fs.readdir("./commands", (e, files) => {
 });
 
 whatsapp.create({
+    useChrome: true,
     puppeteer: {
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"]
