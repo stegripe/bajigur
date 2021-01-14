@@ -1,5 +1,4 @@
 node_modules/
 .node-persist/
-package-lock.json
 session.data.json
 debug.log
