@@ -20,6 +20,6 @@
     "@open-wa/wa-automate": "^3.1.13",
     "@open-wa/wa-decrypt": "^3.0.0",
     "fs": "^0.0.1-security",
-    "mathjs": "^8.1.1"
+    "mathjs": "^9.0.0"
   }
 }
