@@ -12,6 +12,7 @@ exports.run = async (bot, message) => {
         bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`).then((_) => {
             bot.deleteMessage(message.from, waiting);
         });
+        console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     };
 
     if (message.quotedMsgObj && message.quotedMsgObj.type === "image") {
@@ -20,6 +21,7 @@ exports.run = async (bot, message) => {
         bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`).then((_) => {
             bot.deleteMessage(message.from, waiting);
         });
+        console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     };
 };
 
