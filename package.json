@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme",
   "dependencies": {
-    "@open-wa/wa-automate": "^3.2.0",
+    "@open-wa/wa-automate": "^3.2.1",
     "@open-wa/wa-decrypt": "^3.0.0",
     "fs": "^0.0.1-security",
     "mathjs": "^9.1.0"
