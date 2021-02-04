@@ -28,8 +28,6 @@ $ cd whatsapp-bot
 4. Install all the required dependencies by running, and get the bot online
 ```sh
 $ npm i
-$ npm i ffmpeg -g
-$ npm i gify-cli -g
 $ node .
 ```
 5. It will gives you a QR code which you can scan using your WhatsApp Web account
