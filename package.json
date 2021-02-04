@@ -4,7 +4,8 @@
   "description": "A simple and easy-to-use WhatsApp bot project, written in JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,10 @@
     "extends": "@zhycorp/eslint-config/node"
   },
   "dependencies": {
-    "@open-wa/wa-automate": "^3.2.5",
+    "@open-wa/wa-automate": "^3.2.6",
     "@open-wa/wa-decrypt": "^3.0.0",
-    "fs": "^0.0.1-security",
     "child_process": "^1.0.2",
+    "fs": "^0.0.1-security",
     "fs-extra": "^9.1.0",
     "mathjs": "^9.2.0"
   },
