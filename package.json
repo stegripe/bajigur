@@ -16,6 +16,9 @@
     "url": "https://github.com/zhycorp/whatsapp-sticker-bot/issues"
   },
   "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme",
+  "eslintConfig": {
+    "extends": "@zhycorp/eslint-config/node"
+  },
   "dependencies": {
     "@open-wa/wa-automate": "^3.2.5",
     "@open-wa/wa-decrypt": "^3.0.0",
@@ -23,5 +26,9 @@
     "child_process": "^1.0.2",
     "fs-extra": "^9.1.0",
     "mathjs": "^9.2.0"
+  },
+  "devDependencies": {
+    "@zhycorp/eslint-config": "^2.4.2",
+    "eslint": "^7.19.0"
   }
 }
