@@ -17,11 +17,11 @@
   },
   "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme",
   "dependencies": {
-    "@open-wa/wa-automate": "^3.2.3",
+    "@open-wa/wa-automate": "^3.2.5",
     "@open-wa/wa-decrypt": "^3.0.0",
     "fs": "^0.0.1-security",
     "child_process": "^1.0.2",
     "fs-extra": "^9.1.0",
-    "mathjs": "^9.1.0"
+    "mathjs": "^9.2.0"
   }
 }
