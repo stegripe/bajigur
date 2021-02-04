@@ -12,5 +12,5 @@ exports.help = {
     name: "Math",
     description: "Calculate something",
     usage: "math <expression>",
-    cooldown: 5,
+    cooldown: 5
 };

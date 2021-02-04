@@ -6,7 +6,7 @@ const availableCommands = new Set();
 
 fs.readdir("./commands", (e, files) => {
     if (e) return console.error(e);
-    files.forEach((commandFile) => {
+    files.forEach(commandFile => {
         availableCommands.add(commandFile.replace(".js", ""));
     });
 });
@@ -17,15 +17,14 @@ whatsapp.create({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"]
     }
-}).then((bot) => start(bot));
+}).then(bot => start(bot));
 
 function start(bot) {
-    bot.onMessage(async (message) => {
+    bot.onMessage(async message => {
         if (!message.body.startsWith(prefix)) return;
         const args = message.body.slice(prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
-        if (availableCommands.has(command))
-            require(`./commands/${command}`).run(bot, message, args);
+        if (availableCommands.has(command)) { require(`./commands/${command}`).run(bot, message, args); }
     });
-};
+}
