@@ -4,7 +4,8 @@
   "description": "A simple and easy-to-use WhatsApp bot project, written in JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ignore-path .gitignore --cache --cache-location .cache/eslintcache",
+    "lint:fix": "eslint . --ignore-path .gitignore --fix --cache --cache-location .cache/eslintcache",
     "start": "node ."
   },
   "repository": {
