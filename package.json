@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme",
   "eslintConfig": {
-    "extends": "@zhycorp/eslint-config"
+    "extends": "@zhycorp/eslint-config/node"
   },
   "dependencies": {
     "@open-wa/wa-automate": "^3.3.1",
