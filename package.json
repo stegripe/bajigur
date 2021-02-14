@@ -33,6 +33,6 @@
   },
   "devDependencies": {
     "@zhycorp/eslint-config": "^2.4.2",
-    "eslint": "^7.19.0"
+    "eslint": "^7.20.0"
   }
 }
