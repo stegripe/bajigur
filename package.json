@@ -29,7 +29,8 @@
     "fs": "^0.0.1-security",
     "fs-extra": "^9.1.0",
     "gify-cli": "^1.0.2",
-    "mathjs": "^9.2.0"
+    "mathjs": "^9.2.0",
+    "node-zhycorp": "^1.5.5"
   },
   "devDependencies": {
     "@zhycorp/eslint-config": "^2.5.0",
