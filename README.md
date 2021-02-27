@@ -5,10 +5,10 @@
 ## Available Commands
 | Command | Description | Screenshot |
 |------|-------------| --------------|
-| Ping | PING PONG | ![Ping](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/master/assets/images/ping.png) |
-| Sticker | Stickerify a picture | ![Sticker](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/master/assets/images/sticker.png) |
-| Help | Show the bot's commands list | ![Help](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/master/assets/images/help.png) |
-| Math | Calculate something | ![Math](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/master/assets/images/math.png) |
+| Ping | PING PONG | ![Ping](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/main/assets/images/ping.png) |
+| Sticker | Stickerify a picture | ![Sticker](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/main/assets/images/sticker.png) |
+| Help | Show the bot's commands list | ![Help](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/main/assets/images/help.png) |
+| Math | Calculate something | ![Math](https://raw.githubusercontent.com/zhycorp/whatsapp-bot/main/assets/images/math.png) |
 | Another new thing soon | | |
 
 ## Features
