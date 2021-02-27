@@ -4,8 +4,8 @@
   "description": "A simple and easy-to-use WhatsApp bot project, written in JavaScript",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint . --ignore-path .gitignore --cache --cache-location .cache/eslintcache",
-    "lint:fix": "eslint . --ignore-path .gitignore --fix --cache --cache-location .cache/eslintcache",
+    "lint": "eslint . --ignore-path .gitignore",
+    "lint:fix": "eslint . --ignore-path .gitignore",
     "start": "node ."
   },
   "repository": {
