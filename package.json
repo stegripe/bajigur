@@ -22,7 +22,7 @@
     "extends": "@zhycorp/eslint-config/node"
   },
   "dependencies": {
-    "@open-wa/wa-automate": "^3.6.11",
+    "@open-wa/wa-automate": "^3.6.13",
     "@open-wa/wa-decrypt": "^3.0.1",
     "child_process": "^1.0.2",
     "ffmpeg": "0.0.4",
