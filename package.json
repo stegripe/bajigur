@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@open-wa/wa-automate": "^3.9.5",
-    "@open-wa/wa-decrypt": "^3.0.1",
+    "@open-wa/wa-decrypt": "^3.1.0",
     "child_process": "^1.0.2",
     "ffmpeg": "0.0.4",
     "fs": "^0.0.1-security",
