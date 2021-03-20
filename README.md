@@ -24,7 +24,7 @@
 $ git clone https://github.com/zhycorp/whatsapp-bot
 $ cd whatsapp-bot
 ```
-3. Open up the `config.js` file, and fill the required variables
+3. Open up the `config.json` file, and fill the required variables
 4. Install all the required dependencies by running, and get the bot online
 ```sh
 $ npm i
