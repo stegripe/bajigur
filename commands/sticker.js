@@ -15,7 +15,7 @@ exports.run = async (bot, message) => {
         await bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, { author: message.sender.pushname, pack: "WhatsappBOT" });
         console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     } else if ((message.isMedia || message.isGif) || (message.mimetype === "video/mp4" || message.mimetype === "image/gif") || message.type === "video") {
-        if (message.duration >= 10) return bot.reply(message.from, "❎ Your attachment is too big", message.id);
+        if (message.duration >= 10) return bot.reply(message.from, "❎ Sorry, but your attachment size is too large", message.id);
         bot.reply(message.from, "_⌛ Please wait..._", message.id);
         const mediaData = await decryptMedia(message, uaOverride);
         try {
@@ -24,7 +24,7 @@ exports.run = async (bot, message) => {
             bot.reply(message.from, "Error", message.id);
         }
     } else {
-        bot.reply(message.from, "❎ Please caption/quote some picture!", message.id);
+        bot.reply(message.from, "❎ Please caption or quote some picture", message.id);
     }
 };
 
