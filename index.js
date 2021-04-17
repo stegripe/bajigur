@@ -3,8 +3,6 @@ const prefix = require("./config.json").prefix;
 const whatsapp = require("@open-wa/wa-automate");
 const fs = require("fs");
 
-console.log(prefix)
-
 const availableCommands = new Set();
 
 fs.readdir("./commands", (e, files) => {

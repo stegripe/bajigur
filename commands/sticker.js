@@ -5,21 +5,21 @@ const uaOverride = "WhatsApp/2.2029.4 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_
 const prefix = require("../config.json").prefix;
 
 exports.run = async (bot, message) => {
-    let now = Date.now()
+    const now = Date.now();
     if (message.isMedia && message.type === "image") {
         const media = await decryptMedia(message, uaOverride);
-        await bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, {author: message.sender.pushname, pack: 'WhatsappBOT'});
+        await bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, { author: message.sender.pushname, pack: "WhatsappBOT" });
         console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     } else if (message.quotedMsgObj && message.quotedMsgObj.type === "image") {
         const media = await decryptMedia(message.quotedMsgObj, uaOverride);
-        await bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, {author: message.sender.pushname, pack: 'WhatsappBOT'})
+        await bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, { author: message.sender.pushname, pack: "WhatsappBOT" });
         console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     } else if ((message.isMedia || message.isGif) || (message.mimetype === "video/mp4" || message.mimetype === "image/gif") || message.type === "video") {
         if (message.duration >= 10) return bot.reply(message.from, "❎ Your attachment is too big", message.id);
         bot.reply(message.from, "_⌛ Please wait..._", message.id);
         const mediaData = await decryptMedia(message, uaOverride);
         try {
-            await bot.sendMp4AsSticker(message.from, mediaData, { }, {author: message.sender.pushname, pack: 'WhatsappBOT'});
+            await bot.sendMp4AsSticker(message.from, mediaData, { }, { author: message.sender.pushname, pack: "WhatsappBOT" });
         } catch (error) {
             bot.reply(message.from, "Error", message.id);
         }
