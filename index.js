@@ -16,7 +16,7 @@ fs.readdir("./commands", (e, files) => {
 
 whatsapp.create({
     useChrome: true,
-    headless: false,
+    headless: true,
     chromiumArgs: ["--no-sandbox", "--disable-setuid-sandbox"]
 }).then(bot => start(bot));
 
