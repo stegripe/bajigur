@@ -1,16 +1,15 @@
 const { evaluate } = require("mathjs");
+const { prefix } = require("../config.json");
 
 exports.run = async (bot, message, args) => {
     const expressions = args.join(" ");
-    console.log(expressions);
     const answer = evaluate(expressions);
-    console.log(answer);
     bot.sendText(message.from, answer.toString());
 };
 
 exports.help = {
     name: "Math",
     description: "Calculate something",
-    usage: "math <expression>",
+    usage: `${prefix}math <expression>`,
     cooldown: 5
 };

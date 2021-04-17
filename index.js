@@ -28,17 +28,19 @@ function start(bot) {
     });
 
     bot.onMessage(async message => {
-        if (message.body.startsWith(prefix)) {
-            args = message.body.slice(prefix.length).trim().split(/ +/g);
-            command = args.shift().toLowerCase();
-            sender = message.sender.pushname;
-        } else if (message.caption.startsWith(prefix)) {
-            args = message.caption.slice(prefix.length).trim().split(/ +/g);
-            command = args.shift().toLowerCase();
-            sender = message.sender.pushname;
-        } else {
-            return;
-        }
+        try {
+            if (message.body.startsWith(prefix)) {
+                args = message.body.slice(prefix.length).trim().split(/ +/g);
+                command = args.shift().toLowerCase();
+                sender = message.sender.pushname;
+            } else if (message.caption.startsWith(prefix)) {
+                args = message.caption.slice(prefix.length).trim().split(/ +/g);
+                command = args.shift().toLowerCase();
+                sender = message.sender.pushname;
+            } else {
+                return;
+            }
+        } catch { }
         if (availableCommands.has(command)) {
             require(`./commands/${command}`).run(bot, message, args);
         }
