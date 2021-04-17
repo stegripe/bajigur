@@ -1,5 +1,5 @@
 const { readdir } = require("fs");
-const prefix = require("../config.json").prefix;
+const { prefix } = require("../config.json");
 
 exports.run = (bot, message, args) => {
     const tmpFile = {};
