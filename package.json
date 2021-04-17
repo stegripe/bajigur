@@ -25,10 +25,7 @@
     "@open-wa/wa-automate": "^3.10.15",
     "@open-wa/wa-decrypt": "^3.1.0",
     "child_process": "^1.0.2",
-    "ffmpeg": "0.0.4",
     "fs": "^0.0.1-security",
-    "fs-extra": "^9.1.0",
-    "gify-cli": "^1.0.2",
     "mathjs": "^9.3.2",
     "node-zhycorp": "^1.5.5"
   },

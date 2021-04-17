@@ -1,4 +1,5 @@
 const { readdir } = require("fs");
+const prefix = require("../config.json").prefix;
 
 exports.run = (bot, message, args) => {
     const tmpFile = {};
@@ -26,6 +27,6 @@ exports.run = (bot, message, args) => {
 exports.help = {
     name: "Help",
     description: "Show the bot's commands list",
-    usage: "help",
+    usage: `${prefix}help`,
     cooldown: 5
 };

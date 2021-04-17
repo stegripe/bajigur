@@ -1,3 +1,5 @@
+const prefix = require("../config.json").prefix;
+
 exports.run = (bot, message) => {
     bot.sendText(message.from, "Test").then(m => {
         console.log(message);
@@ -8,6 +10,6 @@ exports.run = (bot, message) => {
 exports.help = {
     name: "Log",
     description: "Developer-only command",
-    usage: "log",
+    usage: `${prefix}log`,
     cooldown: 1
 };
