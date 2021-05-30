@@ -30,7 +30,7 @@
     "node-zhycorp": "^1.5.5"
   },
   "devDependencies": {
-    "@zhycorp/eslint-config": "^2.5.0",
+    "@zhycorp/eslint-config": "^3.0.0",
     "eslint": "^7.24.0"
   }
 }
