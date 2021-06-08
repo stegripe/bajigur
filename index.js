@@ -28,6 +28,8 @@ function start(bot) {
     });
 
     bot.onMessage(async message => {
+        message.restTimestamp = Date.now();
+        
         try {
             if (message.body.startsWith(prefix)) {
                 args = message.body.slice(prefix.length).trim().split(/ +/g);
