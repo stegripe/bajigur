@@ -28,7 +28,7 @@ function start(bot) {
     });
 
     bot.onMessage(async message => {
-        message.latencyTimestamp = Date.now();
+        message.restTimestamp = Date.now();
         
         try {
             if (message.body.startsWith(prefix)) {
