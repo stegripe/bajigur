@@ -29,7 +29,7 @@ function start(bot) {
 
     bot.onMessage(async message => {
         message.restTimestamp = Date.now();
-        
+
         try {
             if (message.body.startsWith(prefix)) {
                 args = message.body.slice(prefix.length).trim().split(/ +/g);
@@ -42,7 +42,8 @@ function start(bot) {
             } else {
                 return;
             }
-        } catch { }
+        // eslint-disable-next-line no-empty
+        } catch {}
         if (availableCommands.has(command)) {
             require(`./commands/${command}`).run(bot, message, args);
         }
