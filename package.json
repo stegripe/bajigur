@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhycorp/whatsapp-sticker-bot.git"
+    "url": "git+https://github.com/zhycorp/whatsapp-bot.git"
   },
   "author": "Zhycorp",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/zhycorp/whatsapp-sticker-bot/issues"
+    "url": "https://github.com/zhycorp/whatsapp-bot/issues"
   },
-  "homepage": "https://github.com/zhycorp/whatsapp-sticker-bot#readme",
+  "homepage": "https://github.com/zhycorp/whatsapp-bot#readme",
   "eslintConfig": {
     "extends": "@zhycorp/eslint-config/node"
   },
@@ -26,8 +26,7 @@
     "@open-wa/wa-decrypt": "^4.0.1",
     "child_process": "^1.0.2",
     "fs": "^0.0.1-security",
-    "mathjs": "^9.3.2",
-    "node-zhycorp": "^1.5.5"
+    "mathjs": "^9.3.2"
   },
   "devDependencies": {
     "@zhycorp/eslint-config": "^3.0.0",
