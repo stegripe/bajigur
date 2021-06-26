@@ -6,14 +6,14 @@ exports.run = async (bot, message) => {
     const now = Date.now();
     if (message.isMedia && message.type === "image") {
         const media = await decryptMedia(message, uaOverride);
-        await bot.sendImageAsStickerAsReply(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, {
+        await bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, {
             author: message.sender.pushname,
             pack: "Zhycorp Bot"
         });
         return console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     } else if (message.quotedMsgObj && message.quotedMsgObj.type === "image") {
         const media = await decryptMedia(message.quotedMsgObj, uaOverride);
-        await bot.sendImageAsStickerAsReply(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, {
+        await bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, {
             author: message.sender.pushname,
             pack: "Zhycorp Bot"
         });
@@ -22,7 +22,7 @@ exports.run = async (bot, message) => {
         if (message.duration >= 10) return bot.reply(message.from, "❎ Sorry, but your attachment size is too large", message.id);
         const mediaData = await decryptMedia(message, uaOverride);
         try {
-            await bot.sendImageAsStickerAsReply(message.from, mediaData, {}, {
+            await bot.sendMp4AsSticker(message.from, mediaData, {}, {
                 author: message.sender.pushname,
                 pack: "Zhycorp Bot"
             });
