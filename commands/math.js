@@ -4,7 +4,7 @@ const { prefix } = require("../config.json");
 exports.run = async (bot, message, args) => {
     const expressions = args.join(" ");
     const answer = evaluate(expressions);
-    bot.sendText(message.from, answer.toString());
+    return bot.sendText(message.from, answer.toString());
 };
 
 exports.help = {

@@ -10,28 +10,28 @@ exports.run = async (bot, message) => {
             author: message.sender.pushname,
             pack: "WhatsappBOT"
         });
-        console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
+        return console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     } else if (message.quotedMsgObj && message.quotedMsgObj.type === "image") {
         const media = await decryptMedia(message.quotedMsgObj, uaOverride);
         await bot.sendImageAsSticker(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, {
             author: message.sender.pushname,
-            pack: "WhatsappBOT"
+            pack: "Zhycorp"
         });
-        console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
+        return console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     } else if ((message.isMedia || message.isGif) || (message.mimetype === "video/mp4" || message.mimetype === "image/gif") || message.type === "video") {
         if (message.duration >= 10) return bot.reply(message.from, "❎ Sorry, but your attachment size is too large", message.id);
-        bot.reply(message.from, "_⌛ Please wait..._", message.id);
+        await bot.reply(message.from, "_⌛ Please wait..._", message.id);
         const mediaData = await decryptMedia(message, uaOverride);
         try {
             await bot.sendMp4AsSticker(message.from, mediaData, {}, {
                 author: message.sender.pushname,
-                pack: "WhatsappBOT"
+                pack: "Zhycorp"
             });
         } catch (error) {
-            bot.reply(message.from, "Error", message.id);
+            return bot.reply(message.from, "Error", message.id);
         }
     } else {
-        bot.reply(message.from, "❎ Please caption or quote some picture", message.id);
+        return bot.reply(message.from, "❎ Please caption or quote some picture", message.id);
     }
 };
 

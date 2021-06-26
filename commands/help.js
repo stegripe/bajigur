@@ -4,7 +4,8 @@ const { prefix } = require("../config.json");
 exports.run = (bot, message, args) => {
     const tmpFile = {};
     readdir("./commands/", (e, files) => {
-        if (e) console.error(e);
+        if (e) return console.error(e);
+
         files.forEach(jsFile => {
             const cmdFile = require(`./${jsFile}`);
             tmpFile[jsFile.replace(".js", "")] = {};
@@ -19,7 +20,7 @@ exports.run = (bot, message, args) => {
         } else {
             const commandName = args[0];
             const { name, description, usage } = require(`./${commandName}.js`).help;
-            bot.sendText(message.from, `*${name}*\n\nDescription: ${description}\nUsage: \`\`\`${usage}\`\`\``);
+            return bot.sendText(message.from, `*${name}*\n\nDescription: ${description}\nUsage: \`\`\`${usage}\`\`\``);
         }
     });
 };
