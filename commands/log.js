@@ -1,7 +1,7 @@
 const { prefix } = require("../config.json");
 
 exports.run = (bot, message) => {
-    bot.sendText(message.from, "Test").then(m => {
+    bot.reply(message.from, "Test", message.id).then(m => {
         console.log(message);
         return bot.deleteMessage(message.from, m);
     });

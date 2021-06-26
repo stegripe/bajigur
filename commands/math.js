@@ -4,7 +4,7 @@ const { evaluate } = require("mathjs");
 exports.run = async (bot, message, args) => {
     const expressions = args.join(" ");
     const answer = evaluate(expressions);
-    return bot.sendText(message.from, answer.toString());
+    return bot.reply(message.from, answer.toString(), message.id);
 };
 
 exports.help = {
