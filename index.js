@@ -42,10 +42,10 @@ function start(bot) {
             } else {
                 return;
             }
-        } catch {
-            if (availableCommands.has(command)) {
-                require(`./commands/${command}`).run(bot, message, args);
-            }
+        // eslint-disable-next-line no-empty
+        } catch {}
+        if (availableCommands.has(command)) {
+            require(`./commands/${command}`).run(bot, message, args);
         }
     });
 }
