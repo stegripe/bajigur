@@ -13,9 +13,16 @@ fs.readdir("./commands", (e, files) => {
 });
 
 whatsapp.create({
-    useChrome: true,
+    blockCrashLogs: true,
+    chromiumArgs: ["--no-sandbox", "--disable-setuid-sandbox"],
+    disableSpins: true,
     headless: true,
-    chromiumArgs: ["--no-sandbox", "--disable-setuid-sandbox"]
+    hostNotificationLang: "PT_BR",
+    logConsole: false,
+    popup: true,
+    qrTimeout: 0,
+    sessionId: "ZHYCORP",
+    useChrome: true
 }).then(bot => start(bot));
 
 let args;
@@ -23,8 +30,8 @@ let command;
 
 function start(bot) {
     bot.onStateChanged(async state => {
-        console.log("[Client State]", state);
         if (state === "CONFLICT" || state === "UNLAUNCHED") bot.forceRefocus();
+        console.log("[Client State]", state);
     });
 
     bot.onMessage(async message => {
@@ -35,7 +42,10 @@ function start(bot) {
                 args = message.body.slice(prefix.length).trim().split(/ +/g);
                 command = args.shift().toLowerCase();
                 sender = message.sender.pushname;
-            } else if (message.caption.startsWith(prefix)) {
+            } else {
+                return;
+            }
+            if (message.caption.startsWith(prefix)) {
                 args = message.caption.slice(prefix.length).trim().split(/ +/g);
                 command = args.shift().toLowerCase();
                 sender = message.sender.pushname;
