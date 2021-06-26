@@ -9,14 +9,14 @@ exports.run = async (bot, message) => {
         await bot.sendImageAsStickerAsReply(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, {
             author: message.sender.pushname,
             pack: "Zhycorp Bot"
-        }, message.id);
+        });
         return console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     } else if (message.quotedMsgObj && message.quotedMsgObj.type === "image") {
         const media = await decryptMedia(message.quotedMsgObj, uaOverride);
         await bot.sendImageAsStickerAsReply(message.from, `data:image/jpeg;base64,${media.toString("base64")}`, {
             author: message.sender.pushname,
             pack: "Zhycorp Bot"
-        }, message.id);
+        });
         return console.log(`[DEBUG] Sticker was generated in ${Date.now() - now}ms`);
     } else if ((message.isMedia || message.isGif) || (message.mimetype === "video/mp4" || message.mimetype === "image/gif") || message.type === "video") {
         if (message.duration >= 10) return bot.reply(message.from, "❎ Sorry, but your attachment size is too large", message.id);
@@ -25,7 +25,7 @@ exports.run = async (bot, message) => {
             await bot.sendImageAsStickerAsReply(message.from, mediaData, {}, {
                 author: message.sender.pushname,
                 pack: "Zhycorp Bot"
-            }, message.id);
+            });
         } catch (error) {
             return bot.reply(message.from, "Error", message.id);
         }
