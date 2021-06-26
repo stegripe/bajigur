@@ -1,11 +1,10 @@
-const { readdir } = require("fs");
 const { prefix } = require("../config.json");
+const { readdir } = require("fs");
 
 exports.run = (bot, message, args) => {
     const tmpFile = {};
     readdir("./commands/", (e, files) => {
         if (e) return console.error(e);
-
         files.forEach(jsFile => {
             const cmdFile = require(`./${jsFile}`);
             tmpFile[jsFile.replace(".js", "")] = {};

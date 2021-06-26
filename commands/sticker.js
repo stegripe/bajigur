@@ -1,5 +1,5 @@
-const { prefix } = require("../config.json");
 const { decryptMedia } = require("@open-wa/wa-decrypt");
+const { prefix } = require("../config.json");
 const uaOverride = "WhatsApp/2.2029.4 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36";
 
 exports.run = async (bot, message) => {
@@ -39,5 +39,5 @@ exports.help = {
     name: "Sticker",
     description: "Generate an custom sticker using picture",
     usage: `${prefix}sticker`,
-    cooldown: 5
+    cooldown: 3
 };

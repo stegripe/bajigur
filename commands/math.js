@@ -1,5 +1,5 @@
-const { evaluate } = require("mathjs");
 const { prefix } = require("../config.json");
+const { evaluate } = require("mathjs");
 
 exports.run = async (bot, message, args) => {
     const expressions = args.join(" ");
