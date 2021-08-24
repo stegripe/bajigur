@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@open-wa/wa-automate": "^4.17.2",
-    "@open-wa/wa-decrypt": "^4.2.0",
+    "@open-wa/wa-decrypt": "^4.2.1",
     "child_process": "^1.0.2",
     "fs": "^0.0.1-security",
     "mathjs": "^9.4.4"
