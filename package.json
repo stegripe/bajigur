@@ -26,7 +26,7 @@
     "@open-wa/wa-decrypt": "^4.3.1",
     "child_process": "^1.0.2",
     "fs": "^0.0.1-security",
-    "mathjs": "^9.4.4"
+    "mathjs": "^9.4.5"
   },
   "devDependencies": {
     "@zhycorp/eslint-config": "^4.0.0",
