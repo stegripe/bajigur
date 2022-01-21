@@ -29,7 +29,7 @@
     "mathjs": "^10.1.0"
   },
   "devDependencies": {
-    "@zhycorp/eslint-config": "^6.0.2",
+    "@zhycorp/eslint-config": "^7.1.0",
     "eslint": "^8.7.0"
   }
 }
