@@ -1,7 +1,7 @@
 {
-    "name": "project-template",
+    "name": "whatsapp-bot",
     "version": "1.0.0",
-    "description": "A template to generate well-configured project base for Clytage.",
+    "description": "A simple and easy-to-use WhatsApp bot project, written in TypeScript.",
     "main": "dist/index.js",
     "type": "module",
     "scripts": {
@@ -14,14 +14,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Clytage/project-template.git"
+        "url": "git+https://github.com/Clytage/whatsapp-bot.git"
     },
     "author": "Clytage <support@clytage.org>",
     "license": "BSD-3-Clause",
     "bugs": {
-        "url": "https://github.com/Clytage/project-template/issues"
+        "url": "https://github.com/Clytage/whatsapp-bot/issues"
     },
-    "homepage": "https://github.com/Clytage/project-template#readme",
+    "homepage": "https://github.com/Clytage/whatsapp-bot#readme",
     "engines": {
         "node": ">=16.6.0",
         "npm": ">=7.0.0"

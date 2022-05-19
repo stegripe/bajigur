@@ -1,3 +1,3 @@
-# project-base
+# whatsapp-bot
 
-A template to generate well-configured project base for Clytage.
+A simple and easy-to-use WhatsApp bot project, written in TypeScript.
