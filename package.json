@@ -31,7 +31,7 @@
         "ignorePatterns": "dist/*"
     },
     "dependencies": {
-        "@open-wa/wa-automate": "^1.9.99"
+        "@open-wa/wa-automate": "^3.0.0"
     },
     "devDependencies": {
         "@clytage-pkg/eslint-config": "^1.0.2",
