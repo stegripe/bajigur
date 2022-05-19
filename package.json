@@ -30,6 +30,9 @@
         "extends": "@clytage-pkg/eslint-config/typescript",
         "ignorePatterns": "dist/*"
     },
+    "dependencies": {
+        "@open-wa/wa-automate": "^4.36.4"
+    },
     "devDependencies": {
         "@clytage-pkg/eslint-config": "^1.0.2",
         "@types/node": "^17.0.23",
