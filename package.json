@@ -1,14 +1,17 @@
 {
     "name": "whatsapp-bot",
-    "version": "1.0.0-dev",
+    "version": "3.0.0-dev",
     "description": "A simple and easy-to-use WhatsApp bot project, written in TypeScript.",
     "main": "dist/index.js",
     "type": "module",
     "scripts": {
         "build": "npm run lint && npm run compile",
-        "compile": "tsc --build tsconfig.json",
+        "compile": "swc src -d dist",
+        "compile:ts": "tsc --build tsconfig.json",
         "lint": "eslint . --ignore-path .gitignore --ext .ts",
         "lint:fix": "eslint . --ignore-path .gitignore --ext .ts --fix",
+        "pretty": "prettier --check 'src/**/*.ts'",
+        "pretty:write": "prettier --write 'src/**/*.ts'",
         "start": "node --es-module-specifier-resolution=node .",
         "start:dev": "rimraf ./dist && npm run compile && npm start"
     },
@@ -23,22 +26,47 @@
     },
     "homepage": "https://github.com/Clytage/whatsapp-bot#readme",
     "engines": {
-        "node": ">=16.6.0",
-        "npm": ">=7.0.0"
+        "node": ">=16",
+        "npm": ">=7"
     },
     "eslintConfig": {
-        "extends": "@clytage-pkg/eslint-config/typescript",
-        "ignorePatterns": "dist/*"
+        "ignorePatterns": "dist/*",
+        "extends": [
+            "@clytage-pkg/eslint-config/typescript",
+            "prettier"
+        ],
+        "plugins": [
+            "prettier"
+        ],
+        "parserOptions": {
+            "project": "./tsconfig.json"
+        },
+        "rules": {
+            "class-methods-use-this": 0
+        }
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "trailingComma": "none",
+        "arrowParens": "avoid"
     },
     "dependencies": {
-        "@open-wa/wa-automate": "^4.36.4"
+        "@discordjs/collection": "^0.5.0",
+        "@open-wa/wa-automate": "^4.36.4",
+        "colorette": "^2.0.16",
+        "dayjs": "^1.11.2"
     },
     "devDependencies": {
         "@clytage-pkg/eslint-config": "^1.0.2",
+        "@swc/cli": "^0.1.57",
+        "@swc/core": "^1.2.186",
         "@types/node": "^17.0.23",
         "@typescript-eslint/eslint-plugin": "^5.25.0",
         "@typescript-eslint/parser": "^5.25.0",
         "eslint": "^8.15.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "prettier": "^2.6.2",
         "rimraf": "^3.0.2",
         "ts-node": "^10.7.0",
         "typescript": "^4.6.4"
