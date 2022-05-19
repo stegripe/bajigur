@@ -51,7 +51,7 @@
         "arrowParens": "avoid"
     },
     "dependencies": {
-        "@discordjs/collection": "^0.5.0",
+        "@discordjs/collection": "^0.6.0",
         "@open-wa/wa-automate": "^4.36.4",
         "colorette": "^2.0.16",
         "dayjs": "^1.11.2"
