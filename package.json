@@ -1,35 +1,43 @@
 {
-  "name": "whatsapp-bot",
-  "version": "2.0.0",
-  "description": "A simple and easy-to-use WhatsApp bot project, written in JavaScript",
-  "main": "index.js",
-  "scripts": {
-    "lint": "eslint . --ignore-path .gitignore",
-    "lint:fix": "eslint . --ignore-path .gitignore",
-    "start": "node ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zhycorp/whatsapp-bot.git"
-  },
-  "author": "Zhycorp",
-  "license": "AGPL-3.0",
-  "bugs": {
-    "url": "https://github.com/zhycorp/whatsapp-bot/issues"
-  },
-  "homepage": "https://github.com/zhycorp/whatsapp-bot#readme",
-  "eslintConfig": {
-    "extends": "@zhycorp/eslint-config/node"
-  },
-  "dependencies": {
-    "@open-wa/wa-automate": "^4.30.7",
-    "@open-wa/wa-decrypt": "^4.3.1",
-    "child_process": "^1.0.2",
-    "fs": "^0.0.1-security",
-    "mathjs": "^10.1.0"
-  },
-  "devDependencies": {
-    "@zhycorp/eslint-config": "^7.1.0",
-    "eslint": "^8.7.0"
-  }
+    "name": "whatsapp-bot",
+    "version": "1.0.0",
+    "description": "A simple and easy-to-use WhatsApp bot project, written in TypeScript.",
+    "main": "dist/index.js",
+    "type": "module",
+    "scripts": {
+        "build": "npm run lint && npm run compile",
+        "compile": "tsc --build tsconfig.json",
+        "lint": "eslint . --ignore-path .gitignore --ext .ts",
+        "lint:fix": "eslint . --ignore-path .gitignore --ext .ts --fix",
+        "start": "node --es-module-specifier-resolution=node .",
+        "start:dev": "rimraf ./dist && npm run compile && npm start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Clytage/whatsapp-bot.git"
+    },
+    "author": "Clytage <support@clytage.org>",
+    "license": "BSD-3-Clause",
+    "bugs": {
+        "url": "https://github.com/Clytage/whatsapp-bot/issues"
+    },
+    "homepage": "https://github.com/Clytage/whatsapp-bot#readme",
+    "engines": {
+        "node": ">=16.6.0",
+        "npm": ">=7.0.0"
+    },
+    "eslintConfig": {
+        "extends": "@clytage-pkg/eslint-config/typescript",
+        "ignorePatterns": "dist/*"
+    },
+    "devDependencies": {
+        "@clytage-pkg/eslint-config": "^1.0.2",
+        "@types/node": "^17.0.23",
+        "@typescript-eslint/eslint-plugin": "^5.25.0",
+        "@typescript-eslint/parser": "^5.25.0",
+        "eslint": "^8.15.0",
+        "rimraf": "^3.0.2",
+        "ts-node": "^10.7.0",
+        "typescript": "^4.6.4"
+    }
 }
