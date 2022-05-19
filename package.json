@@ -1,6 +1,6 @@
 {
     "name": "whatsapp-bot",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "A simple and easy-to-use WhatsApp bot project, written in TypeScript.",
     "main": "dist/index.js",
     "type": "module",
@@ -29,6 +29,9 @@
     "eslintConfig": {
         "extends": "@clytage-pkg/eslint-config/typescript",
         "ignorePatterns": "dist/*"
+    },
+    "dependencies": {
+        "@open-wa/wa-automate": "^1.9.99"
     },
     "devDependencies": {
         "@clytage-pkg/eslint-config": "^1.0.2",
