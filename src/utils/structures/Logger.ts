@@ -1,12 +1,6 @@
-import {
-    blueBright,
-    bold,
-    redBright,
-    whiteBright,
-    yellowBright
-} from "colorette";
-import dayjs from "dayjs";
 import { Utils } from "../Utils";
+import { blueBright, bold, redBright, whiteBright, yellowBright } from "colorette";
+import dayjs from "dayjs";
 
 export class Logger {
     public debug(...messages: any[]): void {

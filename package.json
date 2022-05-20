@@ -30,11 +30,11 @@
         "npm": ">=7"
     },
     "eslintConfig": {
-        "ignorePatterns": "dist/*",
         "extends": [
             "@clytage-pkg/eslint-config/typescript",
             "prettier"
         ],
+        "ignorePatterns": "dist/*",
         "plugins": [
             "prettier"
         ],

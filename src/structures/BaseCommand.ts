@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars */
 import { ICommandComponent } from "../types";
 import { WhatsappBot } from "./WhatsappBot";
 

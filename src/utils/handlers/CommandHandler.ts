@@ -1,8 +1,8 @@
-import { Collection } from "@discordjs/collection";
-import { resolve } from "node:path";
 import { WhatsappBot } from "../../structures/WhatsappBot.js";
 import { ICommandComponent } from "../../types/index.js";
 import { Utils } from "../Utils.js";
+import { Collection } from "@discordjs/collection";
+import { resolve } from "node:path";
 
 export class CommandHandler extends Collection<string, unknown> {
     public constructor(

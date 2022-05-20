@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-extraneous-class */
+/* eslint-disable @typescript-eslint/no-extraneous-class, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
 import { readdirSync, statSync } from "fs";
-import { platform } from "node:os";
 import { join, resolve } from "path";
+import { platform } from "node:os";
 
 export class Utils {
     public static async import<T>(
