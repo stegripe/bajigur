@@ -1,12 +1,13 @@
+import { Collection } from "@discordjs/collection";
+import { Message } from "@open-wa/wa-automate";
 import { WhatsappBot } from "../../structures/WhatsappBot.js";
 import { ICommandComponent } from "../../types/index.js";
 import { Utils } from "../Utils.js";
-import { Collection } from "@discordjs/collection";
-import { resolve } from "node:path";
 
-export class CommandHandler extends Collection<string, unknown> {
+export class CommandHandler extends Collection<string, ICommandComponent> {
+    public readonly aliases: Collection<string, string> = new Collection();
     public constructor(
-        public readonly client: WhatsappBot,
+        public readonly whatsappbot: WhatsappBot,
         public readonly path: string
     ) {
         super();
@@ -15,20 +16,24 @@ export class CommandHandler extends Collection<string, unknown> {
     public async load(): Promise<void> {
         const fileCommands = Utils.readdirRecursive(this.path);
         try {
+            this.whatsappbot.logger.info(
+                "command handler",
+                `Loading ${fileCommands.length} command(s).`
+            );
             for (const file of fileCommands) {
                 const command = await Utils.import<ICommandComponent>(
-                    resolve(file),
-                    this.client
+                    file,
+                    this.whatsappbot
                 );
                 if (command === undefined) {
-                    this.client.logger.error(
+                    this.whatsappbot.logger.error(
                         "command handler",
                         `File ${file} is not valid command file`
                     );
                     return;
                 }
                 if (this.has(command.meta.name)) {
-                    this.client.logger.warn(
+                    this.whatsappbot.logger.warn(
                         "command handler",
                         `Duplicate command name detected: ${command.meta.name}, path: ${file}`
                     );
@@ -43,15 +48,51 @@ export class CommandHandler extends Collection<string, unknown> {
                 this.set(command.meta.name, command);
             }
         } catch (e) {
-            this.client.logger.error(
+            this.whatsappbot.logger.error(
                 "command handler",
                 `COMMAND_LOADER_ERR: `,
                 (e as Error).stack ?? (e as Error).message
             );
         } finally {
-            this.client.logger.info(
+            this.whatsappbot.logger.info(
                 "command handler",
                 `Done Registering ${fileCommands.length} command(s).`
+            );
+        }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/require-await
+    public async handle(message: Message, prefix: string): Promise<void> {
+        const args = (message.caption || message.body)
+            .substring(prefix.length)
+            .trim()
+            .split(/ +/);
+        const commandName = args.shift()?.toLowerCase();
+        const command =
+            this.get(commandName!) ??
+            this.find(cmd => cmd.meta.aliases.includes(commandName!));
+        if (!command) {
+            this.whatsappbot.queue.shift();
+            return undefined;
+        }
+        try {
+            if (command.meta.disabled) {
+                this.whatsappbot.queue.shift();
+                return undefined;
+            }
+            return command.execute(message, args);
+        } catch (e) {
+            this.whatsappbot.queue.shift();
+            this.whatsappbot.logger.error(
+                "command handler",
+                `COMMAND_HANDLER_ERR: `,
+                (e as Error).stack ?? (e as Error).message
+            );
+        } finally {
+            this.whatsappbot.queue.shift();
+            this.whatsappbot.logger.info(
+                "command handler",
+                `Executing command: ${command.meta.name}`
             );
         }
     }
