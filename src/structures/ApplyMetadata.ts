@@ -6,9 +6,9 @@ export function ApplyMetadata<P extends ICommandComponent | IListenerComponent>(
 ): any {
     return function decorate<T extends ICommandComponent | IListenerComponent>(
         target: new (...args: any[]) => T
-    ): new (client: WhatsappBot) => T {
+    ): new (whatsappbot: WhatsappBot) => T {
         return new Proxy(target, {
-            construct: (ctx, [client]): T => new ctx(client, meta)
+            construct: (ctx, [whatsappbot]): T => new ctx(whatsappbot, meta)
         });
     };
 }

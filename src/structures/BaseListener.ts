@@ -4,7 +4,7 @@ import { WhatsappBot } from "./WhatsappBot";
 
 export class BaseListener implements IListenerComponent {
     public constructor(
-        public readonly client: WhatsappBot,
+        public readonly whatsappbot: WhatsappBot,
         public readonly meta: IListenerComponent["meta"]
     ) {}
 

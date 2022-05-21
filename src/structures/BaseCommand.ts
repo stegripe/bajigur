@@ -4,7 +4,7 @@ import { WhatsappBot } from "./WhatsappBot";
 
 export class BaseCommand implements ICommandComponent {
     public constructor(
-        public readonly client: WhatsappBot,
+        public readonly whatsappbot: WhatsappBot,
         public readonly meta: ICommandComponent["meta"]
     ) {}
 
