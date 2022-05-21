@@ -8,7 +8,9 @@ export class Utils {
         path: string,
         ...args: any[]
     ): Promise<T | undefined> {
-        const file = await import(resolve(path)).then(m => m.default);
+        const file = await import(
+            `${platform() === "win32" ? "/" : ""}${resolve(path)}`
+        ).then(m => m.default);
         return file ? new file(...args) : undefined;
     }
 
