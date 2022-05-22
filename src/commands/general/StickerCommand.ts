@@ -1,7 +1,7 @@
-import { decryptMedia, Message, MessageTypes } from "@open-wa/wa-automate";
 import { ApplyMetadata } from "../../structures/ApplyMetadata.js";
 import { BaseCommand } from "../../structures/BaseCommand.js";
 import { ICommandComponent } from "../../types/index.js";
+import { decryptMedia, Message, MessageTypes } from "@open-wa/wa-automate";
 
 @ApplyMetadata<ICommandComponent>({
     name: "sticker",
@@ -26,8 +26,7 @@ export default class StickerCommand extends BaseCommand {
         };base64,${mediaType.toString("base64")}`;
         await this.whatsappbot.client.sendImageAsSticker(
             message.chatId,
-            dataSticker,
-            {
+            dataSticker, {
                 author: "Clytage Bot",
                 pack: "Sticker Creator",
                 keepScale: true

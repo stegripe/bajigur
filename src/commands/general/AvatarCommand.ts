@@ -1,7 +1,7 @@
-import { Contact, Message } from "@open-wa/wa-automate";
 import { ApplyMetadata } from "../../structures/ApplyMetadata.js";
 import { BaseCommand } from "../../structures/BaseCommand.js";
 import { ICommandComponent } from "../../types/index.js";
+import { Contact, Message } from "@open-wa/wa-automate";
 
 @ApplyMetadata<ICommandComponent>({
     name: "avatar",

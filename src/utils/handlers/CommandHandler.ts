@@ -1,8 +1,8 @@
-import { Collection } from "@discordjs/collection";
-import { Message } from "@open-wa/wa-automate";
 import { WhatsappBot } from "../../structures/WhatsappBot.js";
 import { ICommandComponent } from "../../types/index.js";
 import { Utils } from "../Utils.js";
+import { Collection } from "@discordjs/collection";
+import { Message } from "@open-wa/wa-automate";
 
 export class CommandHandler extends Collection<string, ICommandComponent> {
     public readonly aliases: Collection<string, string> = new Collection();
@@ -44,7 +44,10 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                     .substring(parseCategory.lastIndexOf("/") + 1)
                     .toLowerCase();
                 const path = file;
-                Object.freeze(Object.assign(command.meta, { category, path }));
+                Object.freeze(Object.assign(command.meta, {
+                    category,
+                    path
+                }));
                 this.set(command.meta.name, command);
             }
         } catch (e) {

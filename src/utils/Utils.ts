@@ -16,6 +16,7 @@ export class Utils {
 
     public static readdirRecursive(directory: string): string[] {
         const results: string[] = [];
+
         function read(path: string): void {
             const files = readdirSync(path);
             for (const file of files) {

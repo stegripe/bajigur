@@ -10,15 +10,15 @@ export class Logger {
     public error(...messages: any[]): void {
         this.log(
             messages.map(message =>
-                message instanceof String
-                    ? message.replace(
-                          new RegExp(
-                              `${Utils.importURLToString(import.meta.url)}/`,
-                              "g"
-                          ),
-                          "./"
-                      )
-                    : message
+                message instanceof String ?
+                message.replace(
+                    new RegExp(
+                        `${Utils.importURLToString(import.meta.url)}/`,
+                        "g"
+                    ),
+                    "./"
+                ) :
+                message
             ),
             "error"
         );

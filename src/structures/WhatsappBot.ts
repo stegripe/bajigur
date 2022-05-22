@@ -1,10 +1,10 @@
-import { Client, ConfigObject, create } from "@open-wa/wa-automate";
-import { AsyncQueue } from "@sapphire/async-queue";
-import { resolve } from "node:path";
 import { CommandHandler } from "../utils/handlers/CommandHandler.js";
 import { ListenerHandler } from "../utils/handlers/ListenerHandler.js";
 import { Logger } from "../utils/structures/Logger.js";
 import { Utils } from "../utils/Utils.js";
+import { Client, ConfigObject, create } from "@open-wa/wa-automate";
+import { AsyncQueue } from "@sapphire/async-queue";
+import { resolve } from "node:path";
 import got from "got";
 
 export class WhatsappBot {
