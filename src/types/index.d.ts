@@ -2,7 +2,8 @@ import { Message } from "@open-wa/wa-automate";
 
 export interface ICommandComponent {
     meta: {
-        name: string;
+        readonly name: string;
+        readonly category?: string;
         description: string;
         aliases: string[];
         usage: string;
