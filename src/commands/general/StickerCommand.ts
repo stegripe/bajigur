@@ -29,7 +29,7 @@ export default class StickerCommand extends BaseCommand {
             message.quotedMsg &&
             message.quotedMsg.type === "document" &&
             ["image/png", "image/jpg", "image/jpeg", "image/webp"].includes(
-                message.quotedMsg?.mimetype!
+                message.quotedMsg.mimetype!
             )
         ) {
             const wait = (await this.whatsappbot.client.reply(
@@ -75,7 +75,7 @@ export default class StickerCommand extends BaseCommand {
             const msg = isQuoted ? message.quotedMsg! : message;
             const media = await decryptMedia(msg);
             const imageBase64 = `data:${
-                msg.mimetype as string
+                msg.mimetype!
             };base64,${media.toString("base64")}`;
 
             if (isGif) {
@@ -121,6 +121,7 @@ export default class StickerCommand extends BaseCommand {
                 }`,
                 message.id
             );
+            this.whatsappbot.logger.error(e);
         }
     }
 }
