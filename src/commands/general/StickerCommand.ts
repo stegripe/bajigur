@@ -5,7 +5,7 @@ import { ICommandComponent } from "../../types/index.js";
 
 @ApplyMetadata<ICommandComponent>({
     name: "sticker",
-    description: "Generate sticker from image",
+    description: "Generates a sticker from image.",
     usage: "sticker",
     aliases: [],
     devOnly: false,
@@ -29,7 +29,7 @@ export default class StickerCommand extends BaseCommand {
             dataSticker,
             {
                 author: "Clytage Bot",
-                pack: "Sticker Generation",
+                pack: "Sticker Creator",
                 keepScale: true
             }
         );

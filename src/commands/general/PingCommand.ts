@@ -5,7 +5,7 @@ import { ICommandComponent } from "../../types/index.js";
 
 @ApplyMetadata<ICommandComponent>({
     name: "ping",
-    description: "Ping command",
+    description: "Ping the bot.",
     usage: "ping",
     aliases: [],
     devOnly: false,
@@ -13,6 +13,6 @@ import { ICommandComponent } from "../../types/index.js";
 })
 export default class PingCommand extends BaseCommand {
     public async execute(message: Message): Promise<void> {
-        await this.whatsappbot.client.sendText(message.chatId, "Pong!");
+        await this.whatsappbot.client.sendText(message.chatId, "PONG!");
     }
 }

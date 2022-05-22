@@ -5,9 +5,9 @@ import { ICommandComponent } from "../../types/index.js";
 
 @ApplyMetadata<ICommandComponent>({
     name: "avatar",
-    description: "Get User profile picture",
+    description: "Get the user's profile picture.",
     usage: "avatar [user]",
-    aliases: ["ava", "av"],
+    aliases: ["ava", "av", "pfp", "pp"],
     devOnly: false,
     disabled: false
 })
