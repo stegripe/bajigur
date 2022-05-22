@@ -13,56 +13,82 @@ import { decryptMedia, Message, MessageTypes } from "@open-wa/wa-automate";
 })
 export default class StickerCommand extends BaseCommand {
     public async execute(message: Message): Promise<void> {
-        const isQuotedImage =
-            message.quotedMsg && message.quotedMsg.type === MessageTypes.IMAGE;
-        const isQuotedVideo =
-            message.quotedMsg && message.quotedMsg.type === MessageTypes.VIDEO;
-
-        if (message.type === MessageTypes.IMAGE || isQuotedImage) {
-            const wait = (await this.whatsappbot.client.reply(
-                message.chatId,
-                "_Generating sticker..._",
-                message.id
-            )) as Message["id"];
-            await this.create(message, wait, isQuotedImage!, false);
-        } else if (
-            message.quotedMsg &&
-            message.quotedMsg.type === "document" &&
+        const isMessageImage = message.type === MessageTypes.IMAGE;
+        const isMessageVideo = message.type === MessageTypes.VIDEO;
+        const isMessageDocument =
+            message.type === MessageTypes.DOCUMENT &&
+            ["image/png", "image/jpg", "image/jpeg", "image/webp"].includes(
+                message.mimetype!
+            );
+        const isQuotedImage = message.quotedMsg?.type === MessageTypes.IMAGE;
+        const isQuotedVideo = message.quotedMsg?.type === MessageTypes.VIDEO;
+        const isQuotedDocument =
+            message.quotedMsg?.type === MessageTypes.DOCUMENT &&
             ["image/png", "image/jpg", "image/jpeg", "image/webp"].includes(
                 message.quotedMsg.mimetype!
-            )
-        ) {
+            );
+
+        if (isMessageImage || isQuotedImage) {
             const wait = (await this.whatsappbot.client.reply(
                 message.chatId,
                 "_Generating sticker..._",
                 message.id
             )) as Message["id"];
-            await this.create(message, wait, true, false);
-        } else if (message.type === "video" || isQuotedVideo) {
-            if (
-                (Number(message.duration) ||
-                    Number(message.quotedMsg!.duration)) >= 11
-            ) {
+            await this.create(
+                message,
+                wait,
+                isMessageImage ? false : isQuotedImage,
+                false
+            );
+
+            return undefined;
+        }
+
+        if (isMessageDocument || isQuotedDocument) {
+            const wait = (await this.whatsappbot.client.reply(
+                message.chatId,
+                "_Generating sticker..._",
+                message.id
+            )) as Message["id"];
+            await this.create(
+                message,
+                wait,
+                isMessageDocument ? false : isQuotedDocument,
+                false
+            );
+
+            return undefined;
+        }
+
+        if (isMessageVideo || isQuotedVideo) {
+            if (Number(message.quotedMsg?.duration ?? message.duration) >= 11) {
                 await this.whatsappbot.client.reply(
                     message.chatId,
                     "Please use video/gif with duration under/equal to 10 seconds and try again.",
                     message.id
                 );
-                return undefined;
+            } else {
+                const wait = (await this.whatsappbot.client.reply(
+                    message.chatId,
+                    "_Generating sticker..._ (sometimes it takes 1 - 5 minutes to process)",
+                    message.id
+                )) as Message["id"];
+                await this.create(
+                    message,
+                    wait,
+                    isMessageVideo ? false : isQuotedVideo,
+                    true
+                );
             }
-            const wait = (await this.whatsappbot.client.reply(
-                message.chatId,
-                "_Generating sticker..._ (sometimes it takes 1-5 minutes to process)",
-                message.id
-            )) as Message["id"];
-            await this.create(message, wait, isQuotedVideo!, true);
-        } else {
-            await this.whatsappbot.client.reply(
-                message.chatId,
-                `Please send a image/video/gif with */sticker* caption or reply it on the file! You can also send a image as document then reply it with */sticker*`,
-                message.id
-            );
+
+            return undefined;
         }
+
+        await this.whatsappbot.client.reply(
+            message.chatId,
+            `Please send a image/video/gif with */sticker* caption or reply it on the file! You can also send a image as document then reply it with */sticker*`,
+            message.id
+        );
     }
 
     private async create(
@@ -74,9 +100,9 @@ export default class StickerCommand extends BaseCommand {
         try {
             const msg = isQuoted ? message.quotedMsg! : message;
             const media = await decryptMedia(msg);
-            const imageBase64 = `data:${
-                msg.mimetype!
-            };base64,${media.toString("base64")}`;
+            const imageBase64 = `data:${msg.mimetype!};base64,${media.toString(
+                "base64"
+            )}`;
 
             if (isGif) {
                 await this.whatsappbot.client.sendMp4AsSticker(
@@ -89,22 +115,18 @@ export default class StickerCommand extends BaseCommand {
                         pack: "Sticker Creator"
                     }
                 );
-                await this.whatsappbot.client.deleteMessage(
+            } else {
+                await this.whatsappbot.client.sendImageAsSticker(
                     message.chatId,
-                    waitMsg
+                    imageBase64,
+                    {
+                        keepScale: true,
+                        author: "Clytage Bot",
+                        pack: "Sticker Creator"
+                    }
                 );
-                return undefined;
             }
 
-            await this.whatsappbot.client.sendImageAsSticker(
-                message.chatId,
-                imageBase64,
-                {
-                    keepScale: true,
-                    author: "Clytage Bot",
-                    pack: "Sticker Creator"
-                }
-            );
             await this.whatsappbot.client.deleteMessage(
                 message.chatId,
                 waitMsg
@@ -121,7 +143,7 @@ export default class StickerCommand extends BaseCommand {
                 }`,
                 message.id
             );
-            this.whatsappbot.logger.error(e);
+            this.whatsappbot.logger.error("sticker command", e);
         }
     }
 }
