@@ -44,10 +44,12 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                     .substring(parseCategory.lastIndexOf("/") + 1)
                     .toLowerCase();
                 const path = file;
-                Object.freeze(Object.assign(command.meta, {
-                    category,
-                    path
-                }));
+                Object.freeze(
+                    Object.assign(command.meta, {
+                        category,
+                        path
+                    })
+                );
                 this.set(command.meta.name, command);
             }
         } catch (e) {
@@ -83,6 +85,15 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                 this.whatsappbot.queue.shift();
                 return undefined;
             }
+
+            if (
+                command.meta.devOnly &&
+                !this.whatsappbot.devs.includes(message.chat.id)
+            ) {
+                this.whatsappbot.queue.shift();
+                return undefined;
+            }
+            
             return command.execute(message, args);
         } catch (e) {
             this.whatsappbot.queue.shift();

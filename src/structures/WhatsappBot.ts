@@ -9,6 +9,7 @@ import got from "got";
 
 export class WhatsappBot {
     public client!: Client;
+    public devs!: string[];
     public readonly logger = new Logger();
     public readonly request = got;
     public readonly queue = new AsyncQueue();
@@ -28,6 +29,7 @@ export class WhatsappBot {
 
     public async start(whatsappClient: Client): Promise<void> {
         this.client = whatsappClient;
+        this.devs = ["6285156958090@c.us"];
         await this.listeners.load();
         await this.commands.load();
         await whatsappClient.onMessage(async msg => {
