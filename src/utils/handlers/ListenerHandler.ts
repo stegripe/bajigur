@@ -11,6 +11,7 @@ export class ListenerHandler {
 
     public async load(): Promise<void> {
         const fileListeners = Utils.readdirRecursive(this.path);
+        let unableToLoad = 0;
         try {
             this.whatsappbot.logger.info(
                 "listener handler",
@@ -26,7 +27,8 @@ export class ListenerHandler {
                         "listener handler",
                         `File ${file} is not valid listener file`
                     );
-                    return;
+                    unableToLoad++;
+                    continue;
                 }
                 ev.addListener(listener.meta.event, (...args) =>
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -42,7 +44,9 @@ export class ListenerHandler {
         } finally {
             this.whatsappbot.logger.info(
                 "listener handler",
-                `Done Registering ${fileListeners.length} command(s).`
+                `Done Registering ${
+                    fileListeners.length - unableToLoad
+                } command(s).`
             );
         }
     }

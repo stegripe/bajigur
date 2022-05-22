@@ -1,11 +1,16 @@
+import { Collection } from "@discordjs/collection";
+import { Message } from "@open-wa/wa-automate";
 import { WhatsappBot } from "../../structures/WhatsappBot.js";
 import { ICommandComponent } from "../../types/index.js";
 import { Utils } from "../Utils.js";
-import { Collection } from "@discordjs/collection";
-import { Message } from "@open-wa/wa-automate";
 
 export class CommandHandler extends Collection<string, ICommandComponent> {
     public readonly aliases: Collection<string, string> = new Collection();
+    public categories!: Record<
+        "developers" | "general",
+        ICommandComponent[] | undefined
+    >;
+
     public constructor(
         public readonly whatsappbot: WhatsappBot,
         public readonly path: string
@@ -15,6 +20,7 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
 
     public async load(): Promise<void> {
         const fileCommands = Utils.readdirRecursive(this.path);
+        let unableToLoad = 0;
         try {
             this.whatsappbot.logger.info(
                 "command handler",
@@ -30,18 +36,21 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                         "command handler",
                         `File ${file} is not valid command file`
                     );
-                    return;
+                    unableToLoad++;
+                    continue;
                 }
                 if (this.has(command.meta.name)) {
                     this.whatsappbot.logger.warn(
                         "command handler",
                         `Duplicate command name detected: ${command.meta.name}, path: ${file}`
                     );
-                    return;
+                    unableToLoad++;
+                    continue;
                 }
-                const parseCategory = file.substring(0, file.lastIndexOf("/"));
-                const category = parseCategory
-                    .substring(parseCategory.lastIndexOf("/") + 1)
+                const category = file
+                    .split(/\/|\\/g)
+                    .slice(0, -1)
+                    .pop()!
                     .toLowerCase();
                 const path = file;
                 Object.freeze(
@@ -55,13 +64,22 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
         } catch (e) {
             this.whatsappbot.logger.error(
                 "command handler",
-                `COMMAND_LOADER_ERR: `,
+                `COMMAND_LOADER_ERR:`,
                 (e as Error).stack ?? (e as Error).message
             );
         } finally {
+            this.categories = this.reduce<
+                Record<string, ICommandComponent[] | undefined>
+            >((a, b) => {
+                a[b.meta.category!] = a[b.meta.category!] ?? [];
+                a[b.meta.category!]?.push(b);
+                return a;
+            }, {});
             this.whatsappbot.logger.info(
                 "command handler",
-                `Done Registering ${fileCommands.length} command(s).`
+                `Done Registering ${
+                    fileCommands.length - unableToLoad
+                } command(s).`
             );
         }
     }
@@ -76,6 +94,7 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
         const command =
             this.get(commandName!) ??
             this.find(cmd => cmd.meta.aliases.includes(commandName!));
+
         if (!command) {
             this.whatsappbot.queue.shift();
             return undefined;
@@ -88,12 +107,14 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
 
             if (
                 command.meta.devOnly &&
-                !this.whatsappbot.devs.includes(message.chat.id)
+                !this.whatsappbot.config.devs.includes(
+                    message.sender.id.split("@")[0]
+                )
             ) {
                 this.whatsappbot.queue.shift();
                 return undefined;
             }
-            
+
             return command.execute(message, args);
         } catch (e) {
             this.whatsappbot.queue.shift();
