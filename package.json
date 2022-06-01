@@ -55,7 +55,7 @@
     },
     "dependencies": {
         "@discordjs/collection": "0.6.0",
-        "@open-wa/wa-automate": "4.37.0",
+        "@open-wa/wa-automate": "4.37.2",
         "@sapphire/async-queue": "^1.3.1",
         "colorette": "2.0.16",
         "dayjs": "1.11.2",
