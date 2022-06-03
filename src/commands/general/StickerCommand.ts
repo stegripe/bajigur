@@ -62,7 +62,7 @@ export default class StickerCommand extends BaseCommand {
             if (Number(message.quotedMsg?.duration ?? message.duration) >= 11) {
                 await this.whatsappbot.client.reply(
                     message.chatId,
-                    "Please use video/gif with duration under/equal to 10 seconds and try again.",
+                    "Please use video or GIF with duration under to 10 seconds and try again.",
                     message.id
                 );
             } else {
@@ -84,7 +84,7 @@ export default class StickerCommand extends BaseCommand {
 
         await this.whatsappbot.client.reply(
             message.chatId,
-            `Please send a image/video/gif with */sticker* caption or reply it on the file! You can also send a image as document then reply it with */sticker*`,
+            "Please send an image, video, or GIF with */sticker* caption or reply it on the file. You can also send an image as document by replying it with */sticker* too.",
             message.id
         );
     }
@@ -137,7 +137,7 @@ export default class StickerCommand extends BaseCommand {
             await this.whatsappbot.client.reply(
                 message.chatId,
                 `An error occured when trying to create the sticker. ${
-                    isGif ? "try again with shorter video/gif" : ""
+                    isGif ? "try again with shorter video or GIF" : ""
                 }`,
                 message.id
             );
