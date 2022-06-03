@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars */
 import { IListenerComponent } from "../types";
-import { WhatsappBot } from "./WhatsappBot";
+import { WhatsAppBot } from "./WhatsAppBot";
 
 export class BaseListener implements IListenerComponent {
     public constructor(
-        public readonly whatsappbot: WhatsappBot,
+        public readonly whatsappbot: WhatsAppBot,
         public readonly meta: IListenerComponent["meta"]
     ) {}
 

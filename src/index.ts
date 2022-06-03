@@ -1,6 +1,6 @@
-import { WhatsappBot } from "./structures/WhatsappBot.js";
+import { WhatsAppBot } from "./structures/WhatsAppBot.js";
 
-new WhatsappBot({
+new WhatsAppBot({
     headless: true,
     qrTimeout: 0
 });

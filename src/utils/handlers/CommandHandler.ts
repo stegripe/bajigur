@@ -1,6 +1,6 @@
 import { Collection } from "@discordjs/collection";
 import { Message } from "@open-wa/wa-automate";
-import { WhatsappBot } from "../../structures/WhatsappBot.js";
+import { WhatsAppBot } from "../../structures/WhatsAppBot.js";
 import { ICommandComponent } from "../../types/index.js";
 import { Utils } from "../Utils.js";
 
@@ -12,7 +12,7 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
     >;
 
     public constructor(
-        public readonly whatsappbot: WhatsappBot,
+        public readonly whatsappbot: WhatsAppBot,
         public readonly path: string
     ) {
         super();

@@ -1,11 +1,11 @@
-import { WhatsappBot } from "../../structures/WhatsappBot.js";
+import { WhatsAppBot } from "../../structures/WhatsAppBot.js";
 import { IListenerComponent } from "../../types/index.js";
 import { Utils } from "../Utils.js";
 import { ev } from "@open-wa/wa-automate";
 
 export class ListenerHandler {
     public constructor(
-        public readonly whatsappbot: WhatsappBot,
+        public readonly whatsappbot: WhatsAppBot,
         public readonly path: string
     ) {}
 

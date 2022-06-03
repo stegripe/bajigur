@@ -8,7 +8,7 @@ import { resolve } from "node:path";
 import got from "got";
 import * as Config from "../config";
 
-export class WhatsappBot {
+export class WhatsAppBot {
     public client!: Client;
     public readonly config = Config;
     public readonly logger = new Logger();
