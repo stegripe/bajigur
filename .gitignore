@@ -98,3 +98,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# managed
+**.data.json
+**.node-persist**
+**_IGNORE_**
+# end managed
