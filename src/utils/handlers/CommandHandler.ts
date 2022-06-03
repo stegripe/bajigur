@@ -1,15 +1,14 @@
-import { Collection } from "@discordjs/collection";
-import { Message } from "@open-wa/wa-automate";
 import { WhatsAppBot } from "../../structures/WhatsAppBot.js";
 import { ICommandComponent } from "../../types/index.js";
 import { Utils } from "../Utils.js";
+import { Collection } from "@discordjs/collection";
+import { Message } from "@open-wa/wa-automate";
 
 export class CommandHandler extends Collection<string, ICommandComponent> {
     public readonly aliases: Collection<string, string> = new Collection();
     public categories!: Record<
         "developers" | "general",
-        ICommandComponent[] | undefined
-    >;
+    ICommandComponent[] | undefined>;
 
     public constructor(
         public readonly whatsappbot: WhatsAppBot,
@@ -68,13 +67,14 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                 (e as Error).stack ?? (e as Error).message
             );
         } finally {
-            this.categories = this.reduce<
-                Record<string, ICommandComponent[] | undefined>
-            >((a, b) => {
-                a[b.meta.category!] = a[b.meta.category!] ?? [];
-                a[b.meta.category!]?.push(b);
-                return a;
-            }, {});
+            this.categories = this.reduce <
+                Record < string, ICommandComponent[] | undefined >
+                >
+                ((a, b) => {
+                    a[b.meta.category!] = a[b.meta.category!] ?? [];
+                    a[b.meta.category!]?.push(b);
+                    return a;
+                }, {});
             this.whatsappbot.logger.info(
                 "command handler",
                 `Done Registering ${

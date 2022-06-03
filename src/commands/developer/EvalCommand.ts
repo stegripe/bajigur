@@ -1,8 +1,8 @@
-import { Message, MessageTypes } from "@open-wa/wa-automate";
-import { inspect } from "node:util";
 import { ApplyMetadata } from "../../structures/ApplyMetadata.js";
 import { BaseCommand } from "../../structures/BaseCommand.js";
 import { ICommandComponent } from "../../types/index.js";
+import { Message, MessageTypes } from "@open-wa/wa-automate";
+import { inspect } from "node:util";
 
 @ApplyMetadata<ICommandComponent>({
     name: "eval",
@@ -33,8 +33,9 @@ export default class EvalCommand extends BaseCommand {
                 // eslint-disable-next-line no-eval
                 await eval(
                     isAsync ? `(async () => { ${toExecute} })()` : toExecute
-                ),
-                { depth: 0 }
+                ), {
+                    depth: 0
+                }
             );
             if (outputCode.length > 60) {
                 const result = `${await this.hastebin(outputCode)}.js`;
@@ -74,7 +75,9 @@ export default class EvalCommand extends BaseCommand {
             .post("https://bin.clytage.org/documents", {
                 body: text
             })
-            .json<{ key: string }>();
+            .json < {
+                key: string
+            } > ();
 
         return `https://bin.clytage.org/${result.key}`;
     }

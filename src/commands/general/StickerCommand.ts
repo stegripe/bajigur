@@ -16,15 +16,13 @@ export default class StickerCommand extends BaseCommand {
         const isMessageImage = message.type === MessageTypes.IMAGE;
         const isMessageVideo = message.type === MessageTypes.VIDEO;
         const isMessageDocument =
-            message.type === MessageTypes.DOCUMENT &&
-            ["image/png", "image/jpg", "image/jpeg", "image/webp"].includes(
+            message.type === MessageTypes.DOCUMENT && ["image/png", "image/jpg", "image/jpeg", "image/webp"].includes(
                 message.mimetype!
             );
         const isQuotedImage = message.quotedMsg?.type === MessageTypes.IMAGE;
         const isQuotedVideo = message.quotedMsg?.type === MessageTypes.VIDEO;
         const isQuotedDocument =
-            message.quotedMsg?.type === MessageTypes.DOCUMENT &&
-            ["image/png", "image/jpg", "image/jpeg", "image/webp"].includes(
+            message.quotedMsg?.type === MessageTypes.DOCUMENT && ["image/png", "image/jpg", "image/jpeg", "image/webp"].includes(
                 message.quotedMsg.mimetype!
             );
 
@@ -107,9 +105,10 @@ export default class StickerCommand extends BaseCommand {
             if (isGif) {
                 await this.whatsappbot.client.sendMp4AsSticker(
                     message.chatId,
-                    media.toString("base64"),
-                    { crop: false, startTime: "00:00:00.0" },
-                    {
+                    media.toString("base64"), {
+                        crop: false,
+                        startTime: "00:00:00.0"
+                    }, {
                         keepScale: true,
                         author: "Clytage Bot",
                         pack: "Sticker Creator"
@@ -118,8 +117,7 @@ export default class StickerCommand extends BaseCommand {
             } else {
                 await this.whatsappbot.client.sendImageAsSticker(
                     message.chatId,
-                    imageBase64,
-                    {
+                    imageBase64, {
                         keepScale: true,
                         author: "Clytage Bot",
                         pack: "Sticker Creator"

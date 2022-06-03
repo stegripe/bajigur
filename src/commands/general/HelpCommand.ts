@@ -39,8 +39,7 @@ export default class HelpCommand extends BaseCommand {
                 .sort((a, b) =>
                     a[0].meta.category!.localeCompare(
                         b[0].meta.category!,
-                        "en",
-                        {
+                        "en", {
                             sensitivity: "base"
                         }
                     )
