@@ -13,6 +13,6 @@ import { Message } from "@open-wa/wa-automate";
 })
 export default class PingCommand extends BaseCommand {
     public async execute(message: Message): Promise<void> {
-        await this.whatsappbot.client.sendText(message.chatId, "PONG!");
+        await this.whatsappbot.client.sendText(message.chatId, "*PONG!*");
     }
 }
