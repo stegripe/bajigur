@@ -46,7 +46,7 @@ export class ListenerHandler {
                 "listener handler",
                 `Done Registering ${
                     fileListeners.length - unableToLoad
-                } command(s).`
+                } listener(s).`
             );
         }
     }
