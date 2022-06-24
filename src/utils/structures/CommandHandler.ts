@@ -132,7 +132,7 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                 this.whatsappbot.queue.shift();
                 this.whatsappbot.logger.info(
                     "command handler",
-                    `${command.meta.name} has been executed by ${
+                    `Command ${command.meta.name} has been executed by ${
                         message.sender.id.split("@")[0]
                     } in chat ${message.chatId.split("@")[0]}`
                 );
