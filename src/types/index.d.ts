@@ -2,13 +2,13 @@ import { Message } from "@open-wa/wa-automate";
 
 export interface ICommandComponent {
     meta: {
-        readonly name: string;
+        name: string;
+        aliases?: string[];
+        description?: string;
+        usage?: string;
+        devOnly?: boolean;
+        disabled?: boolean;
         readonly category?: string;
-        description: string;
-        aliases: string[];
-        usage: string;
-        devOnly: boolean;
-        disabled: boolean;
     };
     execute: (message: Message, ...args: any) => void;
 }
