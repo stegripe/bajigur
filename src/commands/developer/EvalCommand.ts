@@ -1,16 +1,14 @@
-import { ApplyMetadata } from "../../structures/ApplyMetadata.js";
-import { BaseCommand } from "../../structures/BaseCommand.js";
-import { ICommandComponent } from "../../types/index.js";
 import { Message, MessageTypes } from "@open-wa/wa-automate";
 import { inspect } from "node:util";
+import { BaseCommand } from "../../structures/BaseCommand";
+import { ICommandComponent } from "../../types";
+import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
 
 @ApplyMetadata<ICommandComponent>({
     name: "eval",
     description: "Evaluated javascript code",
     usage: "eval <code>",
-    aliases: [],
-    devOnly: true,
-    disabled: false
+    devOnly: true
 })
 export default class EvalCommand extends BaseCommand {
     public async execute(message: Message, args: string[]): Promise<void> {
@@ -33,7 +31,8 @@ export default class EvalCommand extends BaseCommand {
                 // eslint-disable-next-line no-eval
                 await eval(
                     isAsync ? `(async () => { ${toExecute} })()` : toExecute
-                ), {
+                ),
+                {
                     depth: 0
                 }
             );
@@ -75,9 +74,9 @@ export default class EvalCommand extends BaseCommand {
             .post("https://bin.clytage.org/documents", {
                 body: text
             })
-            .json < {
-                key: string
-            } > ();
+            .json<{
+                key: string;
+            }>();
 
         return `https://bin.clytage.org/${result.key}`;
     }

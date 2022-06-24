@@ -1,15 +1,12 @@
-import { ApplyMetadata } from "../../structures/ApplyMetadata.js";
-import { BaseCommand } from "../../structures/BaseCommand.js";
-import { ICommandComponent } from "../../types/index.js";
+import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
+import { BaseCommand } from "../../structures/BaseCommand";
+import { ICommandComponent } from "../../types";
 import { Message } from "@open-wa/wa-automate";
 
 @ApplyMetadata<ICommandComponent>({
     name: "help",
     description: "Display help message.",
-    usage: "help [command]",
-    aliases: [],
-    devOnly: false,
-    disabled: false
+    usage: "help [command]"
 })
 export default class HelpCommand extends BaseCommand {
     public async execute(message: Message, args: string[]): Promise<void> {
@@ -30,7 +27,11 @@ export default class HelpCommand extends BaseCommand {
 
             await this.whatsappbot.client.sendText(
                 message.chatId,
-                `*${this.whatsappbot.config.botName}* - ${command.meta.name}\n\n${command.meta.description}\nUsage: ${command.meta.usage}`
+                `*${this.whatsappbot.config.botName}* - ${
+                    command.meta.name
+                }\n\n${command.meta.description!}\nUsage: ${
+                    this.whatsappbot.config.prefix
+                }${command.meta.usage!}`
             );
         } else {
             let commmandList = "";
@@ -39,7 +40,8 @@ export default class HelpCommand extends BaseCommand {
                 .sort((a, b) =>
                     a[0].meta.category!.localeCompare(
                         b[0].meta.category!,
-                        "en", {
+                        "en",
+                        {
                             sensitivity: "base"
                         }
                     )

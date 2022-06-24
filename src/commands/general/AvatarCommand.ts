@@ -1,15 +1,13 @@
-import { ApplyMetadata } from "../../structures/ApplyMetadata.js";
-import { BaseCommand } from "../../structures/BaseCommand.js";
-import { ICommandComponent } from "../../types/index.js";
+import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
+import { BaseCommand } from "../../structures/BaseCommand";
+import { ICommandComponent } from "../../types";
 import { Contact, Message } from "@open-wa/wa-automate";
 
 @ApplyMetadata<ICommandComponent>({
     name: "avatar",
     description: "Get the user's profile picture.",
     usage: "avatar [user]",
-    aliases: ["ava", "av", "pfp", "pp"],
-    devOnly: false,
-    disabled: false
+    aliases: ["ava", "av", "pfp", "pp"]
 })
 export default class AvatarCommand extends BaseCommand {
     public async execute(message: Message): Promise<void> {

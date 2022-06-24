@@ -1,6 +1,6 @@
-import { ApplyMetadata } from "../structures/ApplyMetadata.js";
-import { BaseListener } from "../structures/BaseListener.js";
-import { IListenerComponent } from "../types/index.js";
+import { ApplyMetadata } from "../utils/decorators/ApplyMetadata";
+import { BaseListener } from "../structures/BaseListener";
+import { IListenerComponent } from "../types";
 
 @ApplyMetadata<IListenerComponent>({
     event: "qr.**"

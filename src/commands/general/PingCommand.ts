@@ -1,15 +1,12 @@
-import { ApplyMetadata } from "../../structures/ApplyMetadata.js";
-import { BaseCommand } from "../../structures/BaseCommand.js";
-import { ICommandComponent } from "../../types/index.js";
+import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
+import { BaseCommand } from "../../structures/BaseCommand";
+import { ICommandComponent } from "../../types";
 import { Message } from "@open-wa/wa-automate";
 
 @ApplyMetadata<ICommandComponent>({
     name: "ping",
     description: "Ping the bot.",
-    usage: "ping",
-    aliases: [],
-    devOnly: false,
-    disabled: false
+    usage: "ping"
 })
 export default class PingCommand extends BaseCommand {
     public async execute(message: Message): Promise<void> {
