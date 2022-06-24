@@ -1,5 +1,6 @@
 {
-    "files.eol": "\n",
     "typescript.tsdk": "node_modules/typescript/lib",
-    "typescript.preferences.importModuleSpecifierEnding": "js"
+    "npm.packageManager": "npm",
+    "files.eol": "\n",
+    "rpc.enabled": true
 }
