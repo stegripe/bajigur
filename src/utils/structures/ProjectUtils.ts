@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-extraneous-class, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-extraneous-class, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-dynamic-delete */
 import { readdirSync, statSync } from "fs";
 import { join, resolve } from "path";
 import { platform } from "node:os";
 
-export class Utils {
+export class ProjectUtils {
     public static async import<T>(
         path: string,
         ...args: any[]
@@ -36,6 +36,17 @@ export class Utils {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    public static mergeDefault<T>(def: T, prov: T): T {
+        const merged = { ...def, ...prov };
+        const defKeys = Object.keys(def as Record<string, unknown>);
+        for (const mergedKey of Object.keys(
+            merged as Record<string, unknown>
+        )) {
+            if (!defKeys.includes(mergedKey)) delete (merged as any)[mergedKey];
+        }
+        return merged;
+    }
+
     public static importURLToString(url: string): string {
         const pathArray = new URL(url).pathname.split(/\/|\\/g).filter(Boolean);
         const path = pathArray.slice(0, -1).join("/");
@@ -44,22 +55,19 @@ export class Utils {
         );
     }
 
-    public static pathStringToURLString(path: string): string {
-        return new URL(`file://${path}`).toString();
-    }
-
     public static parseEnvValue(str: string): string[] {
         return (
             str
-            .match(
-                /(?<=(?:\s+|^))(?<str>['"])?(?:.*?)\k<str>(?=(?:(?:[,;])|(?:(?:\s+)?$)))/g
-            )?.filter(x => Boolean(x.trim()))
-            .map(x =>
-                (x.startsWith("'") && x.endsWith("'")) ||
-                (x.startsWith('"') && x.endsWith('"')) ?
-                x.slice(1, x.length - 1) :
-                x
-            ) ?? []
+                .match(
+                    /(?<=(?:\s+|^))(?<str>['"])?(?:.*?)\k<str>(?=(?:(?:[,;])|(?:(?:\s+)?$)))/g
+                )
+                ?.filter(x => Boolean(x.trim()))
+                .map(x =>
+                    (x.startsWith("'") && x.endsWith("'")) ||
+                    (x.startsWith('"') && x.endsWith('"'))
+                        ? x.slice(1, x.length - 1)
+                        : x
+                ) ?? []
         );
     }
 }

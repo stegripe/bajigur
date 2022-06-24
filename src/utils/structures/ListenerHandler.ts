@@ -1,39 +1,40 @@
-import { WhatsAppBot } from "../../structures/WhatsAppBot.js";
-import { IListenerComponent } from "../../types/index.js";
-import { Utils } from "../Utils.js";
 import { ev } from "@open-wa/wa-automate";
+import { WhatsappBot } from "../../structures/WhatsappBot";
+import { IListenerComponent } from "../../types";
+import { ProjectUtils } from "./ProjectUtils";
 
 export class ListenerHandler {
     public constructor(
-        public readonly whatsappbot: WhatsAppBot,
+        public readonly whatsappbot: WhatsappBot,
         public readonly path: string
     ) {}
 
     public async load(): Promise<void> {
-        const fileListeners = Utils.readdirRecursive(this.path);
-        let unableToLoad = 0;
+        let invalidFile = 0;
+        const fileListeners = ProjectUtils.readdirRecursive(this.path);
         try {
             this.whatsappbot.logger.info(
                 "listener handler",
                 `Loading ${fileListeners.length} listener(s).`
             );
             for (const file of fileListeners) {
-                const listener = await Utils.import<IListenerComponent>(
+                const listener = await ProjectUtils.import<IListenerComponent>(
                     file,
                     this.whatsappbot
                 );
-                if (listener === undefined) {
+                if (listener) {
+                    ev.addListener(listener.meta.event, (...args) =>
+                        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                        listener.execute(...args)
+                    );
+                } else {
                     this.whatsappbot.logger.error(
                         "listener handler",
                         `File ${file} is not valid listener file`
                     );
-                    unableToLoad++;
+                    invalidFile++;
                     continue;
                 }
-                ev.addListener(listener.meta.event, (...args) =>
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-                    listener.execute(...args)
-                );
             }
         } catch (e) {
             this.whatsappbot.logger.error(
@@ -44,8 +45,8 @@ export class ListenerHandler {
         } finally {
             this.whatsappbot.logger.info(
                 "listener handler",
-                `Done Registering ${
-                    fileListeners.length - unableToLoad
+                `Done Registering ${fileListeners.length - invalidFile}/${
+                    fileListeners.length
                 } command(s).`
             );
         }

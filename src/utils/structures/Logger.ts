@@ -1,6 +1,12 @@
-import { Utils } from "../Utils";
-import { blueBright, bold, redBright, whiteBright, yellowBright } from "colorette";
+import {
+    blueBright,
+    bold,
+    redBright,
+    whiteBright,
+    yellowBright
+} from "colorette";
 import dayjs from "dayjs";
+import { ProjectUtils } from "./ProjectUtils";
 
 export class Logger {
     public debug(...messages: any[]): void {
@@ -10,15 +16,17 @@ export class Logger {
     public error(...messages: any[]): void {
         this.log(
             messages.map(message =>
-                message instanceof String ?
-                message.replace(
-                    new RegExp(
-                        `${Utils.importURLToString(import.meta.url)}/`,
-                        "g"
-                    ),
-                    "./"
-                ) :
-                message
+                message instanceof String
+                    ? message.replace(
+                          new RegExp(
+                              `${ProjectUtils.importURLToString(
+                                  import.meta.url
+                              )}/`,
+                              "g"
+                          ),
+                          "./"
+                      )
+                    : message
             ),
             "error"
         );
