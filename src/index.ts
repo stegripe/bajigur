@@ -1,6 +1,9 @@
-import { WhatsAppBot } from "./structures/WhatsAppBot.js";
+import { WhatsappBot } from "./structures/WhatsappBot";
 
-new WhatsAppBot({
+new WhatsappBot({
     headless: true,
-    qrTimeout: 0
+    qrTimeout: 0,
+    chromiumArgs: ["--no-sandbox", "--disable-setuid-sandbox"],
+    ezqr: true,
+    popup: (process.env.PORT ? Number(process.env.PORT) : undefined) ?? false
 });
