@@ -58,7 +58,7 @@
         "colorette": "2.0.19",
         "dayjs": "1.11.4",
         "dotenv": "16.0.1",
-        "got": "^12.1.0",
+        "got": "^12.2.0",
         "tslib": "2.4.0"
     },
     "devDependencies": {
