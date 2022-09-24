@@ -62,7 +62,7 @@
         "tslib": "2.4.0"
     },
     "devDependencies": {
-        "@clytage-pkg/eslint-config": "1.3.0",
+        "@clytage-pkg/eslint-config": "1.4.0",
         "@open-wa/wa-automate": "^4.47.0",
         "@swc/cli": "0.1.57",
         "@swc/core": "^1.3.3",
