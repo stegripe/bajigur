@@ -6,7 +6,7 @@ import { DefaultCommandComponent } from "../constants/DefaultCommandComponent";
 import { ProjectUtils } from "./ProjectUtils";
 
 export class CommandHandler extends Collection<string, ICommandComponent> {
-    public readonly aliases: Collection<string, string> = new Collection();
+    public readonly aliases = new Collection<string, string>();
     public categories!: Record<
         "developers" | "general",
         ICommandComponent[] | undefined
