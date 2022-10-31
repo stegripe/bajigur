@@ -59,7 +59,7 @@
         "dayjs": "1.11.6",
         "dotenv": "16.0.3",
         "got": "^12.5.2",
-        "tslib": "2.4.0"
+        "tslib": "2.4.1"
     },
     "devDependencies": {
         "@clytage-pkg/eslint-config": "1.4.0",
