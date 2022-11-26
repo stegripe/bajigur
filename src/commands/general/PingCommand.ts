@@ -6,7 +6,8 @@ import { Message } from "@open-wa/wa-automate";
 @ApplyMetadata<ICommandComponent>({
     name: "ping",
     description: "Ping the bot.",
-    usage: "ping"
+    usage: "ping",
+    aliases: ["p"]
 })
 export default class PingCommand extends BaseCommand {
     public async execute(message: Message): Promise<void> {

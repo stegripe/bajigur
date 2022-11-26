@@ -8,7 +8,8 @@ import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
 @ApplyMetadata<ICommandComponent>({
     name: "sticker",
     description: "Generates a sticker from image.",
-    usage: "sticker"
+    usage: "sticker",
+    aliases: ["stiker"]
 })
 export default class StickerCommand extends BaseCommand {
     public async execute(message: Message): Promise<void> {
