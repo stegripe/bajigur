@@ -1,5 +1,5 @@
-import { WhatsappBot } from "../../structures/WhatsappBot";
 import { ICommandComponent, IListenerComponent } from "../../types";
+import { WhatsappBot } from "../../structures/WhatsappBot";
 
 export function ApplyMetadata<P extends ICommandComponent | IListenerComponent>(
     meta: P["meta"]

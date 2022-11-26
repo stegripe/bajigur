@@ -1,7 +1,7 @@
-import { CommandHandler } from "../utils/structures/CommandHandler";
 import { ListenerHandler } from "../utils/structures/ListenerHandler";
-import { Logger } from "../utils/structures/Logger";
+import { CommandHandler } from "../utils/structures/CommandHandler";
 import { ProjectUtils } from "../utils/structures/ProjectUtils";
+import { Logger } from "../utils/structures/Logger";
 import * as Config from "../config";
 import { Client, ConfigObject, create } from "@open-wa/wa-automate";
 import { AsyncQueue } from "@sapphire/async-queue";

@@ -1,8 +1,8 @@
-import { Message, MessageTypes } from "@open-wa/wa-automate";
-import { inspect } from "node:util";
+import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
 import { BaseCommand } from "../../structures/BaseCommand";
 import { ICommandComponent } from "../../types";
-import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
+import { Message, MessageTypes } from "@open-wa/wa-automate";
+import { inspect } from "node:util";
 
 @ApplyMetadata<ICommandComponent>({
     name: "eval",

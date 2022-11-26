@@ -1,7 +1,7 @@
-import { ev } from "@open-wa/wa-automate";
 import { WhatsappBot } from "../../structures/WhatsappBot";
 import { IListenerComponent } from "../../types";
 import { ProjectUtils } from "./ProjectUtils";
+import { ev } from "@open-wa/wa-automate";
 
 export class ListenerHandler {
     public constructor(

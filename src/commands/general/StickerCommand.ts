@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import { decryptMedia, Message, MessageTypes } from "@open-wa/wa-automate";
+import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
 import { BaseCommand } from "../../structures/BaseCommand";
 import { ICommandComponent } from "../../types";
 import { FileTypes } from "../../types/enum";
-import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
+import { decryptMedia, Message, MessageTypes } from "@open-wa/wa-automate";
 
 @ApplyMetadata<ICommandComponent>({
     name: "sticker",

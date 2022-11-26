@@ -1,9 +1,9 @@
-import { Collection } from "@discordjs/collection";
-import { Message } from "@open-wa/wa-automate";
+import { DefaultCommandComponent } from "../constants/DefaultCommandComponent";
 import { WhatsappBot } from "../../structures/WhatsappBot";
 import { ICommandComponent } from "../../types";
-import { DefaultCommandComponent } from "../constants/DefaultCommandComponent";
 import { ProjectUtils } from "./ProjectUtils";
+import { Collection } from "@discordjs/collection";
+import { Message } from "@open-wa/wa-automate";
 
 export class CommandHandler extends Collection<string, ICommandComponent> {
     public readonly aliases = new Collection<string, string>();
