@@ -65,7 +65,7 @@
         "@clytage-pkg/eslint-config": "1.5.0",
         "@open-wa/wa-automate": "^4.51.6",
         "@swc/cli": "0.1.57",
-        "@swc/core": "^1.3.20",
+        "@swc/core": "^1.3.21",
         "@types/node": "18.11.9",
         "@typescript-eslint/eslint-plugin": "5.44.0",
         "@typescript-eslint/parser": "5.44.0",
