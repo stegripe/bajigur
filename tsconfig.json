@@ -1,11 +1,9 @@
 {
     "compilerOptions": {
-        "target": "ES2021",
-        "module": "ESNext",
+        "target": "ES5",
+        "module": "commonjs",
         "moduleResolution": "node",
-        "lib": ["ES2021"],
         "strict": true,
-        "outDir": "dist",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
@@ -13,9 +11,9 @@
         "skipLibCheck": true,
         "noEmitHelpers": true,
         "importHelpers": true,
-        "resolveJsonModule": true,
-        "typeRoots": ["node_modules/@types", "src/typings"]
+        "outDir": "dist",
+        "typeRoots": ["node_modules/@types", "src/types"]
     },
-    "exclude": [],
-    "include": ["src/**/*"]
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules/**", "**/.*/"]
 }
