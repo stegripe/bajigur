@@ -1,44 +1,49 @@
-import { ListenerHandler } from "../utils/structures/ListenerHandler";
-import { CommandHandler } from "../utils/structures/CommandHandler";
-import { ProjectUtils } from "../utils/structures/ProjectUtils";
-import { Logger } from "../utils/structures/Logger";
-import * as Config from "../config";
-import { Client, ConfigObject, create } from "@open-wa/wa-automate";
-import { AsyncQueue } from "@sapphire/async-queue";
+import makeWASocket, {
+    AuthenticationState,
+    useMultiFileAuthState
+} from "@adiwajshing/baileys";
 import { resolve } from "node:path";
-import got from "got";
+import pino from "pino";
+import pretty from "pino-pretty";
+import * as Config from "../config";
+import { IWhatsappBotConfig } from "../types";
+import { CommandHandler, ListenerHandler } from "../utils/structures";
 
 export class WhatsappBot {
-    public client!: Client;
-    public readonly config = Config;
-    public readonly logger = new Logger();
-    public readonly request = got;
-    public readonly queue = new AsyncQueue();
-    public readonly commands = new CommandHandler(
-        this,
-        resolve(ProjectUtils.importURLToString(import.meta.url), "../commands")
+    public socket: ReturnType<typeof makeWASocket> | undefined;
+    public authState:
+        | { state: AuthenticationState; saveCreds: () => Promise<void> }
+        | undefined;
+
+    public readonly config: IWhatsappBotConfig = Config;
+
+    public readonly logger = pino(
+        {
+            level: this.config.mode === "prod" ? "debug" : "info",
+            timestamp: true
+        },
+        pretty({
+            translateTime: "SYS:yyyy-MM-dd HH:mm:ss"
+        })
     );
 
-    public readonly listeners = new ListenerHandler(
+    public readonly commandHandler = new CommandHandler(
         this,
-        resolve(ProjectUtils.importURLToString(import.meta.url), "../listeners")
+        resolve("dist/commands")
     );
 
-    public constructor(config?: ConfigObject) {
-        void create(config).then(whatsappClient => this.start(whatsappClient));
-    }
+    public readonly listenerHandler = new ListenerHandler(
+        this,
+        resolve("dist/events")
+    );
 
-    public async start(whatsappClient: Client): Promise<void> {
-        this.client = whatsappClient;
-        await this.listeners.load();
-        await this.commands.load();
-        await whatsappClient.onMessage(async message => {
-            if (
-                (message.caption || message.body).startsWith(this.config.prefix)
-            ) {
-                await this.queue.wait();
-                await this.commands.handle(message);
-            }
+    public async start(): Promise<void> {
+        this.authState = await useMultiFileAuthState("auth_state");
+        this.socket = makeWASocket({
+            auth: this.authState.state,
+            printQRInTerminal: true,
+            logger: this.logger
         });
+        await this.listenerHandler.init();
     }
 }
