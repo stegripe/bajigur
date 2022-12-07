@@ -1,5 +1,4 @@
 import { downloadMediaMessage, proto } from "@adiwajshing/baileys";
-import { readFileSync } from "node:fs";
 import { Sticker, StickerTypes } from "wa-sticker-formatter";
 import { BaseCommand } from "../../structures/BaseCommand";
 import { ICommandComponent } from "../../types";
@@ -16,14 +15,8 @@ export default class StickerCommand extends BaseCommand {
         _: string[],
         data: proto.IWebMessageInfo
     ): Promise<void> {
-        // await this.convertToSticker(
-        //     data.key.remoteJid!,
-        //     readFileSync(`${process.cwd()}/output.webp`),
-        //     data
-        // );
-        // return undefined;
         if (data.message?.imageMessage ?? data.message?.videoMessage) {
-            if ((data.message?.videoMessage?.seconds ?? 0) >= 10) {
+            if ((data.message.videoMessage?.seconds ?? 0) >= 10) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
                     text: "Please use Video or GIF with duration under 10 seconds."
                 });
@@ -40,7 +33,7 @@ export default class StickerCommand extends BaseCommand {
         }
         if (data.message?.documentWithCaptionMessage) {
             if (
-                (data.message?.documentWithCaptionMessage?.message?.videoMessage
+                (data.message.documentWithCaptionMessage.message?.videoMessage
                     ?.seconds ?? 0) >= 10
             ) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
@@ -71,10 +64,10 @@ export default class StickerCommand extends BaseCommand {
                 ?.documentMessage
         ) {
             if (
-                (data.message?.extendedTextMessage?.contextInfo?.quotedMessage
-                    ?.videoMessage?.seconds ?? 0) >= 10 ||
-                (data.message?.extendedTextMessage?.contextInfo?.quotedMessage
-                    ?.documentMessage?.contextInfo?.quotedMessage?.videoMessage
+                (data.message.extendedTextMessage.contextInfo.quotedMessage
+                    .videoMessage?.seconds ?? 0) >= 10 ||
+                (data.message.extendedTextMessage.contextInfo.quotedMessage
+                    .documentMessage?.contextInfo?.quotedMessage?.videoMessage
                     ?.seconds ?? 0) >= 10
             ) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
@@ -103,8 +96,8 @@ export default class StickerCommand extends BaseCommand {
                 ?.documentWithCaptionMessage
         ) {
             if (
-                (data.message?.extendedTextMessage?.contextInfo?.quotedMessage
-                    ?.documentWithCaptionMessage?.message?.videoMessage
+                (data.message.extendedTextMessage.contextInfo.quotedMessage
+                    .documentWithCaptionMessage.message?.videoMessage
                     ?.seconds ?? 0) >= 10
             ) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
