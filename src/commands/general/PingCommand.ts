@@ -1,16 +1,21 @@
-import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
+import { proto } from "@adiwajshing/baileys";
 import { BaseCommand } from "../../structures/BaseCommand";
 import { ICommandComponent } from "../../types";
-import { Message } from "@open-wa/wa-automate";
+import { ApplyMetadata } from "../../utils/decorators";
 
 @ApplyMetadata<ICommandComponent>({
     name: "ping",
-    description: "Ping the bot.",
-    usage: "ping",
-    aliases: ["p"]
+    aliases: ["p"],
+    description: "Ping the bot",
+    usage: "ping"
 })
 export default class PingCommand extends BaseCommand {
-    public async execute(message: Message): Promise<void> {
-        await this.whatsappbot.client.sendText(message.chatId, "*PONG!*");
+    public async executeCommand(
+        _: string[],
+        data: proto.IWebMessageInfo
+    ): Promise<void> {
+        await this.client.socket?.sendMessage(data.key.remoteJid!, {
+            text: "Pong!"
+        });
     }
 }
