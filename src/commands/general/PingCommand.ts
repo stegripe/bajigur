@@ -7,7 +7,7 @@ import { ApplyMetadata } from "../../utils/decorators";
     name: "ping",
     aliases: ["p"],
     description: "Ping the bot",
-    usage: "ping"
+    usage: "{PREFIX}ping"
 })
 export default class PingCommand extends BaseCommand {
     public async executeCommand(
