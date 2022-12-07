@@ -8,7 +8,7 @@ import { ApplyMetadata } from "../../utils/decorators";
     name: "sticker",
     aliases: ["stiker"],
     description: "Convert image to sticker",
-    usage: "sticker <image url>"
+    usage: "{PREFIX}sticker <image/video/gif>"
 })
 export default class StickerCommand extends BaseCommand {
     public async executeCommand(
