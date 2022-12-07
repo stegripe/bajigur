@@ -19,7 +19,7 @@ export class WhatsappBot {
 
     public readonly logger = pino(
         {
-            level: this.config.mode === "prod" ? "debug" : "info",
+            level: this.config.mode === "prod" ? "info" : "debug",
             timestamp: true
         },
         pretty({
