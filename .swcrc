@@ -5,9 +5,9 @@
             "tsx": false,
             "decorators": true
         },
-        "target": "es2021"
+        "target": "es5"
     },
     "module": {
-        "type": "es6"
+        "type": "commonjs"
     }
 }

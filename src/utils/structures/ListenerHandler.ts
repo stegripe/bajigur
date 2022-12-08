@@ -1,54 +1,41 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { resolve } from "path";
 import { WhatsappBot } from "../../structures/WhatsappBot";
 import { IListenerComponent } from "../../types";
-import { ProjectUtils } from "./ProjectUtils";
-import { ev } from "@open-wa/wa-automate";
+import { importClass, readdirRecursive } from "../functions";
 
 export class ListenerHandler {
     public constructor(
-        public readonly whatsappbot: WhatsappBot,
+        public readonly client: WhatsappBot,
         public readonly path: string
     ) {}
 
-    public async load(): Promise<void> {
-        let invalidFile = 0;
-        const fileListeners = ProjectUtils.readdirRecursive(this.path);
+    public async init(): Promise<void> {
         try {
-            this.whatsappbot.logger.info(
-                "listener handler",
-                `Loading ${fileListeners.length} listener(s).`
+            const files = readdirRecursive(this.path);
+            this.client.logger.info(
+                `Found ${files.length} listeners, registering...`
             );
-            for (const file of fileListeners) {
-                const listener = await ProjectUtils.import<IListenerComponent>(
-                    file,
-                    this.whatsappbot
+            for (const file of files) {
+                const event = await importClass<IListenerComponent>(
+                    resolve(file),
+                    this.client
                 );
-                if (listener) {
-                    ev.addListener(listener.meta.event, (...args) =>
-                        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-                        listener.execute(...args)
+                if (event) {
+                    this.client.socket?.ev.on(event.meta.name, (...args) =>
+                        event.executeEvent(...args)
+                    );
+                    this.client.logger.info(
+                        `Registered ${event.meta.name} listener.`
                     );
                 } else {
-                    this.whatsappbot.logger.error(
-                        "listener handler",
-                        `File ${file} is not valid listener file`
-                    );
-                    invalidFile++;
-                    continue;
+                    this.client.logger.warn(`Invalid event file: ${file}.`);
                 }
             }
-        } catch (e) {
-            this.whatsappbot.logger.error(
-                "listener handler",
-                "Listener Handler Err: ",
-                (e as Error).stack ?? (e as Error).message
-            );
+        } catch (err) {
+            this.client.logger.error("EVENT_HANDLER_ERROR", err);
         } finally {
-            this.whatsappbot.logger.info(
-                "listener handler",
-                `Done Registering ${fileListeners.length - invalidFile}/${
-                    fileListeners.length
-                } command(s).`
-            );
+            this.client.logger.info("Done loading events.");
         }
     }
 }
