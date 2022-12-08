@@ -1,41 +1,43 @@
-import { ApplyMetadata } from "../../utils/decorators/ApplyMetadata";
+import { proto } from "@adiwajshing/baileys";
 import { BaseCommand } from "../../structures/BaseCommand";
 import { ICommandComponent } from "../../types";
-import { Message } from "@open-wa/wa-automate";
+import { ApplyMetadata } from "../../utils/decorators";
 
 @ApplyMetadata<ICommandComponent>({
     name: "help",
-    description: "Display help message.",
-    usage: "help [command]"
+    aliases: ["h", "?"],
+    description: "Get help with the bot",
+    usage: "{PREFIX}help [command]"
 })
 export default class HelpCommand extends BaseCommand {
-    public async execute(message: Message, args: string[]): Promise<void> {
+    public async executeCommand(
+        args: string[],
+        data: proto.IWebMessageInfo
+    ): Promise<void> {
         if (args[0]) {
             const command =
-                this.whatsappbot.commands.get(args[0]) ??
-                this.whatsappbot.commands.get(
-                    this.whatsappbot.commands.aliases.get(args[0]) ?? ""
+                this.client.commandHandler.get(args[0]) ??
+                this.client.commandHandler.get(
+                    this.client.commandHandler.aliases.get(args[0]) ?? ""
                 );
-
             if (!command) {
-                await this.whatsappbot.client.sendText(
-                    message.chatId,
-                    "Command not found."
-                );
+                await this.client.socket?.sendMessage(data.key.remoteJid!, {
+                    text: "Command not found"
+                });
                 return undefined;
             }
-
-            await this.whatsappbot.client.sendText(
-                message.chatId,
-                `*${this.whatsappbot.config.botName}* - ${
+            await this.client.socket?.sendMessage(data.key.remoteJid!, {
+                text: `*${this.client.config.botName}* - ${
                     command.meta.name
-                }\n\n${command.meta.description!}\nUsage: ${
-                    this.whatsappbot.config.prefix
-                }${command.meta.usage!}`
-            );
+                }\n\n${command.meta
+                    .description!}\nUsage: ${command.meta.usage!.replace(
+                    "{PREFIX}",
+                    this.client.config.prefix
+                )}`
+            });
         } else {
             let commmandList = "";
-            Object.values(this.whatsappbot.commands.categories)
+            Object.values(this.client.commandHandler.categories)
                 .map(commands => commands!.filter(Boolean))
                 .sort((a, b) =>
                     a[0].meta.category!.localeCompare(
@@ -49,12 +51,11 @@ export default class HelpCommand extends BaseCommand {
                 .map(commands => {
                     const category = commands[0].meta.category!;
                     const cmds = commands.map(cmd => cmd.meta.name).join(", ");
-                    commmandList += `*${category.toUpperCase()}*\n${cmds}\n`;
+                    commmandList += `*${category.toUpperCase()}*\n\`\`\`${cmds}\`\`\`\n`;
                 });
-            await this.whatsappbot.client.sendText(
-                message.chatId,
-                `*${this.whatsappbot.config.botName}* - Command List\n\n${commmandList}`
-            );
+            await this.client.socket?.sendMessage(data.key.remoteJid!, {
+                text: `*${this.client.config.botName}* - Command List\n\n${commmandList}`
+            });
         }
     }
 }

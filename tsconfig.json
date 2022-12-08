@@ -1,9 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES2021",
-        "module": "ESNext",
+        "target": "ES5",
+        "module": "commonjs",
         "moduleResolution": "node",
-        "lib": ["ES2021"],
         "strict": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,

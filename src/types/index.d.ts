@@ -1,4 +1,18 @@
-import { Message } from "@open-wa/wa-automate";
+import {
+    AuthenticationCreds,
+    BaileysEvent,
+    BaileysEventMap,
+    proto
+} from "@adiwajshing/baileys";
+
+export interface IListenerComponent {
+    meta: {
+        name: BaileysEvent;
+    };
+    executeEvent: (
+        data: BaileysEventMap<AuthenticationCreds>[BaileysEvent]
+    ) => void;
+}
 
 export interface ICommandComponent {
     meta: {
@@ -7,15 +21,14 @@ export interface ICommandComponent {
         description?: string;
         usage?: string;
         devOnly?: boolean;
-        disabled?: boolean;
-        readonly category?: string;
+        category?: string;
     };
-    execute: (message: Message, ...args: any) => void;
+    executeCommand: (args: string[], data: proto.IWebMessageInfo) => void;
 }
 
-export interface IListenerComponent {
-    meta: {
-        event: string;
-    };
-    execute: (...args: any) => void;
+export interface IWhatsappBotConfig {
+    botName: string;
+    prefix: string;
+    devs: string[];
+    mode: "dev" | "prod";
 }

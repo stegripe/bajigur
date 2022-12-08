@@ -104,3 +104,5 @@ dist
 **.node-persist**
 **_IGNORE_**
 # end managed
+
+auth_state
