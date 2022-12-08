@@ -1,59 +1,46 @@
-import { DefaultCommandComponent } from "../constants/DefaultCommandComponent";
+import { proto } from "@adiwajshing/baileys";
+import { Collection } from "@discordjs/collection";
+import { resolve } from "node:path";
 import { WhatsappBot } from "../../structures/WhatsappBot";
 import { ICommandComponent } from "../../types";
-import { ProjectUtils } from "./ProjectUtils";
-import { Collection } from "@discordjs/collection";
-import { Message } from "@open-wa/wa-automate";
+import { DefaultCommandComponent } from "../constants";
+import { importClass, mergeDefault, readdirRecursive } from "../functions";
 
 export class CommandHandler extends Collection<string, ICommandComponent> {
+    public categories: Record<string, ICommandComponent[] | undefined> = {};
     public readonly aliases = new Collection<string, string>();
-    public categories!: Record<
-        "developers" | "general",
-        ICommandComponent[] | undefined
-    >;
+    public isReady = false;
 
     public constructor(
-        public readonly whatsappbot: WhatsappBot,
+        public readonly client: WhatsappBot,
         public readonly path: string
     ) {
         super();
     }
 
-    public async load(): Promise<void> {
-        let unableToLoad = 0;
-        const fileCommands = ProjectUtils.readdirRecursive(this.path);
+    public async init(): Promise<void> {
         try {
-            this.whatsappbot.logger.info(
-                "command handler",
-                `Loading ${fileCommands.length} command(s).`
+            const files = readdirRecursive(this.path);
+            this.client.logger.info(
+                `Found ${files.length} commands, registering...`
             );
-            for (const path of fileCommands) {
-                const command = await ProjectUtils.import<ICommandComponent>(
-                    path,
-                    this.whatsappbot
+            for (const path of files) {
+                const command = await importClass<ICommandComponent>(
+                    resolve(path),
+                    this.client
                 );
                 if (command) {
-                    if (this.has(command.meta.name)) {
-                        this.whatsappbot.logger.warn(
-                            "command handler",
-                            `Duplicate command name detected: ${command.meta.name}, path: ${path}`
-                        );
-                        unableToLoad++;
-                        continue;
-                    }
-                    command.meta = ProjectUtils.mergeDefault<
-                        ICommandComponent["meta"]
-                    >(DefaultCommandComponent, command.meta);
+                    command.meta = mergeDefault<ICommandComponent["meta"]>(
+                        DefaultCommandComponent,
+                        command.meta
+                    );
                     const category = path
                         .split(/\/|\\/g)
                         .slice(0, -1)
                         .pop()!
                         .toLowerCase();
                     Object.freeze(
-                        Object.assign(command.meta, {
-                            category,
-                            path
-                        })
+                        Object.assign(command.meta, { category, path })
                     );
                     this.set(command.meta.name, command);
                     if (command.meta.aliases?.length) {
@@ -61,21 +48,15 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                             this.aliases.set(alias, command.meta.name)
                         );
                     }
-                } else {
-                    this.whatsappbot.logger.error(
-                        "command handler",
-                        `File ${path} is not valid command file`
+                    this.client.logger.info(
+                        `Registered ${command.meta.name} in category ${category}.`
                     );
-                    unableToLoad++;
-                    continue;
+                } else {
+                    this.client.logger.warn(`Invalid command file: ${path}.`);
                 }
             }
-        } catch (e) {
-            this.whatsappbot.logger.error(
-                "command handler",
-                `COMMAND_LOADER_ERR:`,
-                (e as Error).stack ?? (e as Error).message
-            );
+        } catch (err) {
+            this.client.logger.error("COMMAND_HANDLER_ERROR", err);
         } finally {
             this.categories = this.reduce<
                 Record<string, ICommandComponent[] | undefined>
@@ -84,62 +65,52 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                 a[b.meta.category!]?.push(b);
                 return a;
             }, {});
-            this.whatsappbot.logger.info(
-                "command handler",
-                `Done Registering ${fileCommands.length - unableToLoad}/${
-                    fileCommands.length
-                } command(s).`
-            );
+            this.client.logger.info("All categories has been registered.");
+            this.isReady = true;
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/require-await
-    public async handle(message: Message): Promise<void> {
-        const args = (message.caption || message.body)
-            .substring(this.whatsappbot.config.prefix.length)
+    public handle(content: string, message: proto.IWebMessageInfo): void {
+        const parseArgs = content
+            .slice(this.client.config.prefix.length)
             .trim()
-            .split(/ +/);
-        const commandName = args.shift()?.toLowerCase();
-        const command =
-            this.get(commandName!) ?? this.get(this.aliases.get(commandName!)!);
+            .split(/ +/g);
+        const commandArgs = parseArgs.shift()?.toLowerCase() ?? "";
+        const getCommand =
+            this.get(commandArgs) ??
+            this.get(this.aliases.get(commandArgs) ?? "");
 
-        if (command) {
+        if (getCommand) {
             try {
-                if (command.meta.disabled) {
-                    this.whatsappbot.queue.shift();
-                    return undefined;
-                }
-
                 if (
-                    command.meta.devOnly &&
-                    !this.whatsappbot.config.devs.includes(
-                        message.sender.id.split("@")[0]
+                    (getCommand.meta.devOnly ||
+                        this.client.config.mode === "dev") &&
+                    !this.client.config.devs.includes(
+                        message.key.remoteJid!.split("@")[0]
                     )
-                ) {
-                    this.whatsappbot.queue.shift();
-                    return undefined;
-                }
-
-                return command.execute(message, args);
-            } catch (e) {
-                this.whatsappbot.queue.shift();
-                this.whatsappbot.logger.error(
-                    "command handler",
-                    `COMMAND_HANDLER_ERR: `,
-                    (e as Error).stack ?? (e as Error).message
-                );
+                )
+                    return;
+                getCommand.executeCommand(parseArgs, message);
+            } catch (err) {
+                this.client.logger.error("COMMAND_HANDLER_ERR:", err);
             } finally {
-                this.whatsappbot.queue.shift();
-                this.whatsappbot.logger.info(
-                    "command handler",
-                    `Command ${command.meta.name} has been executed by ${
-                        message.sender.id.split("@")[0]
-                    } in chat ${message.chatId.split("@")[0]}`
+                if (
+                    (getCommand.meta.devOnly ||
+                        this.client.config.mode === "dev") &&
+                    !this.client.config.devs.includes(
+                        message.key.remoteJid!.split("@")[0]
+                    )
+                )
+                    // eslint-disable-next-line no-unsafe-finally
+                    return;
+                this.client.logger.info(
+                    `${message.pushName ?? ""}(${message.key
+                        .remoteJid!}) is using ${
+                        getCommand.meta.name
+                    } command from ${getCommand.meta
+                        .category!} category on chat ${message.key.remoteJid!}.`
                 );
             }
-        } else {
-            this.whatsappbot.queue.shift();
-            return undefined;
         }
     }
 }

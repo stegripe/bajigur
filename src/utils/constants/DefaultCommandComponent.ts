@@ -6,5 +6,5 @@ export const DefaultCommandComponent: ICommandComponent["meta"] = {
     description: "",
     usage: "",
     devOnly: false,
-    disabled: false
+    category: ""
 };
