@@ -62,7 +62,7 @@
         "wa-sticker-formatter": "^4.3.2"
     },
     "devDependencies": {
-        "@clytage-pkg/eslint-config": "1.5.0",
+        "@clytage-pkg/eslint-config": "1.6.0",
         "@swc/cli": "0.1.57",
         "@swc/core": "^1.3.21",
         "@types/node": "18.11.10",
