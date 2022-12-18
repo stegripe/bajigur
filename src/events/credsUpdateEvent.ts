@@ -1,6 +1,6 @@
 import { BaseListener } from "../structures/BaseListener";
-import { IListenerComponent } from "../types";
 import { ApplyMetadata } from "../utils/decorators";
+import { IListenerComponent } from "../types";
 
 @ApplyMetadata<IListenerComponent>({
     name: "creds.update"

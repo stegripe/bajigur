@@ -1,15 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function */
-import {
-    AuthenticationCreds,
-    BaileysEvent,
-    BaileysEventMap
-} from "@adiwajshing/baileys";
 import { IListenerComponent } from "../types";
-import { WhatsappBot } from "./WhatsappBot";
+import { WhatsAppBot } from "./WhatsAppBot";
+import { AuthenticationCreds, BaileysEvent, BaileysEventMap } from "@adiwajshing/baileys";
 
 export abstract class BaseListener implements IListenerComponent {
     public constructor(
-        public client: WhatsappBot,
+        public client: WhatsAppBot,
         public readonly meta: IListenerComponent["meta"]
     ) {}
 

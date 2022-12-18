@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars */
-import { proto } from "@adiwajshing/baileys";
 import { ICommandComponent } from "../types";
-import { WhatsappBot } from "./WhatsappBot";
+import { WhatsAppBot } from "./WhatsAppBot";
+import { proto } from "@adiwajshing/baileys";
 
 export abstract class BaseCommand implements ICommandComponent {
     public constructor(
-        public client: WhatsappBot,
+        public client: WhatsAppBot,
         public readonly meta: ICommandComponent["meta"]
     ) {}
 

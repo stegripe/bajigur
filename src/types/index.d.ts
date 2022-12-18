@@ -1,9 +1,4 @@
-import {
-    AuthenticationCreds,
-    BaileysEvent,
-    BaileysEventMap,
-    proto
-} from "@adiwajshing/baileys";
+import { AuthenticationCreds, BaileysEvent, BaileysEventMap, proto } from "@adiwajshing/baileys";
 
 export interface IListenerComponent {
     meta: {
@@ -26,7 +21,7 @@ export interface ICommandComponent {
     executeCommand: (args: string[], data: proto.IWebMessageInfo) => void;
 }
 
-export interface IWhatsappBotConfig {
+export interface IWhatsAppBotConfig {
     botName: string;
     prefix: string;
     devs: string[];

@@ -1,8 +1,4 @@
-import {
-    AuthenticationCreds,
-    BaileysEventMap,
-    DisconnectReason
-} from "@adiwajshing/baileys";
+import { AuthenticationCreds, BaileysEventMap, DisconnectReason } from "@adiwajshing/baileys";
 import { Boom } from "@hapi/boom";
 import { rmSync } from "node:fs";
 import { BaseListener } from "../structures/BaseListener";
@@ -26,7 +22,6 @@ export default class connectionUpdateEvent extends BaseListener {
                     lastDisconnect?.error?.message ?? "unknown reason"
                 }, reconnecting ${shouldReconnect}`
             );
-            // reconnect if not logged out
             if (shouldReconnect) {
                 await this.client.start();
             } else {

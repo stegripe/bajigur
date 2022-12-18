@@ -1,10 +1,10 @@
-import { proto } from "@adiwajshing/baileys";
-import { Collection } from "@discordjs/collection";
-import { resolve } from "node:path";
-import { WhatsappBot } from "../../structures/WhatsappBot";
-import { ICommandComponent } from "../../types";
-import { DefaultCommandComponent } from "../constants";
 import { importClass, mergeDefault, readdirRecursive } from "../functions";
+import { WhatsAppBot } from "../../structures/WhatsAppBot";
+import { DefaultCommandComponent } from "../constants";
+import { ICommandComponent } from "../../types";
+import { Collection } from "@discordjs/collection";
+import { proto } from "@adiwajshing/baileys";
+import { resolve } from "node:path";
 
 export class CommandHandler extends Collection<string, ICommandComponent> {
     public categories: Record<string, ICommandComponent[] | undefined> = {};
@@ -12,7 +12,7 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
     public isReady = false;
 
     public constructor(
-        public readonly client: WhatsappBot,
+        public readonly client: WhatsAppBot,
         public readonly path: string
     ) {
         super();
@@ -101,7 +101,6 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                         message.key.remoteJid!.split("@")[0]
                     )
                 )
-                    // eslint-disable-next-line no-unsafe-finally
                     return;
                 this.client.logger.info(
                     `${message.pushName ?? ""}(${message.key
