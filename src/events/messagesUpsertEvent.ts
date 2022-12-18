@@ -1,7 +1,7 @@
-import { AuthenticationCreds, BaileysEventMap } from "@adiwajshing/baileys";
 import { BaseListener } from "../structures/BaseListener";
-import { IListenerComponent } from "../types";
 import { ApplyMetadata } from "../utils/decorators";
+import { IListenerComponent } from "../types";
+import { AuthenticationCreds, BaileysEventMap } from "@adiwajshing/baileys";
 
 @ApplyMetadata<IListenerComponent>({
     name: "messages.upsert"

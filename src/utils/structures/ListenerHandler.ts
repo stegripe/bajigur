@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { resolve } from "path";
-import { WhatsappBot } from "../../structures/WhatsappBot";
-import { IListenerComponent } from "../../types";
 import { importClass, readdirRecursive } from "../functions";
+import { WhatsAppBot } from "../../structures/WhatsAppBot";
+import { IListenerComponent } from "../../types";
+import { resolve } from "path";
 
 export class ListenerHandler {
     public constructor(
-        public readonly client: WhatsappBot,
+        public readonly client: WhatsAppBot,
         public readonly path: string
     ) {}
 

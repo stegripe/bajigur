@@ -1,8 +1,8 @@
+import { BaseCommand } from "../../structures/BaseCommand";
+import { ApplyMetadata } from "../../utils/decorators";
+import { ICommandComponent } from "../../types";
 import { downloadMediaMessage, proto } from "@adiwajshing/baileys";
 import { Sticker, StickerTypes } from "wa-sticker-formatter";
-import { BaseCommand } from "../../structures/BaseCommand";
-import { ICommandComponent } from "../../types";
-import { ApplyMetadata } from "../../utils/decorators";
 
 @ApplyMetadata<ICommandComponent>({
     name: "sticker",

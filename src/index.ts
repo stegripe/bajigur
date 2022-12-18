@@ -1,3 +1,3 @@
-import { WhatsappBot } from "./structures/WhatsappBot.js";
+import { WhatsAppBot } from "./structures/WhatsAppBot.js";
 
-void new WhatsappBot().start();
+void new WhatsAppBot().start();
