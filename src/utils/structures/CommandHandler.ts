@@ -101,6 +101,7 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                         message.key.remoteJid!.split("@")[0]
                     )
                 )
+                    // eslint-disable-next-line no-unsafe-finally
                     return;
                 this.client.logger.info(
                     `${message.pushName ?? ""}(${message.key

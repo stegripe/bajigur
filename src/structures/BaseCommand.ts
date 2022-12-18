@@ -8,5 +8,6 @@ export abstract class BaseCommand implements ICommandComponent {
         public readonly meta: ICommandComponent["meta"]
     ) {}
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
     public executeCommand(args: string[], data: proto.IWebMessageInfo): void {}
 }
