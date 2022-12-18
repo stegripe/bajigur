@@ -9,6 +9,8 @@ export abstract class BaseListener implements IListenerComponent {
     ) {}
 
     public executeEvent(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         data: BaileysEventMap<AuthenticationCreds>[BaileysEvent]
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     ): void {}
 }
