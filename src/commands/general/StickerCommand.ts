@@ -1,14 +1,17 @@
 import { downloadMediaMessage, proto } from "@adiwajshing/baileys";
-import { Sticker, StickerTypes } from "wa-sticker-formatter";
+import { unlinkSync, writeFileSync } from "fs";
+import { join } from "path";
+import { createSticker } from "wa-sticker";
 import { BaseCommand } from "../../structures/BaseCommand";
 import { ICommandComponent } from "../../types";
 import { ApplyMetadata } from "../../utils/decorators";
+import { getTypeFromBuffer } from "../../utils/functions";
 
 @ApplyMetadata<ICommandComponent>({
     name: "sticker",
     aliases: ["stiker"],
     description: "Convert image to sticker",
-    usage: "{PREFIX}sticker <image/video/gif>"
+    usage: "{PREFIX}sticker <image/video/gif> [sticker pack name]"
 })
 export default class StickerCommand extends BaseCommand {
     public async executeCommand(
@@ -22,15 +25,7 @@ export default class StickerCommand extends BaseCommand {
                 });
                 return undefined;
             }
-            const buffer = await downloadMediaMessage(data, "buffer", {
-                endByte: 900000
-            });
-            return this.convertToSticker(
-                data.key.remoteJid!,
-                buffer as Buffer,
-                data,
-                args
-            );
+            return this.convertToSticker(data.key.remoteJid!, data, data, args);
         }
         if (data.message?.documentWithCaptionMessage) {
             if (
@@ -42,17 +37,12 @@ export default class StickerCommand extends BaseCommand {
                 });
                 return undefined;
             }
-            const buffer = await downloadMediaMessage(
+            return this.convertToSticker(
+                data.key.remoteJid!,
                 proto.WebMessageInfo.create({
                     ...data,
                     message: data.message.documentWithCaptionMessage.message
                 }),
-                "buffer",
-                { endByte: 900000 }
-            );
-            return this.convertToSticker(
-                data.key.remoteJid!,
-                buffer as Buffer,
                 data,
                 args
             );
@@ -77,19 +67,14 @@ export default class StickerCommand extends BaseCommand {
                 });
                 return undefined;
             }
-            const buffer = await downloadMediaMessage(
+            return this.convertToSticker(
+                data.key.remoteJid!,
                 proto.WebMessageInfo.create({
                     ...data,
                     message:
                         data.message.extendedTextMessage.contextInfo
                             .quotedMessage
                 }),
-                "buffer",
-                { endByte: 900000 }
-            );
-            return this.convertToSticker(
-                data.key.remoteJid!,
-                buffer as Buffer,
                 data,
                 args
             );
@@ -108,19 +93,14 @@ export default class StickerCommand extends BaseCommand {
                 });
                 return undefined;
             }
-            const buffer = await downloadMediaMessage(
+            return this.convertToSticker(
+                data.key.remoteJid!,
                 proto.WebMessageInfo.create({
                     ...data,
                     message:
                         data.message.extendedTextMessage.contextInfo
                             .quotedMessage.documentWithCaptionMessage.message
                 }),
-                "buffer",
-                { endByte: 900000 }
-            );
-            return this.convertToSticker(
-                data.key.remoteJid!,
-                buffer as Buffer,
                 data,
                 args
             );
@@ -146,22 +126,58 @@ export default class StickerCommand extends BaseCommand {
 
     private async convertToSticker(
         Jid: string,
-        buffer: Buffer,
-        data: proto.IWebMessageInfo,
+        message: proto.IWebMessageInfo,
+        from: proto.IWebMessageInfo,
         args?: string[]
     ): Promise<void> {
         const convertingMessage = await this.client.socket?.sendMessage(Jid, {
             text: "_Converting to sticker..._"
         });
-        const sticker = await new Sticker(buffer, {
-            author: this.client.config.botName,
-            pack: args?.length
-                ? args.join(" ")
-                : this.client.config.stickerPack,
-            type: StickerTypes.FULL,
-            quality: 25
-        }).toMessage();
-        await this.client.socket?.sendMessage(Jid, sticker, { quoted: data });
+
+        const buffer = (await downloadMediaMessage(
+            message,
+            "buffer",
+            {}
+        )) as Buffer;
+
+        const fileExtension = getTypeFromBuffer(buffer);
+        const fileName = `${Date.now()}.${fileExtension}`;
+        const filePath = join(process.cwd(), fileName);
+
+        writeFileSync(filePath, buffer);
+
+        let quality = 100 - ((buffer.length / 2) * 100) / 1_000_000;
+
+        const stickerOptions = {
+            crop: false,
+            metadata: {
+                publisher: this.client.config.botName,
+                packname: args?.length
+                    ? args.join(" ")
+                    : this.client.config.stickerPack
+            }
+        };
+
+        let stickerBuffer = await createSticker([filePath], {
+            quality,
+            ...stickerOptions
+        });
+
+        while (stickerBuffer.length >= 1_000_000) {
+            quality -= 10;
+            stickerBuffer = await createSticker([filePath], {
+                quality,
+                ...stickerOptions
+            });
+        }
+
+        const sticker = {
+            sticker: stickerBuffer
+        };
+
+        unlinkSync(filePath);
+
+        await this.client.socket?.sendMessage(Jid, sticker, { quoted: from });
         await this.client.socket?.sendMessage(Jid, {
             delete: convertingMessage!.key
         });
