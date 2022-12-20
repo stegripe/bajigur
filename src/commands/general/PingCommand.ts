@@ -15,7 +15,7 @@ export default class PingCommand extends BaseCommand {
         data: proto.IWebMessageInfo
     ): Promise<void> {
         await this.client.socket?.sendMessage(data.key.remoteJid!, {
-            text: "Pong!"
+            text: "🏓 PONG!"
         });
     }
 }
