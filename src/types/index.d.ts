@@ -1,4 +1,9 @@
-import { AuthenticationCreds, BaileysEvent, BaileysEventMap, proto } from "@adiwajshing/baileys";
+import {
+    AuthenticationCreds,
+    BaileysEvent,
+    BaileysEventMap,
+    proto
+} from "@adiwajshing/baileys";
 
 export interface IListenerComponent {
     meta: {
@@ -23,6 +28,7 @@ export interface ICommandComponent {
 
 export interface IWhatsAppBotConfig {
     botName: string;
+    stickerPack: string;
     prefix: string;
     devs: string[];
     mode: "dev" | "prod";
