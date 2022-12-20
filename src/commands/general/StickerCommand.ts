@@ -1,8 +1,8 @@
-import { BaseCommand } from "../../structures/BaseCommand";
-import { ApplyMetadata } from "../../utils/decorators";
-import { ICommandComponent } from "../../types";
 import { downloadMediaMessage, proto } from "@adiwajshing/baileys";
 import { Sticker, StickerTypes } from "wa-sticker-formatter";
+import { BaseCommand } from "../../structures/BaseCommand";
+import { ICommandComponent } from "../../types";
+import { ApplyMetadata } from "../../utils/decorators";
 
 @ApplyMetadata<ICommandComponent>({
     name: "sticker",
@@ -12,7 +12,7 @@ import { Sticker, StickerTypes } from "wa-sticker-formatter";
 })
 export default class StickerCommand extends BaseCommand {
     public async executeCommand(
-        _: string[],
+        args: string[],
         data: proto.IWebMessageInfo
     ): Promise<void> {
         if (data.message?.imageMessage ?? data.message?.videoMessage) {
@@ -28,7 +28,8 @@ export default class StickerCommand extends BaseCommand {
             return this.convertToSticker(
                 data.key.remoteJid!,
                 buffer as Buffer,
-                data
+                data,
+                args
             );
         }
         if (data.message?.documentWithCaptionMessage) {
@@ -52,7 +53,8 @@ export default class StickerCommand extends BaseCommand {
             return this.convertToSticker(
                 data.key.remoteJid!,
                 buffer as Buffer,
-                data
+                data,
+                args
             );
         }
         if (
@@ -88,7 +90,8 @@ export default class StickerCommand extends BaseCommand {
             return this.convertToSticker(
                 data.key.remoteJid!,
                 buffer as Buffer,
-                data
+                data,
+                args
             );
         }
         if (
@@ -118,7 +121,8 @@ export default class StickerCommand extends BaseCommand {
             return this.convertToSticker(
                 data.key.remoteJid!,
                 buffer as Buffer,
-                data
+                data,
+                args
             );
         }
         await this.client.socket?.sendMessage(
@@ -143,14 +147,17 @@ export default class StickerCommand extends BaseCommand {
     private async convertToSticker(
         Jid: string,
         buffer: Buffer,
-        data: proto.IWebMessageInfo
+        data: proto.IWebMessageInfo,
+        args?: string[]
     ): Promise<void> {
         const convertingMessage = await this.client.socket?.sendMessage(Jid, {
             text: "_Converting to sticker..._"
         });
         const sticker = await new Sticker(buffer, {
-            author: "Clytage Bot",
-            pack: "Clytage Sticker Pack",
+            author: this.client.config.botName,
+            pack: args?.length
+                ? args.join(" ")
+                : this.client.config.stickerPack,
             type: StickerTypes.FULL,
             quality: 25
         }).toMessage();
