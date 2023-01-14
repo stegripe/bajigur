@@ -1,7 +1,10 @@
 import { CommandHandler, ListenerHandler } from "../utils/structures";
 import { IWhatsAppBotConfig } from "../types";
 import * as Config from "../config";
-import makeWASocket, { AuthenticationState, useMultiFileAuthState } from "@adiwajshing/baileys";
+import makeWASocket, {
+    AuthenticationState,
+    useMultiFileAuthState
+} from "@adiwajshing/baileys";
 import { resolve } from "node:path";
 import pretty from "pino-pretty";
 import pino from "pino";

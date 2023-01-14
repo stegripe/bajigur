@@ -1,4 +1,4 @@
-import { AuthenticationCreds, BaileysEventMap, DisconnectReason } from "@adiwajshing/baileys";
+import { BaileysEventMap, DisconnectReason } from "@adiwajshing/baileys";
 import { Boom } from "@hapi/boom";
 import { rmSync } from "node:fs";
 import { BaseListener } from "../structures/BaseListener";
@@ -12,7 +12,7 @@ export default class connectionUpdateEvent extends BaseListener {
     public async executeEvent({
         lastDisconnect,
         connection
-    }: BaileysEventMap<AuthenticationCreds>["connection.update"]): Promise<void> {
+    }: BaileysEventMap["connection.update"]): Promise<void> {
         const shouldReconnect =
             (lastDisconnect?.error as Boom | undefined)?.output.statusCode !==
             DisconnectReason.loggedOut;

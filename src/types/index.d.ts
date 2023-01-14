@@ -1,17 +1,10 @@
-import {
-    AuthenticationCreds,
-    BaileysEvent,
-    BaileysEventMap,
-    proto
-} from "@adiwajshing/baileys";
+import { BaileysEvent, BaileysEventMap, proto } from "@adiwajshing/baileys";
 
 export interface IListenerComponent {
     meta: {
         name: BaileysEvent;
     };
-    executeEvent: (
-        data: BaileysEventMap<AuthenticationCreds>[BaileysEvent]
-    ) => void;
+    executeEvent: (data: BaileysEventMap[BaileysEvent]) => void;
 }
 
 export interface ICommandComponent {
