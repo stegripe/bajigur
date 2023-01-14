@@ -1,7 +1,7 @@
+import { BaileysEventMap } from "@adiwajshing/baileys";
 import { BaseListener } from "../structures/BaseListener";
-import { ApplyMetadata } from "../utils/decorators";
 import { IListenerComponent } from "../types";
-import { AuthenticationCreds, BaileysEventMap } from "@adiwajshing/baileys";
+import { ApplyMetadata } from "../utils/decorators";
 
 @ApplyMetadata<IListenerComponent>({
     name: "messages.upsert"
@@ -9,7 +9,7 @@ import { AuthenticationCreds, BaileysEventMap } from "@adiwajshing/baileys";
 export default class messagesUpsertEvent extends BaseListener {
     public executeEvent({
         messages
-    }: BaileysEventMap<AuthenticationCreds>["messages.upsert"]): void {
+    }: BaileysEventMap["messages.upsert"]): void {
         const messageData = messages[0];
         const findMessage = messageData.message?.conversation?.length
             ? messageData.message.conversation
