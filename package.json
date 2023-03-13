@@ -49,7 +49,7 @@
     },
     "dependencies": {
         "@adiwajshing/baileys": "^5.0.0",
-        "@discordjs/collection": "1.3.0",
+        "@discordjs/collection": "1.4.0",
         "@hapi/boom": "^10.0.1",
         "dotenv": "16.0.3",
         "ffmpeg-static": "^5.1.0",
@@ -62,8 +62,8 @@
     "devDependencies": {
         "@clytage-pkg/eslint-config": "1.6.0",
         "@swc/cli": "0.1.62",
-        "@swc/core": "^1.3.39",
-        "@types/node": "18.15.0",
+        "@swc/core": "^1.3.40",
+        "@types/node": "18.15.2",
         "@typescript-eslint/eslint-plugin": "5.53.0",
         "@typescript-eslint/parser": "5.53.0",
         "eslint": "^8.34.0",
