@@ -49,7 +49,7 @@
     },
     "dependencies": {
         "@adiwajshing/baileys": "^5.0.0",
-        "@discordjs/collection": "1.5.0",
+        "@discordjs/collection": "1.5.1",
         "@hapi/boom": "^10.0.1",
         "dotenv": "16.0.3",
         "ffmpeg-static": "^5.1.0",
