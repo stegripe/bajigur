@@ -1,4 +1,4 @@
-import { BaileysEventMap } from "@adiwajshing/baileys";
+import { BaileysEventMap } from "@whiskeysockets/baileys";
 import { BaseListener } from "../structures/BaseListener";
 import { IListenerComponent } from "../types";
 import { ApplyMetadata } from "../utils/decorators";
@@ -14,12 +14,12 @@ export default class messagesUpsertEvent extends BaseListener {
         const findMessage = messageData.message?.conversation?.length
             ? messageData.message.conversation
             : messageData.message?.extendedTextMessage?.text ??
-              messageData.message?.imageMessage?.caption ??
-              messageData.message?.videoMessage?.caption ??
-              messageData.message?.documentWithCaptionMessage?.message
-                  ?.documentMessage?.caption ??
-              messageData.message?.groupInviteMessage?.caption ??
-              messageData.message?.liveLocationMessage?.caption;
+            messageData.message?.imageMessage?.caption ??
+            messageData.message?.videoMessage?.caption ??
+            messageData.message?.documentWithCaptionMessage?.message
+                ?.documentMessage?.caption ??
+            messageData.message?.groupInviteMessage?.caption ??
+            messageData.message?.liveLocationMessage?.caption;
 
         if (
             findMessage?.startsWith(this.client.config.prefix) &&

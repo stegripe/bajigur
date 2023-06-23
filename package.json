@@ -48,9 +48,9 @@
         ]
     },
     "dependencies": {
-        "@adiwajshing/baileys": "^5.0.0",
         "@discordjs/collection": "1.5.1",
         "@hapi/boom": "^10.0.1",
+        "@whiskeysockets/baileys": "^6.3.0",
         "dotenv": "16.3.1",
         "ffmpeg-static": "^5.1.0",
         "pino": "^8.14.1",

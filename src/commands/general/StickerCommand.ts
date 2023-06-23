@@ -1,4 +1,4 @@
-import { downloadMediaMessage, proto } from "@adiwajshing/baileys";
+import { downloadMediaMessage, proto } from "@whiskeysockets/baileys";
 import { unlinkSync, writeFileSync } from "fs";
 import { join } from "path";
 import { createSticker } from "wa-sticker";
@@ -114,11 +114,11 @@ export default class StickerCommand extends BaseCommand {
                 quoted: data.message?.extendedTextMessage?.contextInfo
                     ?.quotedMessage
                     ? proto.WebMessageInfo.create({
-                          ...data,
-                          message:
-                              data.message.extendedTextMessage.contextInfo
-                                  .quotedMessage
-                      })
+                        ...data,
+                        message:
+                            data.message.extendedTextMessage.contextInfo
+                                .quotedMessage
+                    })
                     : data
             }
         );

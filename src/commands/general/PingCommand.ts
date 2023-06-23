@@ -1,7 +1,7 @@
+import { proto } from "@whiskeysockets/baileys";
 import { BaseCommand } from "../../structures/BaseCommand";
-import { ApplyMetadata } from "../../utils/decorators";
 import { ICommandComponent } from "../../types";
-import { proto } from "@adiwajshing/baileys";
+import { ApplyMetadata } from "../../utils/decorators";
 
 @ApplyMetadata<ICommandComponent>({
     name: "ping",

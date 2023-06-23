@@ -1,13 +1,13 @@
-import { importClass, readdirRecursive } from "../functions";
+import { resolve } from "path";
 import { WhatsAppBot } from "../../structures/WhatsAppBot";
 import { IListenerComponent } from "../../types";
-import { resolve } from "path";
+import { importClass, readdirRecursive } from "../functions";
 
 export class ListenerHandler {
     public constructor(
         public readonly client: WhatsAppBot,
         public readonly path: string
-    ) {}
+    ) { }
 
     public async init(): Promise<void> {
         try {

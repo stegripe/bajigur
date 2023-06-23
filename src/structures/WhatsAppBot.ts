@@ -1,13 +1,14 @@
-import { CommandHandler, ListenerHandler } from "../utils/structures";
-import { IWhatsAppBotConfig } from "../types";
-import * as Config from "../config";
 import makeWASocket, {
     AuthenticationState,
+    makeCacheableSignalKeyStore,
     useMultiFileAuthState
-} from "@adiwajshing/baileys";
+} from "@whiskeysockets/baileys";
 import { resolve } from "node:path";
-import pretty from "pino-pretty";
 import pino from "pino";
+import pretty from "pino-pretty";
+import * as Config from "../config";
+import { IWhatsAppBotConfig } from "../types";
+import { CommandHandler, ListenerHandler } from "../utils/structures";
 
 export class WhatsAppBot {
     public socket: ReturnType<typeof makeWASocket> | undefined;
@@ -40,7 +41,10 @@ export class WhatsAppBot {
     public async start(): Promise<void> {
         this.authState = await useMultiFileAuthState("auth_state");
         this.socket = makeWASocket({
-            auth: this.authState.state,
+            auth: {
+                creds: this.authState.state.creds,
+                keys: makeCacheableSignalKeyStore(this.authState.state.keys, this.logger),
+            },
             printQRInTerminal: true,
             logger: this.logger
         });

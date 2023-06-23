@@ -1,7 +1,7 @@
+import { proto } from "@whiskeysockets/baileys";
 import { BaseCommand } from "../../structures/BaseCommand";
-import { ApplyMetadata } from "../../utils/decorators";
 import { ICommandComponent } from "../../types";
-import { proto } from "@adiwajshing/baileys";
+import { ApplyMetadata } from "../../utils/decorators";
 
 @ApplyMetadata<ICommandComponent>({
     name: "help",
@@ -27,13 +27,12 @@ export default class HelpCommand extends BaseCommand {
                 return undefined;
             }
             await this.client.socket?.sendMessage(data.key.remoteJid!, {
-                text: `*${this.client.config.botName}* - ${
-                    command.meta.name
-                }\n\n${command.meta
-                    .description!}\nUsage: ${command.meta.usage!.replace(
-                    "{PREFIX}",
-                    this.client.config.prefix
-                )}`
+                text: `*${this.client.config.botName}* - ${command.meta.name
+                    }\n\n${command.meta
+                        .description!}\nUsage: ${command.meta.usage!.replace(
+                            "{PREFIX}",
+                            this.client.config.prefix
+                        )}`
             });
         } else {
             let commmandList = "";

@@ -1,4 +1,4 @@
-import { BaileysEvent, BaileysEventMap, proto } from "@adiwajshing/baileys";
+import { BaileysEvent, BaileysEventMap, proto } from "@whiskeysockets/baileys";
 
 export interface IListenerComponent {
     meta: {

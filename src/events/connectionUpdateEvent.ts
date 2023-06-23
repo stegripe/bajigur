@@ -1,5 +1,5 @@
-import { BaileysEventMap, DisconnectReason } from "@adiwajshing/baileys";
 import { Boom } from "@hapi/boom";
+import { BaileysEventMap, DisconnectReason } from "@whiskeysockets/baileys";
 import { rmSync } from "node:fs";
 import { BaseListener } from "../structures/BaseListener";
 import { IListenerComponent } from "../types";
@@ -18,8 +18,7 @@ export default class connectionUpdateEvent extends BaseListener {
             DisconnectReason.loggedOut;
         if (connection === "close") {
             this.client.logger.warn(
-                `Connection closed due to ${
-                    lastDisconnect?.error?.message ?? "unknown reason"
+                `Connection closed due to ${lastDisconnect?.error?.message ?? "unknown reason"
                 }, reconnecting ${shouldReconnect}`
             );
             if (shouldReconnect) {
