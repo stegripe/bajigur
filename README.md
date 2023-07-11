@@ -3,7 +3,7 @@
 > A simple and easy-to-use WhatsApp bot project, written in TypeScript.
 
 <img src="https://badgen.net/badge/icon/typescript?icon=typescript&label">
-<a href="https://github.com/Clytage/rawon/actions?query=workflow%3A%22Lint+code+and+compile+setup+script%22"><img src="https://github.com/Clytage/rawon/workflows/Lint%20code%20and%20compile%20setup%20script/badge.svg" alt="CI Status" /></a>
+<a href="https://github.com/clytage/rawon/actions?query=workflow%3A%22Lint+code+and+compile+setup+script%22"><img src="https://github.com/clytage/rawon/workflows/Lint%20code%20and%20compile%20setup%20script/badge.svg" alt="CI Status" /></a>
 
 ## Features
 - Easy to use.

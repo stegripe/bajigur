@@ -2,13 +2,13 @@
     "name": "whatsapp-bot",
     "version": "1.1.0",
     "description": "A simple and easy-to-use WhatsApp bot project, written in TypeScript.",
-    "homepage": "https://github.com/Clytage/whatsapp-bot#readme",
+    "homepage": "https://github.com/clytage/whatsapp-bot#readme",
     "bugs": {
-        "url": "https://github.com/Clytage/whatsapp-bot/issues"
+        "url": "https://github.com/clytage/whatsapp-bot/issues"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Clytage/whatsapp-bot.git"
+        "url": "git+https://github.com/clytage/whatsapp-bot.git"
     },
     "license": "BSD-3-Clause",
     "author": "Clytage <support@clytage.org>",
