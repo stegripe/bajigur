@@ -83,7 +83,7 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
         if (getCommand) {
             try {
                 if (
-                    (getCommand.meta.devOnly ||
+                    (getCommand.meta.devOnly ??
                         this.client.config.mode === "dev") &&
                     !this.client.config.devs.includes(
                         message.key.remoteJid!.split("@")[0]
@@ -95,7 +95,7 @@ export class CommandHandler extends Collection<string, ICommandComponent> {
                 this.client.logger.error("COMMAND_HANDLER_ERR:", err);
             } finally {
                 if (
-                    (getCommand.meta.devOnly ||
+                    (getCommand.meta.devOnly ??
                         this.client.config.mode === "dev") &&
                     !this.client.config.devs.includes(
                         message.key.remoteJid!.split("@")[0]
