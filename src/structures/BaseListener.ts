@@ -1,6 +1,6 @@
-import { BaileysEvent, BaileysEventMap } from "@whiskeysockets/baileys";
 import { IListenerComponent } from "../types";
 import { WhatsAppBot } from "./WhatsAppBot";
+import { BaileysEvent, BaileysEventMap } from "@whiskeysockets/baileys";
 
 export abstract class BaseListener implements IListenerComponent {
     public constructor(

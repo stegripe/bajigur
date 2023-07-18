@@ -1,10 +1,10 @@
+import { importClass, mergeDefault, readdirRecursive } from "../functions";
+import { WhatsAppBot } from "../../structures/WhatsAppBot";
+import { DefaultCommandComponent } from "../constants";
+import { ICommandComponent } from "../../types";
 import { Collection } from "@discordjs/collection";
 import { proto } from "@whiskeysockets/baileys";
 import { resolve } from "node:path";
-import { WhatsAppBot } from "../../structures/WhatsAppBot";
-import { ICommandComponent } from "../../types";
-import { DefaultCommandComponent } from "../constants";
-import { importClass, mergeDefault, readdirRecursive } from "../functions";
 
 export class CommandHandler extends Collection<string, ICommandComponent> {
     public categories: Record<string, ICommandComponent[] | undefined> = {};

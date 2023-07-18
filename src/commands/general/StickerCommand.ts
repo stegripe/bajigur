@@ -1,11 +1,11 @@
+import { BaseCommand } from "../../structures/BaseCommand";
+import { getTypeFromBuffer } from "../../utils/functions";
+import { ApplyMetadata } from "../../utils/decorators";
+import { ICommandComponent } from "../../types";
 import { downloadMediaMessage, proto } from "@whiskeysockets/baileys";
 import { unlinkSync, writeFileSync } from "fs";
-import { join } from "path";
 import { createSticker } from "wa-sticker";
-import { BaseCommand } from "../../structures/BaseCommand";
-import { ICommandComponent } from "../../types";
-import { ApplyMetadata } from "../../utils/decorators";
-import { getTypeFromBuffer } from "../../utils/functions";
+import { join } from "path";
 
 @ApplyMetadata<ICommandComponent>({
     name: "sticker",

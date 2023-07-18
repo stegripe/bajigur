@@ -1,5 +1,4 @@
 export { getTypeFromBuffer } from "./getTypeFromBuffer";
-export { importClass } from "./importClass";
-export { mergeDefault } from "./mergeDefault";
 export { readdirRecursive } from "./readdirRecursive";
-
+export { mergeDefault } from "./mergeDefault";
+export { importClass } from "./importClass";

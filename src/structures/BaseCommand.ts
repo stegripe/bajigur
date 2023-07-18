@@ -1,6 +1,6 @@
-import { proto } from "@whiskeysockets/baileys";
 import { ICommandComponent } from "../types";
 import { WhatsAppBot } from "./WhatsAppBot";
+import { proto } from "@whiskeysockets/baileys";
 
 export abstract class BaseCommand implements ICommandComponent {
     public constructor(

@@ -1,7 +1,7 @@
-import { resolve } from "path";
+import { importClass, readdirRecursive } from "../functions";
 import { WhatsAppBot } from "../../structures/WhatsAppBot";
 import { IListenerComponent } from "../../types";
-import { importClass, readdirRecursive } from "../functions";
+import { resolve } from "path";
 
 export class ListenerHandler {
     public constructor(

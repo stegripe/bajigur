@@ -1,11 +1,11 @@
-import { proto } from "@whiskeysockets/baileys";
 import { BaseCommand } from "../../structures/BaseCommand";
-import { ICommandComponent } from "../../types";
 import { ApplyMetadata } from "../../utils/decorators";
+import { ICommandComponent } from "../../types";
+import { proto } from "@whiskeysockets/baileys";
 
 @ApplyMetadata<ICommandComponent>({
     name: "ping",
-    aliases: ["p"],
+    aliases: ["p", "pang", "pung", "peng", "pong"],
     description: "Ping the bot",
     usage: "{PREFIX}ping"
 })

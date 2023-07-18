@@ -1,9 +1,9 @@
-import { Boom } from "@hapi/boom";
-import { BaileysEventMap, DisconnectReason } from "@whiskeysockets/baileys";
-import { rmSync } from "node:fs";
 import { BaseListener } from "../structures/BaseListener";
-import { IListenerComponent } from "../types";
 import { ApplyMetadata } from "../utils/decorators";
+import { IListenerComponent } from "../types";
+import { BaileysEventMap, DisconnectReason } from "@whiskeysockets/baileys";
+import { Boom } from "@hapi/boom";
+import { rmSync } from "node:fs";
 
 @ApplyMetadata<IListenerComponent>({
     name: "connection.update"
@@ -30,7 +30,7 @@ export default class connectionUpdateEvent extends BaseListener {
                 });
             }
         } else if (connection === "open") {
-            this.client.logger.info("opened connection");
+            this.client.logger.info("Opened connection.");
             await this.client.commandHandler.init();
         }
     }

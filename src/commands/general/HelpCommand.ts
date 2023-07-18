@@ -1,7 +1,7 @@
-import { proto } from "@whiskeysockets/baileys";
 import { BaseCommand } from "../../structures/BaseCommand";
-import { ICommandComponent } from "../../types";
 import { ApplyMetadata } from "../../utils/decorators";
+import { ICommandComponent } from "../../types";
+import { proto } from "@whiskeysockets/baileys";
 
 @ApplyMetadata<ICommandComponent>({
     name: "help",
@@ -22,7 +22,7 @@ export default class HelpCommand extends BaseCommand {
                 );
             if (!command) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
-                    text: "Command not found"
+                    text: "Command not found."
                 });
                 return undefined;
             }
