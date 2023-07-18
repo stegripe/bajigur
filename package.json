@@ -10,7 +10,7 @@
         "type": "git",
         "url": "git+https://github.com/clytage/whatsapp-bot.git"
     },
-    "license": "BSD-3-Clause",
+    "license": "AGPL-3.0",
     "author": "Clytage <admin@clytage.org>",
     "main": "dist",
     "scripts": {
