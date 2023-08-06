@@ -3,7 +3,9 @@
         "target": "ES5",
         "module": "commonjs",
         "moduleResolution": "node",
+        "lib": [],
         "strict": true,
+        "outDir": "dist",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
@@ -11,17 +13,17 @@
         "skipLibCheck": true,
         "noEmitHelpers": true,
         "importHelpers": true,
-        "outDir": "dist",
+        "resolveJsonModule": true,
         "typeRoots": [
             "node_modules/@types",
-            "src/types"
+            "src/typings"
         ]
     },
-    "include": [
-        "src/**/*.ts"
-    ],
     "exclude": [
         "node_modules/**",
         "**/.*/"
+    ],
+    "include": [
+        "src/**/*.ts"
     ]
 }

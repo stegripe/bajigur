@@ -105,4 +105,5 @@ dist
 **_IGNORE_**
 # end managed
 
+# Auth state
 auth_state
