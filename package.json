@@ -48,11 +48,11 @@
         ]
     },
     "dependencies": {
-        "@discordjs/collection": "1.5.2",
+        "@discordjs/collection": "1.5.3",
         "@hapi/boom": "^10.0.1",
         "@whiskeysockets/baileys": "^6.4.0",
         "dotenv": "16.3.1",
-        "ffmpeg-static": "^5.1.0",
+        "ffmpeg-static": "^5.2.0",
         "pino": "^8.15.0",
         "pino-pretty": "^10.2.0",
         "qrcode-terminal": "^0.12.0",
