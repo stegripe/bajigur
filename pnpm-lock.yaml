@@ -30,8 +30,8 @@ dependencies:
     specifier: ^0.12.0
     version: 0.12.0
   tslib:
-    specifier: 2.6.1
-    version: 2.6.1
+    specifier: 2.6.2
+    version: 2.6.2
   wa-sticker:
     specifier: ^1.0.14
     version: 1.0.14
@@ -47,8 +47,8 @@ devDependencies:
     specifier: ^1.3.78
     version: 1.3.78
   '@types/node':
-    specifier: 18.17.5
-    version: 18.17.5
+    specifier: 18.17.6
+    version: 18.17.6
   '@typescript-eslint/eslint-plugin':
     specifier: 6.4.0
     version: 6.4.0(@typescript-eslint/parser@6.4.0)(eslint@8.47.0)(typescript@5.1.6)
@@ -72,7 +72,7 @@ devDependencies:
     version: 5.0.1
   ts-node:
     specifier: 10.9.1
-    version: 10.9.1(@swc/core@1.3.78)(@types/node@18.17.5)(typescript@5.1.6)
+    version: 10.9.1(@swc/core@1.3.78)(@types/node@18.17.6)(typescript@5.1.6)
   typescript:
     specifier: 5.1.6
     version: 5.1.6
@@ -293,7 +293,7 @@ packages:
       is-glob: 4.0.3
       open: 9.1.0
       picocolors: 1.0.0
-      tslib: 2.6.1
+      tslib: 2.6.2
     dev: true
 
   /@protobufjs/aspromise@1.1.2:
@@ -519,7 +519,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.4
-      '@types/node': 18.17.5
+      '@types/node': 18.17.6
       '@types/responselike': 1.0.0
     dev: true
 
@@ -534,7 +534,7 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 18.17.5
+      '@types/node': 18.17.6
     dev: true
 
   /@types/long@4.0.2:
@@ -545,13 +545,13 @@ packages:
     resolution: {integrity: sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==}
     dev: false
 
-  /@types/node@18.17.5:
-    resolution: {integrity: sha512-xNbS75FxH6P4UXTPUJp/zNPq6/xsfdJKussCWNOnz4aULWIRwMgP1LgaB5RiBnMX1DPCYenuqGZfnIAx5mbFLA==}
+  /@types/node@18.17.6:
+    resolution: {integrity: sha512-fGmT/P7z7ecA6bv/ia5DlaWCH4YeZvAQMNpUhrJjtAhOhZfoxS1VLUgU2pdk63efSjQaOJWdXMuAJsws+8I6dg==}
 
   /@types/responselike@1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 18.17.5
+      '@types/node': 18.17.6
     dev: true
 
   /@types/semver@7.5.0:
@@ -2385,7 +2385,7 @@ packages:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
       '@types/long': 4.0.2
-      '@types/node': 18.17.5
+      '@types/node': 18.17.6
       long: 4.0.0
     dev: false
 
@@ -2734,7 +2734,7 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     dependencies:
       '@pkgr/utils': 2.4.2
-      tslib: 2.6.1
+      tslib: 2.6.2
     dev: true
 
   /text-table@0.2.0:
@@ -2797,7 +2797,7 @@ packages:
       typescript: 5.1.6
     dev: true
 
-  /ts-node@10.9.1(@swc/core@1.3.78)(@types/node@18.17.5)(typescript@5.1.6):
+  /ts-node@10.9.1(@swc/core@1.3.78)(@types/node@18.17.6)(typescript@5.1.6):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -2817,7 +2817,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 18.17.5
+      '@types/node': 18.17.6
       acorn: 8.10.0
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -2829,8 +2829,8 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /tslib@2.6.1:
-    resolution: {integrity: sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==}
+  /tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
   /type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
