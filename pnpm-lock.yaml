@@ -24,8 +24,8 @@ dependencies:
     specifier: ^8.15.4
     version: 8.15.4
   pino-pretty:
-    specifier: ^10.2.2
-    version: 10.2.2
+    specifier: ^10.2.3
+    version: 10.2.3
   qrcode-terminal:
     specifier: ^0.12.0
     version: 0.12.0
@@ -2282,8 +2282,8 @@ packages:
       split2: 4.2.0
     dev: false
 
-  /pino-pretty@10.2.2:
-    resolution: {integrity: sha512-RvAdCQAU51MdVsJdvXX4Bipb52wwldXtOzlva1NT8q2d7tmgYWFIMLhoSnfx2Sr+Hi7BLGpR/n8wgrcq5G/ykA==}
+  /pino-pretty@10.2.3:
+    resolution: {integrity: sha512-4jfIUc8TC1GPUfDyMSlW1STeORqkoxec71yhxIpLDQapUu8WOuoz2TTCoidrIssyz78LZC69whBMPIKCMbi3cw==}
     hasBin: true
     dependencies:
       colorette: 2.0.20
