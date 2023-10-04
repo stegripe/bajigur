@@ -21,8 +21,8 @@ dependencies:
     specifier: ^5.2.0
     version: 5.2.0
   pino:
-    specifier: ^8.15.4
-    version: 8.15.4
+    specifier: ^8.15.5
+    version: 8.15.5
   pino-pretty:
     specifier: ^10.2.3
     version: 10.2.3
@@ -2327,8 +2327,8 @@ packages:
       thread-stream: 0.15.2
     dev: false
 
-  /pino@8.15.4:
-    resolution: {integrity: sha512-3s+SfSxeugMt8QeBVXprIJAgXuGDeGuHBfquXKEXKnpghlXzMGMjoa8tOSyzz00iBfQX3xlZvm2yJQ+d6SrVsg==}
+  /pino@8.15.5:
+    resolution: {integrity: sha512-KoTDSVRLiCWIJXTeAHNaflEXqsqCmyZkxfL09y+wT+NRo7j2Ieq30jBEC+GpE4HTQCQQyt3pDRhmwvCKjqzxfQ==}
     hasBin: true
     dependencies:
       atomic-sleep: 1.0.0
