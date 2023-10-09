@@ -21,8 +21,8 @@ dependencies:
     specifier: ^5.2.0
     version: 5.2.0
   pino:
-    specifier: ^8.15.6
-    version: 8.15.6
+    specifier: ^8.16.0
+    version: 8.16.0
   pino-pretty:
     specifier: ^10.2.3
     version: 10.2.3
@@ -2327,8 +2327,8 @@ packages:
       thread-stream: 0.15.2
     dev: false
 
-  /pino@8.15.6:
-    resolution: {integrity: sha512-GuxHr61R0ZFD1npu58tB3a3FSVjuy21OwN/haw4OuKiZBL63Pg11Y51WWeD52RENS2mjwPZOwt+2OQOSkck6kQ==}
+  /pino@8.16.0:
+    resolution: {integrity: sha512-UUmvQ/7KTZt/vHjhRrnyS7h+J7qPBQnpG80V56xmIC+o9IqYmQOw/UIny9S9zYDfRBR0ClouCr464EkBMIT7Fw==}
     hasBin: true
     dependencies:
       atomic-sleep: 1.0.0
@@ -2340,7 +2340,7 @@ packages:
       quick-format-unescaped: 4.0.4
       real-require: 0.2.0
       safe-stable-stringify: 2.4.3
-      sonic-boom: 3.3.0
+      sonic-boom: 3.7.0
       thread-stream: 2.3.0
     dev: false
 
@@ -2624,6 +2624,12 @@ packages:
 
   /sonic-boom@3.3.0:
     resolution: {integrity: sha512-LYxp34KlZ1a2Jb8ZQgFCK3niIHzibdwtwNUWKg0qQRzsDoJ3Gfgkf8KdBTFU3SkejDEIlWwnSnpVdOZIhFMl/g==}
+    dependencies:
+      atomic-sleep: 1.0.0
+    dev: false
+
+  /sonic-boom@3.7.0:
+    resolution: {integrity: sha512-IudtNvSqA/ObjN97tfgNmOKyDOs4dNcg4cUUsHDebqsgb8wGBBwb31LIgShNO8fye0dFI52X1+tFoKKI6Rq1Gg==}
     dependencies:
       atomic-sleep: 1.0.0
     dev: false
