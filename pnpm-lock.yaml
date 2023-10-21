@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@clytage/liqueur':
-    specifier: ^1.1.1
-    version: 1.1.1
+    specifier: ^1.1.3
+    version: 1.1.3
   '@sapphire/time-utilities':
     specifier: ^1.7.10
     version: 1.7.10
@@ -108,8 +108,8 @@ packages:
       typescript: 5.2.2
     dev: true
 
-  /@clytage/liqueur@1.1.1:
-    resolution: {integrity: sha512-LbaBYFRNIBSjYf4lfiL9Xi2+GblkFD2Rur8i+p8C1yzzMOkvNE+fwSXojm0QJswAGXNypnjX0ayhOV4hA4rNEQ==}
+  /@clytage/liqueur@1.1.3:
+    resolution: {integrity: sha512-3wsfudnP6mRrdrh86t58MbXXyD1MEfQX20YfephVeqlgg0gcl7Af1zJOxTXIopzcHuf+7VkCC7xlGOSEXTh0NA==}
     engines: {node: '>=18.12.1', npm: '>=8.0.0'}
     dependencies:
       '@discordjs/collection': 1.5.3

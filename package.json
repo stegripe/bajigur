@@ -50,7 +50,7 @@
         ]
     },
     "dependencies": {
-        "@clytage/liqueur": "^1.1.1",
+        "@clytage/liqueur": "^1.1.3",
         "@sapphire/time-utilities": "^1.7.10",
         "@whiskeysockets/baileys": "^6.5.0",
         "dotenv": "16.3.1",
