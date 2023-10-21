@@ -1,60 +1,56 @@
-import { BaseCommand } from "../../structures/BaseCommand";
-import { ApplyMetadata } from "../../utils/decorators";
-import { ICommandComponent } from "../../types";
+import { ApplyOptions } from "@nezuchan/decorators";
+import { Command, CommandOptions } from "@clytage/liqueur";
+import { ArgumentStream } from "@sapphire/lexure";
 import { proto } from "@whiskeysockets/baileys";
+import { botName } from "../../config/env.js";
 
-@ApplyMetadata<ICommandComponent>({
+@ApplyOptions<CommandOptions>({
+    aliases: ["?", "h"],
     name: "help",
-    aliases: ["h", "?"],
     description: "Get help with the bot",
-    usage: "{PREFIX}help [command]"
+    usage: "{prefix}help [command name]",
+    preconditions: []
 })
-export default class HelpCommand extends BaseCommand {
-    public async executeCommand(
-        args: string[],
-        data: proto.IWebMessageInfo
-    ): Promise<void> {
-        if (args[0]) {
-            const command =
-                this.client.commandHandler.get(args[0]) ??
-                this.client.commandHandler.get(
-                    this.client.commandHandler.aliases.get(args[0]) ?? ""
-                );
-            if (!command) {
-                await this.client.socket?.sendMessage(data.key.remoteJid!, {
-                    text: "Command not found."
-                });
-                return undefined;
+export class HelpCommand extends Command {
+    public async messageRun(data: proto.IWebMessageInfo, args: ArgumentStream): Promise<any> {
+        const commandName = args.single().unwrapOr(undefined);
+        if (!commandName) {
+            let commandList = "";
+            const commands = this.container.stores.get("commands");
+            const categories = [
+                ...new Set([...commands.values()].flatMap(x => x.fullCategory[0])).values()
+            ].sort();
+    
+            for (const category of categories) {
+                const cmds = commands.filter(x => x.fullCategory[0] === category)
+                    .sort((a, b) => a.options.name!.localeCompare(b.name, "en", { sensitivity: "base" }))
+                    .map(x => x.options.name)
+                    .join(", ");
+                commandList += `*${category.toUpperCase()}*\n\`\`\`${cmds}\`\`\``
             }
-            await this.client.socket?.sendMessage(data.key.remoteJid!, {
-                text: `*${this.client.config.botName}* - ${command.meta.name
-                    }\n\n${command.meta
-                        .description!}\nUsage: ${command.meta.usage!.replace(
-                            "{PREFIX}",
-                            this.client.config.prefix
-                        )}`
-            });
-        } else {
-            let commmandList = "";
-            Object.values(this.client.commandHandler.categories)
-                .map(commands => commands!.filter(Boolean))
-                .sort((a, b) =>
-                    a[0].meta.category!.localeCompare(
-                        b[0].meta.category!,
-                        "en",
-                        {
-                            sensitivity: "base"
-                        }
-                    )
-                )
-                .map(commands => {
-                    const category = commands[0].meta.category!;
-                    const cmds = commands.map(cmd => cmd.meta.name).join(", ");
-                    commmandList += `*${category.toUpperCase()}*\n\`\`\`${cmds}\`\`\`\n`;
-                });
-            await this.client.socket?.sendMessage(data.key.remoteJid!, {
-                text: `*${this.client.config.botName}* - Command List\n\n${commmandList}`
+
+            return this.container.client.socket?.sendMessage(data.key.remoteJid!, {
+                text: `*${botName}* - Command List\n\n${commandList}`
             });
         }
+
+        const command = this.container.client.stores.get("commands").get(commandName);
+        if (!command) {
+            return this.container.client.socket?.sendMessage(data.key.remoteJid!, {
+                text: "Command not found."
+            });
+        }
+
+        await this.container.client.socket?.sendMessage(data.key.remoteJid!, {
+            text: `*${botName}* - ${command.options.name}
+
+${command.options.description || "No description was provided."}
+Usage: ${(command.options.usage ?? "No usage was provided.")
+    .replace(
+        "{prefix}",
+        await this.container.client.options.fetchPrefix(data)
+    )}`
+        });
+
     }
 }

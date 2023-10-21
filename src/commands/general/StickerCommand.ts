@@ -1,38 +1,40 @@
-import { BaseCommand } from "../../structures/BaseCommand";
-import { getTypeFromBuffer } from "../../utils/functions";
-import { ApplyMetadata } from "../../utils/decorators";
-import { ICommandComponent } from "../../types";
-import { downloadMediaMessage, proto } from "@whiskeysockets/baileys";
+import { ApplyOptions } from "@nezuchan/decorators";
+import { Command, CommandOptions } from "@clytage/liqueur";
 import { unlinkSync, writeFileSync } from "fs";
-import { createSticker } from "wa-sticker";
 import { join } from "path";
+import { fileTypeFromBuffer } from "file-type";
+import { botName, stickerPack } from "../../config/env.js";
+import { createSticker } from "wa-sticker";
+import { ArgumentStream } from "@sapphire/lexure";
 
-@ApplyMetadata<ICommandComponent>({
+import baileys from "@whiskeysockets/baileys";
+const { downloadMediaMessage, proto } = baileys;
+
+@ApplyOptions<CommandOptions>({
+    aliases: [],
     name: "sticker",
-    aliases: ["stiker"],
     description: "Convert image to sticker",
-    usage: "{PREFIX}sticker <image/video/gif> [sticker pack name]"
+    usage: "{prefix}sticker <image/video/gif> [sticker pack name]",
+    preconditions: []
 })
-export default class StickerCommand extends BaseCommand {
-    public async executeCommand(
-        args: string[],
-        data: proto.IWebMessageInfo
-    ): Promise<void> {
+export class StickerCommand extends Command {
+    public async messageRun(data: baileys.proto.IWebMessageInfo, args: ArgumentStream): Promise<any> {
+        const packName = args.many().unwrapOr([]).map(x => x.value);
         if (data.message?.imageMessage ?? data.message?.videoMessage) {
             if ((data.message.videoMessage?.seconds ?? 0) >= 10) {
-                await this.client.socket?.sendMessage(data.key.remoteJid!, {
+                await this.container.client.socket?.sendMessage(data.key.remoteJid!, {
                     text: "Please use Video or GIF with duration under 10 seconds."
                 });
                 return undefined;
             }
-            return this.convertToSticker(data.key.remoteJid!, data, data, args);
+            return this.convertToSticker(data.key.remoteJid!, data, data, packName);
         }
         if (data.message?.documentWithCaptionMessage) {
             if (
                 (data.message.documentWithCaptionMessage.message?.videoMessage
                     ?.seconds ?? 0) >= 10
             ) {
-                await this.client.socket?.sendMessage(data.key.remoteJid!, {
+                await this.container.client.socket?.sendMessage(data.key.remoteJid!, {
                     text: "Please use Video or GIF with duration under 10 seconds."
                 });
                 return undefined;
@@ -44,7 +46,7 @@ export default class StickerCommand extends BaseCommand {
                     message: data.message.documentWithCaptionMessage.message
                 }),
                 data,
-                args
+                packName
             );
         }
         if (
@@ -62,7 +64,7 @@ export default class StickerCommand extends BaseCommand {
                     .documentMessage?.contextInfo?.quotedMessage?.videoMessage
                     ?.seconds ?? 0) >= 10
             ) {
-                await this.client.socket?.sendMessage(data.key.remoteJid!, {
+                await this.container.client.socket?.sendMessage(data.key.remoteJid!, {
                     text: "Please use Video or GIF with duration under 10 seconds."
                 });
                 return undefined;
@@ -76,7 +78,7 @@ export default class StickerCommand extends BaseCommand {
                             .quotedMessage
                 }),
                 data,
-                args
+                packName
             );
         }
         if (
@@ -88,7 +90,7 @@ export default class StickerCommand extends BaseCommand {
                     .documentWithCaptionMessage.message?.videoMessage
                     ?.seconds ?? 0) >= 10
             ) {
-                await this.client.socket?.sendMessage(data.key.remoteJid!, {
+                await this.container.client.socket?.sendMessage(data.key.remoteJid!, {
                     text: "Please use Video or GIF with duration under 10 seconds."
                 });
                 return undefined;
@@ -102,10 +104,10 @@ export default class StickerCommand extends BaseCommand {
                             .quotedMessage.documentWithCaptionMessage.message
                 }),
                 data,
-                args
+                packName
             );
         }
-        await this.client.socket?.sendMessage(
+        await this.container.client.socket?.sendMessage(
             data.key.remoteJid!,
             {
                 text: "Please send an image, video, or GIF with */sticker* caption or reply it on the file. You can also send an image as document by replying it with */sticker* too."
@@ -126,11 +128,11 @@ export default class StickerCommand extends BaseCommand {
 
     private async convertToSticker(
         Jid: string,
-        message: proto.IWebMessageInfo,
-        from: proto.IWebMessageInfo,
+        message: baileys.proto.IWebMessageInfo,
+        from: baileys.proto.IWebMessageInfo,
         args?: string[]
     ): Promise<void> {
-        const convertingMessage = await this.client.socket?.sendMessage(Jid, {
+        const convertingMessage = await this.container.client.socket?.sendMessage(Jid, {
             text: "_Converting to sticker..._"
         });
 
@@ -140,8 +142,8 @@ export default class StickerCommand extends BaseCommand {
             {}
         )) as Buffer;
 
-        const fileExtension = getTypeFromBuffer(buffer);
-        const fileName = `${Date.now()}.${fileExtension}`;
+        const fileType = await fileTypeFromBuffer(buffer);
+        const fileName = `${Date.now()}.${fileType?.ext}`;
         const filePath = join(process.cwd(), fileName);
 
         writeFileSync(filePath, buffer);
@@ -151,10 +153,10 @@ export default class StickerCommand extends BaseCommand {
         const stickerOptions = {
             crop: false,
             metadata: {
-                publisher: this.client.config.botName,
+                publisher: botName,
                 packname: args?.length
                     ? args.join(" ")
-                    : this.client.config.stickerPack
+                    : stickerPack
             }
         };
 
@@ -177,8 +179,8 @@ export default class StickerCommand extends BaseCommand {
 
         unlinkSync(filePath);
 
-        await this.client.socket?.sendMessage(Jid, sticker, { quoted: from });
-        await this.client.socket?.sendMessage(Jid, {
+        await this.container.client.socket?.sendMessage(Jid, sticker, { quoted: from });
+        await this.container.client.socket?.sendMessage(Jid, {
             delete: convertingMessage!.key
         });
     }

@@ -1,9 +1,11 @@
 {
     "compilerOptions": {
-        "target": "ES5",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "lib": [],
+        "target": "ESNext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "lib": [
+            "ESNext"
+        ],
         "strict": true,
         "outDir": "dist",
         "esModuleInterop": true,
@@ -19,11 +21,8 @@
             "src/typings"
         ]
     },
-    "exclude": [
-        "node_modules/**",
-        "**/.*/"
-    ],
+    "exclude": [],
     "include": [
-        "src/**/*.ts"
+        "src/**/*"
     ]
 }

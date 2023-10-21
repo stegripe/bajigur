@@ -13,6 +13,7 @@
     "license": "AGPL-3.0",
     "author": "Clytage <admin@clytage.org>",
     "main": "dist",
+    "type": "module",
     "scripts": {
         "build": "npm run lint && npm run compile",
         "compile": "swc src -d dist",
@@ -49,13 +50,12 @@
         ]
     },
     "dependencies": {
-        "@discordjs/collection": "1.5.3",
-        "@hapi/boom": "^10.0.1",
+        "@clytage/liqueur": "^1.1.1",
+        "@sapphire/time-utilities": "^1.7.10",
         "@whiskeysockets/baileys": "^6.5.0",
         "dotenv": "16.3.1",
         "ffmpeg-static": "^5.2.0",
-        "pino": "^8.16.0",
-        "pino-pretty": "^10.2.3",
+        "file-type": "^18.5.0",
         "qrcode-terminal": "^0.12.0",
         "tslib": "2.6.2",
         "wa-sticker": "^1.0.14"
