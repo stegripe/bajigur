@@ -1,3 +1,37 @@
+import { makeWASocket, makeCacheableSignalKeyStore, useMultiFileAuthState } from "@whiskeysockets/baileys";
+import { mode, prefix } from "./config/env.js";
 import { WhatsAppBot } from "./structures/WhatsAppBot.js";
+import { container } from "@sapphire/pieces";
+import { createLogger } from "@clytage/liqueur";
 
-void new WhatsAppBot().start();
+const logger = createLogger({
+    name: "WhatsApp-bot",
+    debug: mode === "dev"
+});
+
+const client = new WhatsAppBot({
+    baseUserDirectory: "dist",
+    fetchPrefix: () => Promise.resolve(prefix),
+    async makeWASocket() {
+        container.authState = await useMultiFileAuthState("auth_state");
+        return makeWASocket({
+            auth: {
+                creds: container.authState.state.creds,
+                // @ts-expect-error-next-line
+                keys: makeCacheableSignalKeyStore(container.authState.state.keys, logger)
+            },
+            printQRInTerminal: true,
+            // @ts-expect-error-next-line
+            logger
+        });
+    },
+    logger
+});
+
+await client.login();
+
+declare module "@sapphire/pieces" {
+    interface Container {
+        authState: Awaited<ReturnType<typeof useMultiFileAuthState>>
+    }
+}
