@@ -38,5 +38,8 @@ COPY --from=build-stage /tmp/build/dist ./dist
 # Additional Environment Variables
 ENV NODE_ENV production
 
+# Add scripts volumes
+VOLUME /app/auth_state
+
 # Start the app with node
 CMD ["node", "dist/index.js"]
