@@ -1,12 +1,12 @@
 import { makeWASocket, makeCacheableSignalKeyStore, useMultiFileAuthState } from "@whiskeysockets/baileys";
-import { mode, prefix } from "./config/env.js";
+import { isDev, prefix } from "./config/env.js";
 import { WhatsAppBot } from "./structures/WhatsAppBot.js";
 import { container } from "@sapphire/pieces";
 import { createLogger } from "@clytage/liqueur";
 
 const logger = createLogger({
     name: "WhatsApp-bot",
-    debug: mode === "dev"
+    debug: isDev
 });
 
 const client = new WhatsAppBot({
