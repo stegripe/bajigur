@@ -21,8 +21,8 @@ dependencies:
     specifier: ^5.2.0
     version: 5.2.0
   file-type:
-    specifier: ^18.6.0
-    version: 18.6.0
+    specifier: ^18.7.0
+    version: 18.7.0
   qrcode-terminal:
     specifier: ^0.12.0
     version: 0.12.0
@@ -1594,8 +1594,8 @@ packages:
       token-types: 5.0.1
     dev: true
 
-  /file-type@18.6.0:
-    resolution: {integrity: sha512-uLqXnIAIyy8K9rnvdU9IYi3WIL+6qVBWn24kThYOPlnyU+6yrr2oarn+j7seMLh1wOEG4hEjRP6a30IiKR9OaA==}
+  /file-type@18.7.0:
+    resolution: {integrity: sha512-ihHtXRzXEziMrQ56VSgU7wkxh55iNchFkosu7Y9/S+tXHdKyrGjVK0ujbqNnsxzea+78MaLhN6PGmfYSAv1ACw==}
     engines: {node: '>=14.16'}
     dependencies:
       readable-web-to-node-stream: 3.0.2
