@@ -63,14 +63,14 @@
     "devDependencies": {
         "@clytage/eslint-config": "^3.0.1",
         "@swc/cli": "0.1.63",
-        "@swc/core": "^1.3.103",
-        "@types/node": "20.11.4",
+        "@swc/core": "^1.3.104",
+        "@types/node": "20.11.5",
         "@typescript-eslint/eslint-plugin": "6.19.0",
         "@typescript-eslint/parser": "6.19.0",
         "eslint": "^8.56.0",
         "eslint-config-prettier": "9.1.0",
         "eslint-plugin-prettier": "5.1.3",
-        "prettier": "3.2.2",
+        "prettier": "3.2.4",
         "rimraf": "5.0.5",
         "ts-node": "10.9.2",
         "typescript": "5.3.3"
