@@ -12,12 +12,16 @@
     },
     "license": "AGPL-3.0",
     "author": "Stegripe <admin@stegripe.org>",
+    "type": "module",
+    "imports": {
+        "#bajigur/*": "./dist/*"
+    },
     "main": "dist",
     "scripts": {
         "build": "rimraf dist && npm run lint && npm run compile",
         "compile": "swc src -d dist",
         "compile:ts": "tsc --build tsconfig.json",
-        "lint": "pnpm prisma:generate && pnpm pretty && eslint src --cache --cache-file .eslintcache --ext .ts",
+        "lint": "pnpm pretty && eslint src --cache --cache-file .eslintcache --ext .ts",
         "lint:fix": "pnpm pretty:write && eslint src --cache --cache-file .eslintcache --ext .ts --fix",
         "pretty": "prettier --check src",
         "pretty:write": "prettier --write src",
@@ -31,30 +35,32 @@
         "trailingComma": "none"
     },
     "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
         "parserOptions": {
             "project": "./tsconfig.json"
         },
         "plugins": [
+            "@typescript-eslint",
             "prettier"
         ],
         "extends": [
+            "eslint:recommended",
+            "plugin:@typescript-eslint/recommended",
             "@clytage/eslint-config/typescript",
             "prettier"
         ],
         "rules": {
             "class-methods-use-this": 0
-        },
-        "ignorePatterns": [
-            "dist/*"
-        ]
+        }
     },
     "dependencies": {
         "@discordjs/collection": "1.5.3",
         "@hapi/boom": "^10.0.1",
+        "@sapphire/utilities": "^3.15.3",
         "@whiskeysockets/baileys": "^6.6.0",
         "dotenv": "16.3.1",
         "ffmpeg-static": "^5.2.0",
-        "pino": "^8.19.0",
+        "pino": "7.11.0",
         "pino-pretty": "^10.3.1",
         "qrcode-terminal": "^0.12.0",
         "tslib": "2.6.2",
