@@ -1,25 +1,21 @@
-import { BaseCommand } from "../../structures/BaseCommand";
-import { ApplyMetadata } from "../../utils/decorators";
-import { ICommandComponent } from "../../types";
-import { proto } from "@whiskeysockets/baileys";
+import { BOT_NAME, PREFIX } from "#bajigur/config.js";
+import ApplyMetadata from "#bajigur/decorators/ApplyMetadata.js";
+import Command from "#bajigur/structures/Command.js";
+import { ICommand } from "#bajigur/types/index.js";
+import { WAProto } from "@whiskeysockets/baileys";
 
-@ApplyMetadata<ICommandComponent>({
+@ApplyMetadata<ICommand>({
     name: "help",
     aliases: ["h", "?"],
     description: "Get help with the bot",
     usage: "{PREFIX}help [command]"
 })
-export default class HelpCommand extends BaseCommand {
-    public async executeCommand(
-        args: string[],
-        data: proto.IWebMessageInfo
-    ): Promise<void> {
+export default class HelpCommand extends Command {
+    public async run(args: string[], data: WAProto.IWebMessageInfo): Promise<void> {
         if (args[0]) {
             const command =
-                this.client.commandHandler.get(args[0]) ??
-                this.client.commandHandler.get(
-                    this.client.commandHandler.aliases.get(args[0]) ?? ""
-                );
+                this.client.commands.get(args[0]) ??
+                this.client.commands.get(this.client.commands.aliases.get(args[0]) ?? "");
             if (!command) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
                     text: "Command not found."
@@ -27,25 +23,17 @@ export default class HelpCommand extends BaseCommand {
                 return undefined;
             }
             await this.client.socket?.sendMessage(data.key.remoteJid!, {
-                text: `*${this.client.config.botName}* - ${command.meta.name
-                    }\n\n${command.meta
-                        .description!}\nUsage: ${command.meta.usage!.replace(
-                            "{PREFIX}",
-                            this.client.config.prefix
-                        )}`
+                text: `*${BOT_NAME}* - ${command.meta.name}\n\n${command.meta
+                    .description!}\nUsage: ${command.meta.usage!.replace("{PREFIX}", PREFIX)}`
             });
         } else {
             let commmandList = "";
-            Object.values(this.client.commandHandler.categories)
+            Object.values(this.client.commands.categories)
                 .map(commands => commands!.filter(Boolean))
                 .sort((a, b) =>
-                    a[0].meta.category!.localeCompare(
-                        b[0].meta.category!,
-                        "en",
-                        {
-                            sensitivity: "base"
-                        }
-                    )
+                    a[0].meta.category!.localeCompare(b[0].meta.category!, "en", {
+                        sensitivity: "base"
+                    })
                 )
                 .map(commands => {
                     const category = commands[0].meta.category!;
@@ -53,7 +41,7 @@ export default class HelpCommand extends BaseCommand {
                     commmandList += `*${category.toUpperCase()}*\n\`\`\`${cmds}\`\`\`\n`;
                 });
             await this.client.socket?.sendMessage(data.key.remoteJid!, {
-                text: `*${this.client.config.botName}* - Command List\n\n${commmandList}`
+                text: `*${BOT_NAME}* - Command List\n\n${commmandList}`
             });
         }
     }

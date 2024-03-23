@@ -1,4 +1,4 @@
-export const getTypeFromBuffer = (buffer: Buffer): string => {
+export default function GetMediaTypeFromBuffer(buffer: Buffer): string {
     let fileType = "";
     if (buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff) {
         fileType = "jpeg";
@@ -190,4 +190,4 @@ export const getTypeFromBuffer = (buffer: Buffer): string => {
     }
 
     return fileType;
-};
+}

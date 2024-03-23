@@ -1,13 +1,13 @@
-import { BaileysEvent, BaileysEventMap, proto } from "@whiskeysockets/baileys";
+import { BaileysEvent, BaileysEventMap, WAProto } from "@whiskeysockets/baileys";
 
-export interface IListenerComponent {
+export interface IListener {
     meta: {
         name: BaileysEvent;
     };
-    executeEvent: (data: BaileysEventMap[BaileysEvent]) => void;
+    run: (data: BaileysEventMap[BaileysEvent]) => void;
 }
 
-export interface ICommandComponent {
+export interface ICommand {
     meta: {
         name: string;
         aliases?: string[];
@@ -15,14 +15,15 @@ export interface ICommandComponent {
         usage?: string;
         devOnly?: boolean;
         category?: string;
+        allowSelfRun?: boolean;
     };
-    executeCommand: (args: string[], data: proto.IWebMessageInfo) => void;
+    run: (args: string[], data: WAProto.IWebMessageInfo) => void;
 }
 
-export interface IWhatsAppBotConfig {
+export interface IConfig {
     botName: string;
     stickerPack: string;
     prefix: string;
     devs: string[];
-    mode: "dev" | "prod";
+    mode: "development" | "production";
 }

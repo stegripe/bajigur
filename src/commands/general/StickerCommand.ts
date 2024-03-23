@@ -1,23 +1,21 @@
-import { BaseCommand } from "../../structures/BaseCommand";
-import { getTypeFromBuffer } from "../../utils/functions";
-import { ApplyMetadata } from "../../utils/decorators";
-import { ICommandComponent } from "../../types";
-import { downloadMediaMessage, proto } from "@whiskeysockets/baileys";
+import { BOT_NAME, STICKER_PACK_NAME } from "#bajigur/config.js";
+import ApplyMetadata from "#bajigur/decorators/ApplyMetadata.js";
+import Command from "#bajigur/structures/Command.js";
+import { ICommand } from "#bajigur/types/index.js";
+import GetMediaTypeFromBuffer from "#bajigur/utils/GetMediaTypeFromBuffer.js";
+import { WAProto, downloadMediaMessage } from "@whiskeysockets/baileys";
 import { unlinkSync, writeFileSync } from "fs";
-import { createSticker } from "wa-sticker";
 import { join } from "path";
+import { createSticker } from "wa-sticker";
 
-@ApplyMetadata<ICommandComponent>({
+@ApplyMetadata<ICommand>({
     name: "sticker",
     aliases: ["stiker"],
     description: "Convert image to sticker",
     usage: "{PREFIX}sticker <image/video/gif> [sticker pack name]"
 })
-export default class StickerCommand extends BaseCommand {
-    public async executeCommand(
-        args: string[],
-        data: proto.IWebMessageInfo
-    ): Promise<void> {
+export default class StickerCommand extends Command {
+    public async run(args: string[], data: WAProto.WebMessageInfo): Promise<void> {
         if (data.message?.imageMessage ?? data.message?.videoMessage) {
             if ((data.message.videoMessage?.seconds ?? 0) >= 10) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
@@ -29,8 +27,7 @@ export default class StickerCommand extends BaseCommand {
         }
         if (data.message?.documentWithCaptionMessage) {
             if (
-                (data.message.documentWithCaptionMessage.message?.videoMessage
-                    ?.seconds ?? 0) >= 10
+                (data.message.documentWithCaptionMessage.message?.videoMessage?.seconds ?? 0) >= 10
             ) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
                     text: "Please use Video or GIF with duration under 10 seconds."
@@ -39,7 +36,7 @@ export default class StickerCommand extends BaseCommand {
             }
             return this.convertToSticker(
                 data.key.remoteJid!,
-                proto.WebMessageInfo.create({
+                WAProto.WebMessageInfo.create({
                     ...data,
                     message: data.message.documentWithCaptionMessage.message
                 }),
@@ -48,19 +45,15 @@ export default class StickerCommand extends BaseCommand {
             );
         }
         if (
-            data.message?.extendedTextMessage?.contextInfo?.quotedMessage
-                ?.imageMessage ??
-            data.message?.extendedTextMessage?.contextInfo?.quotedMessage
-                ?.videoMessage ??
-            data.message?.extendedTextMessage?.contextInfo?.quotedMessage
-                ?.documentMessage
+            data.message?.extendedTextMessage?.contextInfo?.quotedMessage?.imageMessage ??
+            data.message?.extendedTextMessage?.contextInfo?.quotedMessage?.videoMessage ??
+            data.message?.extendedTextMessage?.contextInfo?.quotedMessage?.documentMessage
         ) {
             if (
-                (data.message.extendedTextMessage.contextInfo.quotedMessage
-                    .videoMessage?.seconds ?? 0) >= 10 ||
-                (data.message.extendedTextMessage.contextInfo.quotedMessage
-                    .documentMessage?.contextInfo?.quotedMessage?.videoMessage
-                    ?.seconds ?? 0) >= 10
+                (data.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage?.seconds ??
+                    0) >= 10 ||
+                (data.message.extendedTextMessage.contextInfo.quotedMessage.documentMessage
+                    ?.contextInfo?.quotedMessage?.videoMessage?.seconds ?? 0) >= 10
             ) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
                     text: "Please use Video or GIF with duration under 10 seconds."
@@ -69,11 +62,9 @@ export default class StickerCommand extends BaseCommand {
             }
             return this.convertToSticker(
                 data.key.remoteJid!,
-                proto.WebMessageInfo.create({
+                WAProto.WebMessageInfo.create({
                     ...data,
-                    message:
-                        data.message.extendedTextMessage.contextInfo
-                            .quotedMessage
+                    message: data.message.extendedTextMessage.contextInfo.quotedMessage
                 }),
                 data,
                 args
@@ -85,8 +76,7 @@ export default class StickerCommand extends BaseCommand {
         ) {
             if (
                 (data.message.extendedTextMessage.contextInfo.quotedMessage
-                    .documentWithCaptionMessage.message?.videoMessage
-                    ?.seconds ?? 0) >= 10
+                    .documentWithCaptionMessage.message?.videoMessage?.seconds ?? 0) >= 10
             ) {
                 await this.client.socket?.sendMessage(data.key.remoteJid!, {
                     text: "Please use Video or GIF with duration under 10 seconds."
@@ -95,11 +85,11 @@ export default class StickerCommand extends BaseCommand {
             }
             return this.convertToSticker(
                 data.key.remoteJid!,
-                proto.WebMessageInfo.create({
+                WAProto.WebMessageInfo.create({
                     ...data,
                     message:
-                        data.message.extendedTextMessage.contextInfo
-                            .quotedMessage.documentWithCaptionMessage.message
+                        data.message.extendedTextMessage.contextInfo.quotedMessage
+                            .documentWithCaptionMessage.message
                 }),
                 data,
                 args
@@ -111,14 +101,11 @@ export default class StickerCommand extends BaseCommand {
                 text: "Please send an image, video, or GIF with */sticker* caption or reply it on the file. You can also send an image as document by replying it with */sticker* too."
             },
             {
-                quoted: data.message?.extendedTextMessage?.contextInfo
-                    ?.quotedMessage
-                    ? proto.WebMessageInfo.create({
-                        ...data,
-                        message:
-                            data.message.extendedTextMessage.contextInfo
-                                .quotedMessage
-                    })
+                quoted: data.message?.extendedTextMessage?.contextInfo?.quotedMessage
+                    ? WAProto.WebMessageInfo.create({
+                          ...data,
+                          message: data.message.extendedTextMessage.contextInfo.quotedMessage
+                      })
                     : data
             }
         );
@@ -126,21 +113,17 @@ export default class StickerCommand extends BaseCommand {
 
     private async convertToSticker(
         Jid: string,
-        message: proto.IWebMessageInfo,
-        from: proto.IWebMessageInfo,
+        message: WAProto.IWebMessageInfo,
+        from: WAProto.IWebMessageInfo,
         args?: string[]
     ): Promise<void> {
         const convertingMessage = await this.client.socket?.sendMessage(Jid, {
             text: "_Converting to sticker..._"
         });
 
-        const buffer = (await downloadMediaMessage(
-            message,
-            "buffer",
-            {}
-        )) as Buffer;
+        const buffer = (await downloadMediaMessage(message, "buffer", {})) as Buffer;
 
-        const fileExtension = getTypeFromBuffer(buffer);
+        const fileExtension = GetMediaTypeFromBuffer(buffer);
         const fileName = `${Date.now()}.${fileExtension}`;
         const filePath = join(process.cwd(), fileName);
 
@@ -151,10 +134,8 @@ export default class StickerCommand extends BaseCommand {
         const stickerOptions = {
             crop: false,
             metadata: {
-                publisher: this.client.config.botName,
-                packname: args?.length
-                    ? args.join(" ")
-                    : this.client.config.stickerPack
+                publisher: BOT_NAME,
+                packname: args?.length ? args.join(" ") : STICKER_PACK_NAME
             }
         };
 

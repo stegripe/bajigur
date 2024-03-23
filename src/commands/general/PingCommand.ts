@@ -1,21 +1,20 @@
-import { BaseCommand } from "../../structures/BaseCommand";
-import { ApplyMetadata } from "../../utils/decorators";
-import { ICommandComponent } from "../../types";
-import { proto } from "@whiskeysockets/baileys";
+import ApplyMetadata from "#bajigur/decorators/ApplyMetadata.js";
+import Command from "#bajigur/structures/Command.js";
+import { ICommand } from "#bajigur/types/index.js";
+import { cast } from "@sapphire/utilities";
+import { WAProto } from "@whiskeysockets/baileys";
 
-@ApplyMetadata<ICommandComponent>({
+@ApplyMetadata<ICommand>({
     name: "ping",
     aliases: ["p", "pang", "pung", "peng", "pong"],
     description: "Ping the bot",
     usage: "{PREFIX}ping"
 })
-export default class PingCommand extends BaseCommand {
-    public async executeCommand(
-        _: string[],
-        data: proto.IWebMessageInfo
-    ): Promise<void> {
+export default class PingCommand extends Command {
+    public async run(_: string[], data: WAProto.IWebMessageInfo): Promise<void> {
+        const latency = Date.now() - new Date(cast<number>(data.messageTimestamp) * 1000).getTime();
         await this.client.socket?.sendMessage(data.key.remoteJid!, {
-            text: "🏓 PONG!"
+            text: `🏓 Took me \`\`\`${latency.toFixed(0)}ms\`\`\` to respond`
         });
     }
 }

@@ -1,7 +1,7 @@
 import { readdirSync, statSync } from "fs";
 import { join } from "path";
 
-export const readdirRecursive = (directory: string): string[] => {
+export default function ReadDirRecursive(directory: string): string[] {
     const results: string[] = [];
     function read(path: string): void {
         const files = readdirSync(path);
@@ -16,4 +16,4 @@ export const readdirRecursive = (directory: string): string[] => {
     }
     read(directory);
     return results;
-};
+}
