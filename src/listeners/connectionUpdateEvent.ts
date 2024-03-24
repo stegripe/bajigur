@@ -10,12 +10,12 @@ import { rmSync } from "node:fs";
     name: "connection.update"
 })
 export default class connectionUpdateEvent extends Listener {
-    public override async run({
+    public async run({
         lastDisconnect,
         connection
     }: BaileysEventMap["connection.update"]): Promise<void> {
         const shouldReconnect =
-            cast<Boom>(lastDisconnect?.error).output.statusCode.toString() !==
+            cast<Boom | undefined>(lastDisconnect?.error)?.output.statusCode.toString() !==
             DisconnectReason.loggedOut.toString();
         if (connection === "close") {
             this.client.logger.warn(
