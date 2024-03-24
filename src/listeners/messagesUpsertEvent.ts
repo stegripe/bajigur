@@ -8,7 +8,7 @@ import { BaileysEventMap } from "@whiskeysockets/baileys";
     name: "messages.upsert"
 })
 export default class messagesUpsertEvent extends Listener {
-    public override run({ messages }: BaileysEventMap["messages.upsert"]): void {
+    public run({ messages }: BaileysEventMap["messages.upsert"]): void {
         const messageData = messages[0];
         const findMessage = messageData.message?.conversation?.length
             ? messageData.message.conversation
