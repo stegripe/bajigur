@@ -40,7 +40,7 @@ export class ListenerHandler {
                 }
             }
         } catch (err) {
-            this.client.logger.error("EVENT_HANDLER_ERROR", err);
+            this.client.logger.error(err);
         } finally {
             this.client.logger.info("Done loading events.");
         }

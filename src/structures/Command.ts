@@ -64,7 +64,7 @@ export class CommandHandler extends Collection<string, ICommand> {
                 }
             }
         } catch (err) {
-            this.client.logger.error("COMMAND_HANDLER_ERROR", err);
+            this.client.logger.error(err);
         } finally {
             this.categories = this.reduce<Record<string, ICommand[] | undefined>>((a, b) => {
                 a[b.meta.category!] = a[b.meta.category!] ?? [];
@@ -90,7 +90,7 @@ export class CommandHandler extends Collection<string, ICommand> {
                     return;
                 getCommand.run(parseArgs, message);
             } catch (err) {
-                this.client.logger.error("COMMAND_HANDLER_ERR:", err);
+                this.client.logger.error(err);
             } finally {
                 if (
                     (getCommand.meta.devOnly ?? ISDEV) &&
