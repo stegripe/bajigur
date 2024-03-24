@@ -7,7 +7,7 @@ import { BaileysEventMap } from "@whiskeysockets/baileys";
 @ApplyMetadata<IListener>({
     name: "messages.upsert"
 })
-export default class messagesUpsertEvent extends Listener {
+export default class MessageUpsertListener extends Listener {
     public run({ messages }: BaileysEventMap["messages.upsert"]): void {
         const messageData = messages[0];
         const findMessage = messageData.message?.conversation?.length

@@ -9,7 +9,7 @@ import { rmSync } from "node:fs";
 @ApplyMetadata<IListener>({
     name: "connection.update"
 })
-export default class connectionUpdateEvent extends Listener {
+export default class ConnectionUpdateListener extends Listener {
     public async run({
         lastDisconnect,
         connection
