@@ -19,12 +19,7 @@ export default class MessageUpsertListener extends Listener {
               messageData.message?.groupInviteMessage?.caption ??
               messageData.message?.liveLocationMessage?.caption;
 
-        if (
-            !findMessage?.startsWith(PREFIX) ||
-            Boolean(messageData.key.fromMe) ||
-            !this.client.commands.isReady
-        )
-            return;
+        if (!findMessage?.startsWith(PREFIX) || !this.client.commands.isReady) return;
 
         this.client.commands.handle(findMessage, messageData);
     }

@@ -25,7 +25,8 @@ const DefaultCommandMetadata: ICommand["meta"] = {
     devOnly: false,
     category: "",
     name: "",
-    usage: ""
+    usage: "",
+    allowSelfRun: false
 };
 
 export class CommandHandler extends Collection<string, ICommand> {
@@ -81,23 +82,17 @@ export class CommandHandler extends Collection<string, ICommand> {
         const commandArgs = parseArgs.shift()?.toLowerCase() ?? "";
         const getCommand = this.get(commandArgs) ?? this.get(this.aliases.get(commandArgs) ?? "");
 
-        if (getCommand) {
-            try {
-                if (
-                    (getCommand.meta.devOnly ?? ISDEV) &&
-                    !DEVS.includes(message.key.remoteJid!.split("@")[0])
-                )
-                    return;
+        if (!getCommand) return;
+        if (message.key.fromMe && !getCommand.meta.allowSelfRun) return;
+
+        try {
+            if (!this.isDev(getCommand, message)) {
                 getCommand.run(parseArgs, message);
-            } catch (err) {
-                this.client.logger.error(err);
-            } finally {
-                if (
-                    (getCommand.meta.devOnly ?? ISDEV) &&
-                    !DEVS.includes(message.key.remoteJid!.split("@")[0])
-                )
-                    // eslint-disable-next-line no-unsafe-finally
-                    return;
+            }
+        } catch (err) {
+            this.client.logger.error(err);
+        } finally {
+            if (!this.isDev(getCommand, message)) {
                 this.client.logger.info(
                     `${message.pushName}(${message.key.remoteJid!}) is using ${
                         getCommand.meta.name
@@ -106,5 +101,11 @@ export class CommandHandler extends Collection<string, ICommand> {
                 );
             }
         }
+    }
+
+    private isDev(command: ICommand, message: WAProto.IWebMessageInfo): boolean {
+        return (
+            (command.meta.devOnly ?? ISDEV) && !DEVS.includes(message.key.remoteJid!.split("@")[0])
+        );
     }
 }
