@@ -58,7 +58,6 @@
         "@hapi/boom": "^10.0.1",
         "@sapphire/utilities": "^3.15.3",
         "@whiskeysockets/baileys": "^6.6.0",
-        "dotenv": "16.4.5",
         "ffmpeg-static": "^5.2.0",
         "pino": "8.19.0",
         "pino-pretty": "^11.0.0",
