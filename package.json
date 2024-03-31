@@ -54,7 +54,7 @@
         }
     },
     "dependencies": {
-        "@discordjs/collection": "1.5.3",
+        "@discordjs/collection": "2.0.0",
         "@hapi/boom": "^10.0.1",
         "@sapphire/utilities": "^3.15.3",
         "@whiskeysockets/baileys": "^6.6.0",
