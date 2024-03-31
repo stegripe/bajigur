@@ -70,7 +70,7 @@
         "@clytage/eslint-config": "^3.0.1",
         "@swc/cli": "0.3.10",
         "@swc/core": "^1.4.11",
-        "@types/node": "18.19.28",
+        "@types/node": "20.12.2",
         "@typescript-eslint/eslint-plugin": "6.21.0",
         "@typescript-eslint/parser": "6.21.0",
         "eslint": "^8.57.0",
