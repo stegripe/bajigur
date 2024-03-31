@@ -60,7 +60,7 @@
         "@whiskeysockets/baileys": "^6.6.0",
         "dotenv": "16.4.5",
         "ffmpeg-static": "^5.2.0",
-        "pino": "7.11.0",
+        "pino": "8.19.0",
         "pino-pretty": "^10.3.1",
         "qrcode-terminal": "^0.12.0",
         "tslib": "2.6.2",
