@@ -68,7 +68,7 @@
     "devDependencies": {
         "@clytage/eslint-config": "^3.0.1",
         "@swc/cli": "0.3.12",
-        "@swc/core": "^1.4.15",
+        "@swc/core": "^1.4.16",
         "@types/node": "20.12.7",
         "@typescript-eslint/eslint-plugin": "7.7.0",
         "@typescript-eslint/parser": "7.7.0",
