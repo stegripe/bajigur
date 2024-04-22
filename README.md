@@ -11,7 +11,7 @@
 - A production-ready project, set up the bot without coding.
 
 ## General Setup
-1. Download and install [Node.js](https://nodejs.org) version `16.6.0` or higher (make sure you have installed the build tools too)
+1. Download and install [Node.js](https://nodejs.org) version `20.0.0` or higher (make sure you have installed the build tools too)
 2. Open `.env_example` file and rename it to `.env`
 3. Install required and optional dependencies. You still can use `npm` too.
 ```sh
@@ -41,4 +41,4 @@ We haven't tested this project on free hosting providers yet.
 - [@noxzym](https://github.com/noxzym)
 - [@Tiramitzu](https://github.com/Tiramitzu)
 
-> © 2023 Clytage Development
+> © 2024 Stegripe Development
