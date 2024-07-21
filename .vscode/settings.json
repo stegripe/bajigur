@@ -1,5 +1,5 @@
 {
     "typescript.tsdk": "node_modules/typescript/lib",
+    "files.eol": "\n",
     "npm.packageManager": "npm",
-    "files.eol": "\n"
 }

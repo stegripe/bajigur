@@ -1,9 +1,9 @@
 import ApplyMetadata from "#bajigur/decorators/ApplyMetadata.js";
 import Listener from "#bajigur/structures/Listener.js";
 import { IListener } from "#bajigur/types/index.js";
-import { Boom } from "@hapi/boom";
-import { cast } from "@sapphire/utilities";
 import { BaileysEventMap, DisconnectReason } from "@whiskeysockets/baileys";
+import { cast } from "@sapphire/utilities";
+import { Boom } from "@hapi/boom";
 import { rmSync } from "node:fs";
 
 @ApplyMetadata<IListener>({

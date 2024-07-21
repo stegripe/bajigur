@@ -1,8 +1,8 @@
 import ApplyMetadata from "#bajigur/decorators/ApplyMetadata.js";
 import Command from "#bajigur/structures/Command.js";
 import { ICommand } from "#bajigur/types/index.js";
-import { cast } from "@sapphire/utilities";
 import { WAProto } from "@whiskeysockets/baileys";
+import { cast } from "@sapphire/utilities";
 
 @ApplyMetadata<ICommand>({
     name: "ping",

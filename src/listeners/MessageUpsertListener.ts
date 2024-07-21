@@ -1,7 +1,7 @@
-import { PREFIX } from "#bajigur/config.js";
 import ApplyMetadata from "#bajigur/decorators/ApplyMetadata.js";
 import Listener from "#bajigur/structures/Listener.js";
 import { IListener } from "#bajigur/types/index.js";
+import { PREFIX } from "#bajigur/config.js";
 import { BaileysEventMap } from "@whiskeysockets/baileys";
 
 @ApplyMetadata<IListener>({

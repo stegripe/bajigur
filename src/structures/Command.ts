@@ -1,12 +1,12 @@
-import { DEVS, ISDEV, PREFIX } from "#bajigur/config.js";
-import { ICommand } from "#bajigur/types/index.js";
-import ImportClass from "#bajigur/utils/ImportClass.js";
 import ReadDirRecursive from "#bajigur/utils/ReadDirRecursive.js";
+import { DEVS, ISDEV, PREFIX } from "#bajigur/config.js";
+import ImportClass from "#bajigur/utils/ImportClass.js";
+import { ICommand } from "#bajigur/types/index.js";
+import BajigurClient from "./BajigurClient.js";
 import { Collection } from "@discordjs/collection";
 import { mergeDefault } from "@sapphire/utilities";
 import { WAProto } from "@whiskeysockets/baileys";
 import { resolve } from "node:path";
-import BajigurClient from "./BajigurClient.js";
 
 export default abstract class Command implements ICommand {
     public constructor(

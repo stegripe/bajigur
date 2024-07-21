@@ -2,21 +2,18 @@
     "name": "bajigur",
     "version": "1.5.5",
     "description": "A simple and easy-to-use WhatsApp bot project, written in TypeScript.",
-    "homepage": "https://github.com/stegripe/bajigur#readme",
-    "bugs": {
-        "url": "https://github.com/stegripe/bajigur/issues"
-    },
+    "license": "AGPL-3.0",
+    "author": "Stegripe Development <support@stegripe.org>",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/stegripe/bajigur.git"
     },
-    "license": "AGPL-3.0",
-    "author": "Stegripe <admin@stegripe.org>",
-    "type": "module",
-    "imports": {
-        "#bajigur/*": "./dist/*"
+    "bugs": {
+        "url": "https://github.com/stegripe/bajigur/issues"
     },
+    "homepage": "https://github.com/stegripe/bajigur#readme",
     "main": "dist",
+    "type": "module",
     "scripts": {
         "build": "rimraf dist && npm run lint && npm run compile",
         "compile": "swc src -d dist --strip-leading-paths",
@@ -27,6 +24,13 @@
         "pretty:write": "prettier --write src",
         "start": "node --env-file=.env .",
         "start:dev": "rimraf dist && set NODE_ENV=development && tsc-watch --onSuccess \"pnpm start\""
+    },
+    "engines": {
+        "node": ">=20",
+        "npm": ">=10"
+    },
+    "imports": {
+        "#bajigur/*": "./dist/*"
     },
     "prettier": {
         "arrowParens": "avoid",
@@ -80,9 +84,5 @@
         "ts-node": "10.9.2",
         "tsc-watch": "^6.2.0",
         "typescript": "5.5.3"
-    },
-    "engines": {
-        "node": ">=20",
-        "npm": ">=10"
     }
 }

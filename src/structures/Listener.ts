@@ -1,10 +1,10 @@
-import { IListener } from "#bajigur/types/index.js";
-import importClass from "#bajigur/utils/ImportClass.js";
 import readdirRecursive from "#bajigur/utils/ReadDirRecursive.js";
-import { Collection } from "@discordjs/collection";
-import { BaileysEvent, BaileysEventMap } from "@whiskeysockets/baileys";
-import { resolve } from "path";
+import importClass from "#bajigur/utils/ImportClass.js";
+import { IListener } from "#bajigur/types/index.js";
 import BajigurClient from "./BajigurClient.js";
+import { BaileysEvent, BaileysEventMap } from "@whiskeysockets/baileys";
+import { Collection } from "@discordjs/collection";
+import { resolve } from "path";
 
 export default abstract class Listener implements IListener {
     public constructor(

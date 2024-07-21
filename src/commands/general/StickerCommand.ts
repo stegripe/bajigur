@@ -5,8 +5,8 @@ import { ICommand } from "#bajigur/types/index.js";
 import GetMediaTypeFromBuffer from "#bajigur/utils/GetMediaTypeFromBuffer.js";
 import { WAProto, downloadMediaMessage } from "@whiskeysockets/baileys";
 import { unlinkSync, writeFileSync } from "fs";
-import { join } from "path";
 import { createSticker } from "wa-sticker";
+import { join } from "path";
 
 @ApplyMetadata<ICommand>({
     name: "sticker",

@@ -3,7 +3,9 @@
         "target": "ES2022",
         "module": "Node16",
         "moduleResolution": "Node16",
-        "lib": ["ES2022"],
+        "lib": [
+            "ES2022"
+        ],
         "strict": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
@@ -12,14 +14,22 @@
         "skipLibCheck": true,
         "noEmitHelpers": true,
         "importHelpers": true,
-        "rootDir": "src",
         "outDir": "dist",
+        "rootDir": "src",
         "baseUrl": "src",
-        "typeRoots": ["node_modules/@types", "src/types"],
+        "typeRoots": [
+            "node_modules/@types",
+            "src/types"
+        ],
         "paths": {
             "#bajigur/*": ["*"]
         }
     },
-    "exclude": ["node_modules/**", "**/.*/"],
-    "include": ["src/**/*.ts"]
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules/**",
+        "**/.*/"
+    ]
 }

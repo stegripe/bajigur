@@ -25,7 +25,7 @@ RUN pnpm prune --production
 FROM ghcr.io/hazmi35/node:21-alpine
 
 LABEL name "bajigur"
-LABEL maintainer "Stegripe <admin@stegripe.org>"
+LABEL maintainer "Stegripe Development <support@stegripe.org>"
 
 # Install ffmpeg
 RUN apk add --no-cache ffmpeg

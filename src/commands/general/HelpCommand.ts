@@ -1,5 +1,5 @@
-import { BOT_NAME, PREFIX } from "#bajigur/config.js";
 import ApplyMetadata from "#bajigur/decorators/ApplyMetadata.js";
+import { BOT_NAME, PREFIX } from "#bajigur/config.js";
 import Command from "#bajigur/structures/Command.js";
 import { ICommand } from "#bajigur/types/index.js";
 import { WAProto } from "@whiskeysockets/baileys";
