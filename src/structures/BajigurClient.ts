@@ -2,7 +2,11 @@ import ImportURLToString from "#bajigur/utils/ImportURLToString.js";
 import { ISDEV } from "#bajigur/config.js";
 import { ListenerHandler } from "./Listener.js";
 import { CommandHandler } from "./Command.js";
-import { makeCacheableSignalKeyStore, makeWASocket, useMultiFileAuthState } from "@whiskeysockets/baileys";
+import {
+    makeCacheableSignalKeyStore,
+    makeWASocket,
+    useMultiFileAuthState
+} from "@whiskeysockets/baileys";
 import { Logger, pino } from "pino";
 import { resolve } from "path";
 
